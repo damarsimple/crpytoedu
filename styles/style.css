@@ -2557,7 +2557,7 @@ textarea.form-input {
 }
 
 .rd-form-inline .form-wrap {
-	flex: 1;
+	;
 	min-width: 185px;
 }
 
@@ -2608,7 +2608,7 @@ textarea.form-input {
 }
 
 .rd-form-inline-2 .form-wrap {
-	flex: 1;
+	;
 	min-width: 185px;
 }
 

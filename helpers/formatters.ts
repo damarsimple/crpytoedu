@@ -1,4 +1,4 @@
-import { SelectValue } from "../components/Form";
+import { SelectValue } from "../types/type";
 
 export const wildCardFormatter = (e: string) => "%" + e + "%";
 

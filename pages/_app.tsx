@@ -14,7 +14,20 @@ import { useAuthStore } from "../store/auth";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
 import { createUploadLink } from "apollo-upload-client";
-import { createTheme, ThemeProvider } from "@mui/material";
+import {
+  Box,
+  Button,
+  createTheme,
+  Modal,
+  ThemeProvider,
+  Typography,
+} from "@mui/material";
+import Head from "next/head";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useModalStore } from "../store/modal";
+// When using TypeScript 4.x and above
+import type {} from "@mui/lab/themeAugmentation";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -69,12 +82,61 @@ const client = new ApolloClient({
 const theme = createTheme({});
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const { open, close, message, next } = useModalStore();
   return (
-    <ApolloProvider client={client}>
-      <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </ApolloProvider>
+    <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+      </Head>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+          <Modal open={open} onClose={close}>
+            <Box
+              sx={{
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: 600,
+                boxShadow: 24,
+                backgroundColor: "white",
+                p: 4,
+              }}
+            >
+              <Typography>{message}</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                }}
+              >
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => next && next() && close()}
+                >
+                  Yes
+                </Button>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="warning"
+                  onClick={close}
+                >
+                  No
+                </Button>
+              </Box>
+            </Box>
+          </Modal>
+        </ThemeProvider>
+        <ToastContainer position="bottom-right" />
+      </ApolloProvider>
+    </>
   );
 }
 

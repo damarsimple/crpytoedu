@@ -14,6 +14,10 @@
 // 💙
 
 export type Maybe<T> = T | null;
+export interface SelectValue {
+  label: string;
+  value: string;
+}
 
 export interface Category {
   id: string;
