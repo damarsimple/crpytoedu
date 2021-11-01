@@ -1,1 +1,0 @@
-https://crpyto.damaral.my.id/graphql
