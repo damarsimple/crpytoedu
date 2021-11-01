@@ -1,12 +1,12 @@
 import { gql } from "@apollo/client";
 import { Button } from "@mui/material";
+import withRouter, { WithRouterProps } from "next/dist/client/with-router";
 import React from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import TableLoader from "../../components/TableLoader";
 import { selectObjectExtractor } from "../../helpers/formatters";
 import { Roles, User } from "../../types/type";
-
-export default function Index() {
+function Index({ router: { push } }: WithRouterProps) {
   return (
     <DashboardLayout>
       <TableLoader<User>
@@ -28,6 +28,7 @@ export default function Index() {
                 node {
                   id
                   name
+                  username
                   email
                   roles
                   title
@@ -91,7 +92,13 @@ export default function Index() {
               <>
                 <Button
                   variant="contained"
-                  // onClick={() => setEditTrainer(e.api.getCellValue(e.id, "id"))}
+                  onClick={() =>
+                    push(
+                      "/users/" +
+                        e.api.getCellValue(e.id, "username") +
+                        "?tab=profiles"
+                    )
+                  }
                 >
                   Profile
                 </Button>
@@ -105,7 +112,13 @@ export default function Index() {
               <>
                 <Button
                   variant="contained"
-                  // onClick={() => setEditTrainer(e.api.getCellValue(e.id, "id"))}
+                  onClick={() =>
+                    push(
+                      "/users/" +
+                        e.api.getCellValue(e.id, "username") +
+                        "/?tab=trees"
+                    )
+                  }
                 >
                   Pohon
                 </Button>
@@ -133,3 +146,5 @@ export default function Index() {
     </DashboardLayout>
   );
 }
+
+export default withRouter(Index);

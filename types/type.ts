@@ -72,6 +72,8 @@ export interface User {
   url_instagram: Maybe<string>;
   url_linkedin: Maybe<string>;
   got_children: boolean;
+  parentages?: string;
+  children: User[];
 }
 
 export interface Province {

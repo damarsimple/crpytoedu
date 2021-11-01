@@ -120,7 +120,7 @@ const TrainerRoutes: Array<LinkItemProps> = [
   {
     name: "Settings",
     icon: "settings",
-    route: "/trainers/settings",
+    route: "/settings",
   },
 ];
 
@@ -140,7 +140,7 @@ const MemberRoutes: Array<LinkItemProps> = [
   {
     name: "Settings",
     icon: "settings",
-    route: "/members/settings",
+    route: "/settings",
   },
 ];
 
@@ -162,7 +162,7 @@ const AdminRoutes: Array<LinkItemProps> = [
   {
     name: "Settings",
     icon: "settings",
-    route: "/admins/settings",
+    route: "/settings",
   },
 ];
 
