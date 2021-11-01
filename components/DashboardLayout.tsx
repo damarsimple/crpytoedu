@@ -202,10 +202,11 @@ export default function DashboardLayout({
 
   const { pathname, push } = useRouter();
 
-  const routeName = pathname.split("/")[1];
+  const { user, setUser } = useUserStore();
+
+  const routeName = user?.roles?.toLowerCase() + "s";
 
   const { setToken } = useAuthStore();
-  const { setUser } = useUserStore();
 
   const logout = () => {
     setToken("");
