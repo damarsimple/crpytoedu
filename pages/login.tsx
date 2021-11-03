@@ -60,6 +60,18 @@ const LOGIN = gql`
           id
           name
         }
+        thumbnail {
+          id
+          path
+        }
+        cover {
+          id
+          path
+        }
+        url_facebook
+        url_twitter
+        url_instagram
+        url_linkedin
       }
     }
   }

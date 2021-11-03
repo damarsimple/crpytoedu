@@ -1,4 +1,4 @@
-import { Grid, Paper, Box, Typography } from "@mui/material";
+import { Paper, Box, Typography } from "@mui/material";
 import React from "react";
 import { Video } from "../types/type";
 import Image from "next/image";
@@ -24,7 +24,11 @@ export default function VideoCard({
             />
           </Box>
           <Box sx={{ p: 1 }}>
-            <Typography variant="h6" component="h2">
+            <Typography
+              variant="h6"
+              component="h2"
+              sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
+            >
               {name}
             </Typography>
             <Typography>{user?.name}</Typography>

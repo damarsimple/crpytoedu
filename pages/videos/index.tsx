@@ -1,30 +1,32 @@
 import { gql, useQuery } from "@apollo/client";
 import { Box, Chip, Grid, Stack, Typography, Paper } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import VideoCard from "../../components/VideoCard";
-import { VideoEdge } from "../../types/type";
+import { Category, VideoEdge } from "../../types/type";
 
 export default function Index() {
+  const [category, setCategory] = useState<undefined | Category>(undefined);
+
   const { data } = useQuery<{ videos: { edges: VideoEdge[] } }>(
     gql`
       query Query(
         $first: Int!
         $orderBy: [QueryVideosOrderByOrderByClause!]
         $name: String
-        $userId: ID
+        $user_id: ID
         $type: VideoType
         $after: String
-        $categoryId: ID
+        $category_id: ID
       ) {
         videos(
           first: $first
           orderBy: $orderBy
           name: $name
-          user_id: $userId
+          user_id: $user_id
           type: $type
           after: $after
-          category_id: $categoryId
+          category_id: $category_id
         ) {
           pageInfo {
             hasNextPage
@@ -73,15 +75,35 @@ export default function Index() {
       }
     `,
     {
-      variables: { first: 10 },
+      variables: { first: 10, category_id: category?.id },
+      fetchPolicy: "network-only",
     }
   );
+
+  const { data: { categories } = {} } = useQuery<{
+    categories: Category[];
+  }>(gql`
+    query {
+      categories {
+        id
+        name
+      }
+    }
+  `);
+
   return (
     <DashboardLayout>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         <Stack direction="row" spacing={1}>
-          <Chip label="Clickable" />
-          <Chip label="Clickable" variant="outlined" />
+          {categories?.map((e) => (
+            <Chip
+              key={e.id}
+              label={e.name}
+              variant="outlined"
+              color={category?.id == e.id ? "success" : "info"}
+              onClick={() => setCategory(e == category ? undefined : e)}
+            />
+          ))}
         </Stack>
         <Grid container spacing={1}>
           {data?.videos?.edges?.map(({ node }) => (

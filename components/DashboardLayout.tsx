@@ -115,7 +115,7 @@ const TrainerRoutes: Array<LinkItemProps> = [
   {
     name: "Daftarkan Member",
     icon: "people",
-    route: "/trainers/members",
+    route: "/childrens",
   },
   {
     name: "Settings",
@@ -136,7 +136,7 @@ const AdminRoutes: Array<LinkItemProps> = [
   {
     name: "Member",
     icon: "people",
-    route: "/admins/members",
+    route: "/childrens",
   },
   // { name: "Pages", icon: FiPackage, route: "/admins/pages" },
   {
@@ -157,7 +157,7 @@ const MemberRoutes: Array<LinkItemProps> = [
   {
     name: "Daftarkan Member",
     icon: "people",
-    route: "/members/members",
+    route: "/childrens",
   },
   {
     name: "Settings",

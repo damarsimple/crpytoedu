@@ -26,6 +26,7 @@ import usePlaces from "../../hooks/usePlaces";
 import { useQuery, gql } from "@apollo/client";
 import { Classroom, ClassroomEdge } from "../../types/type";
 import { AccountBox } from "@mui/icons-material";
+import { useRouter } from "next/dist/client/router";
 
 export default function Index() {
   const { user } = useUserStore();
@@ -74,7 +75,6 @@ export default function Index() {
                 name
               }
               name
-              address
               max_join
               trainersCount
               participantsCount
@@ -232,95 +232,84 @@ export default function Index() {
           </Box>
         ) : (
           <Grid container spacing={2}>
-            {data?.availableEvents?.edges?.map(
-              (
-                {
-                  node: {
-                    cover,
-                    name,
-                    address,
-                    province,
-                    city,
-                    trainersCount,
-                    participantsCount,
-                    max_join,
-                    user,
-                  },
-                },
-                i
-              ) => (
-                <Grid item xs={12} md={3} lg={2} key={i}>
-                  <Card>
-                    <CardMedia
-                      component="img"
-                      height="300"
-                      image={cover?.name ?? "/tothemoon.jpg"}
-                      alt={name}
-                    />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="div"
-                        sx={{ height: 50 }}
-                      >
-                        {name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{ height: 50, mt: 4 }}
-                      >
-                        {address}
-                      </Typography>
-                    </CardContent>
-                    <Grid spacing={1} container sx={{ p: 1 }}>
-                      <Grid item xs={12}>
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                        >
-                          <AccountBox />
-                          {user?.name}
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                        >
-                          <PlaceIcon />
-                          {city?.name}, {province?.name}
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                        >
-                          <GroupIcon />
-                          {trainersCount} Trainer
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Box
-                          sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                        >
-                          <GroupIcon />
-                          {participantsCount}/{max_join} Peserta
-                        </Box>
-                      </Grid>
-                    </Grid>
-
-                    <CardActions>
-                      <Button fullWidth variant="contained">
-                        lihat acara
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              )
-            )}
+            {data?.availableEvents?.edges?.map(({ node }, i) => (
+              <Grid item xs={12} md={3} lg={2} key={i}>
+                <ClassroomCard {...node} />
+              </Grid>
+            ))}
           </Grid>
         )}
       </Box>
     </DashboardLayout>
   );
 }
+
+const ClassroomCard = ({
+  id,
+  cover,
+  name,
+  province,
+  city,
+  trainersCount,
+  participantsCount,
+  max_join,
+  user,
+}: Classroom) => {
+  const { push } = useRouter();
+  return (
+    <Card>
+      <CardMedia
+        component="img"
+        height="300"
+        image={cover?.name ?? "/tothemoon.jpg"}
+        alt={name}
+      />
+      <CardContent>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ height: 50 }}
+        >
+          {name}
+        </Typography>
+      </CardContent>
+      <Grid spacing={1} container sx={{ p: 1 }}>
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <AccountBox />
+            {user?.name}
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <PlaceIcon />
+            {city?.name}, {province?.name}
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <GroupIcon />
+            {trainersCount} Trainer
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <GroupIcon />
+            {participantsCount}/{max_join} Peserta
+          </Box>
+        </Grid>
+      </Grid>
+
+      <CardActions>
+        <Button
+          fullWidth
+          variant="contained"
+          onClick={() => push("/events/" + id)}
+        >
+          lihat acara
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};

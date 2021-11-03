@@ -1,10 +1,10 @@
 import { useQuery, gql } from "@apollo/client";
-import { Chip, Grid, Box, Button } from "@mui/material";
+import { Chip, Grid, Box, Button, Stack } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 import React from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import VideoCard from "../../components/VideoCard";
-import { VideoEdge } from "../../types/type";
+import { Video, VideoEdge } from "../../types/type";
 
 export default function Id() {
   const { data } = useQuery<{ videos: { edges: VideoEdge[] } }>(
@@ -79,6 +79,51 @@ export default function Id() {
   );
 
   const { push } = useRouter();
+  const { query } = useRouter();
+  const { id } = query;
+
+  const { data: { video } = {} } = useQuery<{ video: Video }>(
+    gql`
+      query Query($id: ID!) {
+        video(id: $id) {
+          id
+          name
+          created_at
+          updated_at
+          youtube_id
+          description
+          user {
+            id
+            name
+            username
+
+            cover {
+              path
+              id
+              name
+            }
+          }
+          statistics {
+            viewCount
+            likeCount
+            dislikeCount
+            favoriteCount
+            commentCount
+          }
+          metadata {
+            duration
+          }
+          categories {
+            id
+            name
+          }
+        }
+      }
+    `,
+    {
+      variables: { id },
+    }
+  );
 
   return (
     <DashboardLayout>
@@ -87,15 +132,20 @@ export default function Id() {
       </Button>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         <iframe
+          title={video?.name}
+          allowFullScreen
           style={{
             width: "100%",
             height: "80vh",
           }}
-          src="https://www.youtube.com/embed/g9NuYgcVpp0"
-          title="YouTube video player"
+          src={`https://www.youtube.com/embed/${video?.youtube_id}?autoplay=1&modestbranding=1`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
-        <Chip label="Clickable" variant="outlined" />
+        <Stack direction="row" spacing={1}>
+          {video?.categories?.map((e) => (
+            <Chip key={e.id} label={e.name} variant="outlined" />
+          ))}
+        </Stack>
         <Grid container spacing={1}>
           {data?.videos?.edges?.map(({ node }) => (
             <Grid item xs={12} md={6} lg={2} key={node?.id}>
