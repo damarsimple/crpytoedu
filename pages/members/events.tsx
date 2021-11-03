@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { useRouter } from "next/dist/client/router";
 
-export default function events() {
+export default function Events() {
   const { data: { myEvents } = {} } = useQuery<{ myEvents: Classroom[] }>(
     gql`
       query Query {
