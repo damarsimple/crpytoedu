@@ -48,6 +48,18 @@ const LOGIN = gql`
       user {
         ...CoreUserInfoMinimalField
         is_admin
+        province {
+          id
+          name
+        }
+        city {
+          id
+          name
+        }
+        district {
+          id
+          name
+        }
       }
     }
   }

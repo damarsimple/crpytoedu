@@ -111,31 +111,11 @@ const TrainerRoutes: Array<LinkItemProps> = [
     icon: "event",
     route: "/trainers/events",
   },
-  { name: "Videos", icon: VideoCall, route: "/videos" },
+  { name: "Videos", icon: "video_library", route: "/videos" },
   {
     name: "Daftarkan Member",
     icon: "people",
     route: "/trainers/members",
-  },
-  {
-    name: "Settings",
-    icon: "settings",
-    route: "/settings",
-  },
-];
-
-const MemberRoutes: Array<LinkItemProps> = [
-  { name: "Halaman Utama", icon: "home", route: "/members" },
-  {
-    name: "Ruang Kelas",
-    icon: "event",
-    route: "/members/events",
-  },
-  { name: "Videos", icon: VideoCall, route: "/videos" },
-  {
-    name: "Daftarkan Member",
-    icon: "people",
-    route: "/members/members",
   },
   {
     name: "Settings",
@@ -159,6 +139,26 @@ const AdminRoutes: Array<LinkItemProps> = [
     route: "/admins/members",
   },
   // { name: "Pages", icon: FiPackage, route: "/admins/pages" },
+  {
+    name: "Settings",
+    icon: "settings",
+    route: "/settings",
+  },
+];
+
+const MemberRoutes: Array<LinkItemProps> = [
+  { name: "Halaman Utama", icon: "home", route: "/members" },
+  {
+    name: "Acara Anda",
+    icon: "event",
+    route: "/members/events",
+  },
+  { name: "Videos", icon: "video_library", route: "/videos" },
+  {
+    name: "Daftarkan Member",
+    icon: "people",
+    route: "/members/members",
+  },
   {
     name: "Settings",
     icon: "settings",
@@ -271,8 +271,6 @@ export default function DashboardLayout({
             <IconButton
               size="large"
               edge="end"
-              aria-label="account of current user"
-              aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
@@ -293,7 +291,7 @@ export default function DashboardLayout({
         </DrawerHeader>
         <Divider />
         <List>
-          {LinkItems[routeName]?.map(({ icon, name, route }, index) => (
+          {LinkItems[routeName]?.map(({ icon, name, route }) => (
             <ListItem button key={name} onClick={() => push(route)}>
               <ListItemIcon>
                 <Icon>{icon}</Icon>

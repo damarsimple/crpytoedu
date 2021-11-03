@@ -15,9 +15,7 @@ import EventMapEditor from "../../components/EventMediaEditor";
 import EventTrainerEditor from "../../components/EventTrainerEditor";
 
 export default function Index() {
-  const { provinces, cities, districts, setCityId, setProvinceId } = usePlaces(
-    {}
-  );
+  const { provinces, cities, districts, setCity, setProvince } = usePlaces({});
 
   const [editMap, setEditMap] = useState("");
   const [editTrainer, setEditTrainer] = useState("");
@@ -88,7 +86,8 @@ export default function Index() {
             editable: true,
             selects: provinces.map(selectExtractor),
             valueGetter: (e) => find(provinces, { id: e.value })?.name ?? "",
-            onChange: setProvinceId,
+            //@ts-ignore
+            onChange: (e) => setProvince({ id: e }),
           },
           {
             field: "city_id",
@@ -97,7 +96,8 @@ export default function Index() {
             editable: true,
             selects: cities.map(selectExtractor),
             valueGetter: (e) => find(cities, { id: e.value })?.name ?? "",
-            onChange: setCityId,
+            //@ts-ignore
+            onChange: (e) => setCity({ id: e }),
           },
           {
             field: "district_id",

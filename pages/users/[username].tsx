@@ -1,6 +1,5 @@
 import withRouter, { WithRouterProps } from "next/dist/client/with-router";
 import React, { SyntheticEvent, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
 
 import {
   IconButton,
@@ -13,7 +12,6 @@ import {
 } from "@mui/material";
 import { Box } from "@mui/system";
 import Image from "next/image";
-
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";

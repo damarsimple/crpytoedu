@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { City, District, Province } from "../types/type";
 
 export default function usePlaces({ useChain }: { useChain?: boolean }) {
-  const [cityId, setCityId] = useState<string | undefined>(undefined);
-  const [provinceId, setProvinceId] = useState<string | undefined>(undefined);
+  const [city, setCity] = useState<City | undefined>(undefined);
+  const [province, setProvince] = useState<Province | undefined>(undefined);
+  const [district, setDistrict] = useState<District | undefined>(undefined);
   const { data: { provinces } = {} } = useQuery<{
     provinces: Province[];
   }>(gql`
@@ -27,7 +28,7 @@ export default function usePlaces({ useChain }: { useChain?: boolean }) {
         }
       }
     `,
-    { variables: { province_id: provinceId } }
+    { variables: { province_id: province?.id } }
   );
   const { data: { districts } = {}, refetch: refetchDistrict } = useQuery<{
     districts: District[];
@@ -40,24 +41,28 @@ export default function usePlaces({ useChain }: { useChain?: boolean }) {
         }
       }
     `,
-    { variables: { city_id: cityId } }
+    { variables: { city_id: city?.id } }
   );
 
   useEffect(() => {
     refetchCity();
-  }, [provinceId, refetchCity]);
+    setCity(undefined);
+  }, [province, refetchCity, setCity]);
 
   useEffect(() => {
     refetchDistrict();
-  }, [cityId, refetchDistrict]);
+    setDistrict(undefined);
+  }, [city, refetchDistrict, setDistrict]);
 
   return {
     provinces: provinces ?? [],
     cities: cities ?? [],
     districts: districts ?? [],
-    setCityId,
-    setProvinceId,
-    cityId,
-    provinceId,
+    setCity,
+    setProvince,
+    city,
+    province,
+    district,
+    setDistrict,
   };
 }

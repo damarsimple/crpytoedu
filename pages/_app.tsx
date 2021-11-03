@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import "../styles/bootstrap.css";
 import "../styles/fonts.css";
 import "../styles/style.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import type { AppProps } from "next/app";
 import {
   ApolloClient,
