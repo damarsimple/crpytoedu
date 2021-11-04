@@ -74,6 +74,7 @@ export interface User {
   got_children: boolean;
   parentages?: string;
   children: User[];
+  trainers_parent: User[];
 }
 
 export interface Province {

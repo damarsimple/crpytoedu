@@ -32,6 +32,13 @@ export default function Childrens() {
     query GetMe {
       me {
         parentages
+        trainers_parent {
+          id
+          name
+          username
+          roles
+          created_at
+        }
       }
     }
   `);
@@ -75,6 +82,7 @@ export default function Childrens() {
             <Tab label="Daftarkan Member" />
             <Tab label="Pohon" />
             <Tab label="Tabel" />
+            <Tab label="Trainer" />
           </Tabs>
         </Box>
         {tabs == 0 && (
@@ -266,6 +274,39 @@ export default function Childrens() {
                 </TableHead>
                 <TableBody>
                   {parentages?.flat().map((row) => (
+                    <TableRow
+                      key={row.name}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {row.name}
+                      </TableCell>
+                      <TableCell align="right">{row.username}</TableCell>
+                      <TableCell align="right">{row.roles}</TableCell>
+                      <TableCell align="right">
+                        {moment(row.created_at).format()}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
+        )}
+        {tabs == 3 && (
+          <Box>
+            <TableContainer component={Paper}>
+              <Table sx={{ width: "100%" }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Nama</TableCell>
+                    <TableCell align="right">Username</TableCell>
+                    <TableCell align="right">Roles</TableCell>
+                    <TableCell align="right">Daftar Pada</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {me?.trainers_parent?.flat().map((row) => (
                     <TableRow
                       key={row.name}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
