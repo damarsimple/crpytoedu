@@ -59,6 +59,8 @@ export interface User {
   created_at: string;
   updated_at: string;
   subscription_expired_at: Maybe<string>;
+  subscription_verified: boolean;
+  subscription_reason: Maybe<string>;
   province_id: Maybe<string>;
   city_id: Maybe<string>;
   district_id: Maybe<string>;
@@ -75,6 +77,7 @@ export interface User {
   parentages?: string;
   children: User[];
   trainers_parent: User[];
+  payment_proves: File[];
 }
 
 export interface Province {

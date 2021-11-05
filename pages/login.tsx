@@ -3,7 +3,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Typography,
-  Link,
+  Link as MLink,
   Grid,
   CssBaseline,
   Paper,
@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { useAuthStore } from "../store/auth";
 import { useUserStore } from "../store/user";
 import { AuthOutput } from "../types/type";
-
+import Link from "next/link";
 function Copyright(props: any) {
   return (
     <Typography
@@ -30,9 +30,9 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <MLink color="inherit" href="https://material-ui.com/">
         Your Website
-      </Link>{" "}
+      </MLink>{" "}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -181,14 +181,16 @@ export default function SignInSide() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+              <Grid item xs sx={{ cursor: "pointer" }}>
+                <Link href="/forgot">
+                  <MLink variant="body2">Forgot password?</MLink>
                 </Link>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+              <Grid item sx={{ cursor: "pointer" }}>
+                <Link href="/register">
+                  <MLink variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </MLink>
                 </Link>
               </Grid>
             </Grid>

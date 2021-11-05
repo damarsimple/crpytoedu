@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { styled } from "@mui/material/styles";
 import {
@@ -18,6 +18,7 @@ import {
   CardActions,
   Paper,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
@@ -28,6 +29,19 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import usePlaces from "../hooks/usePlaces";
+import { toast } from "react-toastify";
+import { gql, useMutation, useQuery } from "@apollo/client";
+import {
+  AuthOutput,
+  Classroom,
+  ClassroomEdge,
+  File as FileType,
+  User,
+} from "../types/type";
+import { CoreUserInfoMinimalField } from "../fragments/fragments";
+import { useAuthStore } from "../store/auth";
+import { useUserStore } from "../store/user";
 type RegisterType = "ONLINE" | "OFFLINE";
 
 const images: {
@@ -43,6 +57,11 @@ const images: {
     title: "OFFLINE",
   },
 ];
+
+interface CheckAvailable {
+  username: "exist" | "notexist";
+  email: "exist" | "notexist";
+}
 
 export const formatCardNumber = (value: string) => {
   const regex = /^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g;
@@ -87,6 +106,10 @@ const steps: Record<RegisterType, StepType[]> = {
 };
 
 export default function Register() {
+  const [data, setData] = useState<Record<string, string>>({});
+  const [checkAvailable, setCheckAvailable] = useState<
+    CheckAvailable | undefined
+  >(undefined);
   const [currentStep, setCurrentStep] = useState(0);
   const [registerType, setRegisterType] = useState<RegisterType | undefined>(
     undefined
@@ -96,20 +119,323 @@ export default function Register() {
     undefined
   );
 
+  const [event, setEvent] = useState<Classroom | undefined>(undefined);
+
+  const [showAll, setShowAll] = useState(false);
+
+  const {
+    setCity,
+    setDistrict,
+    setProvince,
+    province,
+    city,
+    district,
+    districts,
+    provinces,
+    cities,
+  } = usePlaces({});
+
+  const {
+    refetch,
+    data: { getParentCandidate } = {},
+    loading,
+    error,
+  } = useQuery<{ getParentCandidate: User }>(
+    gql`
+      query Query($city_id: ID, $province_id: ID, $event_id: ID) {
+        getParentCandidate(
+          city_id: $city_id
+          province_id: $province_id
+          event_id: $event_id
+        ) {
+          id
+          name
+          username
+          title
+          cover {
+            id
+            path
+            mime
+            name
+          }
+          city {
+            id
+            name
+          }
+          province {
+            id
+            name
+          }
+          url_facebook
+          url_twitter
+          url_instagram
+          url_linkedin
+        }
+      }
+    `,
+    {
+      variables: {
+        province_id: showAll ? undefined : province?.id,
+        city_id: showAll ? undefined : city?.id,
+        event_id: event?.id,
+      },
+      fetchPolicy: "network-only",
+    }
+  );
+
+  const { data: { availableEvents } = {} } = useQuery<{
+    availableEvents: { edges: ClassroomEdge[] };
+  }>(
+    gql`
+      query Query(
+        $first: Int!
+        $district_id: ID
+        $city_id: ID
+        $province_id: ID
+      ) {
+        availableEvents(
+          first: $first
+          district_id: $district_id
+          city_id: $city_id
+          province_id: $province_id
+        ) {
+          edges {
+            node {
+              id
+              user {
+                id
+                name
+              }
+              name
+              max_join
+              trainersCount
+              participantsCount
+              province {
+                id
+                name
+              }
+              city {
+                id
+                name
+              }
+              cover {
+                id
+                name
+                path
+              }
+              thumbnail {
+                id
+                name
+                path
+              }
+            }
+          }
+        }
+      }
+    `,
+    {
+      variables: {
+        first: 10,
+        province_id: showAll ? undefined : province?.id,
+        city_id: showAll ? undefined : city?.id,
+      },
+    }
+  );
+
   const next = () => {
     if (!registerType) return;
 
     if (currentStep == steps[registerType].length - 1) {
       setStepType("FINISH");
     }
+
+    if (currentStep == 0 || stepType == "Data Diri") {
+      if (!city || !district || !province) {
+        toast.error("Anda belum mengisi wilayah ");
+        return;
+      }
+
+      for (const x of [
+        "name",
+        "username",
+        "email",
+        "password",
+        "confirm_password",
+      ]) {
+        if (!data[x]) {
+          toast.error("Anda belum mengisi " + x);
+          return;
+        }
+      }
+
+      if (data["confirm_password"] != data["password"]) {
+        toast.error("Password tidak sama ");
+        return;
+      }
+
+      if (data["password"].length < 8) {
+        toast.error("Password harus memiliki 8 karakter");
+        return;
+      }
+
+      if (
+        checkAvailable?.email == "exist" ||
+        checkAvailable?.username == "exist"
+      ) {
+        toast.error("Mohon gunakan email / username yang belum digunakan");
+        return;
+      }
+    }
+
+    if (stepType == "Pembayaran") {
+      handleRegister();
+    }
+
     setStepType(steps[registerType][currentStep + 1]);
     setCurrentStep(currentStep + 1);
   };
 
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-  }, []);
+  const [handleUpload, { loading: lUpload }] = useMutation<{
+    uploadFile: {
+      status: boolean;
+      message?: string;
+      file?: FileType;
+    };
+  }>(gql`
+    mutation Mutation($input: UploadFile!) {
+      uploadFile(input: $input) {
+        status
+        message
+        file {
+          id
+          name
+          mime
+          path
+        }
+      }
+    }
+  `);
+
+  const [handleRegisterMutation, { loading: lRegister }] = useMutation<{
+    register: AuthOutput;
+  }>(gql`
+    ${CoreUserInfoMinimalField}
+    mutation Mutation($input: Register!) {
+      register(input: $input) {
+        status
+        message
+        token
+        user {
+          ...CoreUserInfoMinimalField
+          roles
+          province {
+            id
+            name
+          }
+          city {
+            id
+            name
+          }
+        }
+      }
+    }
+  `);
+
+  const [handleCheckAvailability] = useMutation<{
+    handleCheckAvailability: CheckAvailable;
+  }>(gql`
+    mutation HandleCheckAvailabilityMutation(
+      $username: String!
+      $email: String!
+    ) {
+      handleCheckAvailability(username: $username, email: $email) {
+        email
+        username
+      }
+    }
+  `);
+
+  useEffect(() => {
+    data.username &&
+      data.email &&
+      handleCheckAvailability({
+        variables: {
+          username: data.username,
+          email: data.email,
+        },
+      }).then((e) => {
+        e.data?.handleCheckAvailability &&
+          setCheckAvailable(e.data.handleCheckAvailability);
+      });
+  }, [data]);
+
+  const { setToken } = useAuthStore();
+
+  const { setUser } = useUserStore();
+
+  const [proves, setProves] = useState<FileType | undefined>(undefined);
+
+  const onDrop = (acceptedFiles: any) => {
+    const file = acceptedFiles[0];
+    handleUpload({
+      variables: {
+        input: {
+          name: file.name,
+          mime: file.type,
+          file,
+        },
+      },
+    }).then((e) => {
+      if (e.data?.uploadFile?.status && e.data.uploadFile.file) {
+        const f = e.data.uploadFile.file;
+        setProves(f);
+      } else {
+        toast({
+          description: e.data?.uploadFile.message,
+        });
+      }
+    });
+  };
+
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
+  const handleRegister = () => {
+    if (!proves) return toast.error("Anda belum mengupload bukti pembayaran !");
+
+    handleRegisterMutation({
+      variables: {
+        input: {
+          prove_id: proves.id,
+          parent_id: getParentCandidate?.id,
+          province_id: province?.id,
+          city_id: city?.id,
+          district_id: district?.id,
+          subscription_type: registerType,
+          classroom_id: event?.id,
+          ...data,
+
+          confirm_password: undefined,
+        },
+      },
+    }).then((e) => {
+      if (
+        e.data?.register.status &&
+        e.data.register.token &&
+        e.data.register.user
+      ) {
+        toast.success("Berhasil mendaftar akun anda");
+
+        setToken(e.data.register.token);
+        setUser(e.data.register.user);
+
+        window.location.replace(
+          `/${e.data.register.user?.roles?.toLowerCase() + "s"}`
+        );
+      } else {
+        toast.error(e?.data?.register?.message);
+      }
+    });
+  };
 
   const reset = () => {
     setRegisterType(undefined);
@@ -154,29 +480,85 @@ export default function Register() {
               {stepType == "Data Diri" && (
                 <Grid container spacing={2} sx={{ p: 2 }}>
                   <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Nama" variant="outlined" />
+                    <TextField
+                      fullWidth
+                      label="Nama"
+                      variant="outlined"
+                      onChange={(e) =>
+                        setData({ ...data, name: e.target.value })
+                      }
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Username" variant="outlined" />
+                    <TextField
+                      fullWidth
+                      label="Username"
+                      variant="outlined"
+                      color={
+                        checkAvailable?.username == "exist"
+                          ? "warning"
+                          : undefined
+                      }
+                      helperText={
+                        checkAvailable?.username == "exist"
+                          ? "Username sudah digunakan"
+                          : undefined
+                      }
+                      onChange={(e) =>
+                        setData({ ...data, username: e.target.value })
+                      }
+                    />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField fullWidth label="Email" variant="outlined" />
+                    <TextField
+                      fullWidth
+                      label="Email"
+                      variant="outlined"
+                      type="email"
+                      color={
+                        checkAvailable?.email == "exist" ? "warning" : undefined
+                      }
+                      helperText={
+                        checkAvailable?.email == "exist"
+                          ? "Email sudah digunakan"
+                          : undefined
+                      }
+                      onChange={(e) =>
+                        setData({ ...data, email: e.target.value })
+                      }
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField fullWidth label="Password" variant="outlined" />
+                    <TextField
+                      fullWidth
+                      label="Password"
+                      variant="outlined"
+                      type="password"
+                      onChange={(e) =>
+                        setData({ ...data, password: e.target.value })
+                      }
+                    />
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <TextField
                       fullWidth
                       label="Konfirmasi Password"
                       variant="outlined"
+                      type="password"
+                      onChange={(e) =>
+                        setData({ ...data, confirm_password: e.target.value })
+                      }
                     />
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      disablePortal
-                      options={[{ label: "The Godfather", id: 1 }]}
+                      options={provinces?.map((e) => ({
+                        label: e.name,
+                        id: e.id,
+                        rest: e,
+                      }))}
                       fullWidth
+                      onChange={(_, v) => v?.rest && setProvince(v.rest)}
                       renderInput={(params) => (
                         <TextField {...params} label="Provinsi" />
                       )}
@@ -184,9 +566,13 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      disablePortal
-                      options={[{ label: "The Godfather", id: 1 }]}
+                      options={cities?.map((e) => ({
+                        label: e.name,
+                        id: e.id,
+                        rest: e,
+                      }))}
                       fullWidth
+                      onChange={(_, v) => v?.rest && setCity(v.rest)}
                       renderInput={(params) => (
                         <TextField {...params} label="Kota / Kabupaten" />
                       )}
@@ -194,9 +580,13 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      disablePortal
-                      options={[{ label: "The Godfather", id: 1 }]}
+                      options={districts?.map((e) => ({
+                        label: e.name,
+                        id: e.id,
+                        rest: e,
+                      }))}
                       fullWidth
+                      onChange={(_, v) => v?.rest && setDistrict(v.rest)}
                       renderInput={(params) => (
                         <TextField {...params} label="Kecamatan / Kelurahan" />
                       )}
@@ -209,10 +599,10 @@ export default function Register() {
                 <Box sx={{ display: "flex", gap: 1, flexDirection: "column" }}>
                   <Box sx={{ display: "flex", alignItems: "center" }}>
                     <PlaceIcon />
-                    Acara di Bekasi, DKI Jakarta
+                    Acara di {city?.name}, {province?.name}
                   </Box>
                   <Paper sx={{ p: 2 }}>
-                    {false ? (
+                    {availableEvents?.edges?.length == 0 ? (
                       <Box
                         sx={{
                           display: "flex",
@@ -221,9 +611,12 @@ export default function Register() {
                         }}
                       >
                         <Typography>
-                          Tidak menemukan acara di Bekasi, DKI Jakarta
+                          Tidak menemukan acara di {city?.name},{" "}
+                          {province?.name}
                         </Typography>
-                        <Button>Lihat semua acara aktif?</Button>
+                        <Button onClick={() => setShowAll(true)}>
+                          Lihat semua acara aktif?
+                        </Button>
                       </Box>
                     ) : (
                       <Grid
@@ -231,8 +624,8 @@ export default function Register() {
                         spacing={2}
                         sx={{ overflowY: "auto", maxHeight: 650 }}
                       >
-                        {[...Array(10)].map((_, i) => (
-                          <Grid item xs={12} sm={4} key={i}>
+                        {availableEvents?.edges?.map(({ node }, i) => (
+                          <Grid item xs={12} sm={4} key={node?.id}>
                             <Card>
                               <CardMedia
                                 component="img"
@@ -246,13 +639,13 @@ export default function Register() {
                                   variant="h5"
                                   component="div"
                                 >
-                                  Acara NFT
+                                  {node?.name}
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   color="text.secondary"
                                 >
-                                  JL. Kripto Mangun kusuma
+                                  {node?.address}
                                 </Typography>
                               </CardContent>
                               <Box
@@ -266,13 +659,13 @@ export default function Register() {
                                   sx={{ display: "flex", alignItems: "center" }}
                                 >
                                   <PlaceIcon />
-                                  Bekasi, DKI Jakarta
+                                  {node?.city?.name}, {node?.province?.name}
                                 </Box>
                                 <Box
                                   sx={{ display: "flex", alignItems: "center" }}
                                 >
                                   <GroupIcon />
-                                  10 Trainer
+                                  {node?.trainersCount} Trainer
                                 </Box>
                               </Box>
 
@@ -280,7 +673,10 @@ export default function Register() {
                                 <Button
                                   fullWidth
                                   variant="contained"
-                                  onClick={next}
+                                  onClick={() => {
+                                    setEvent(node);
+                                    next();
+                                  }}
                                 >
                                   pilih acara
                                 </Button>
@@ -300,10 +696,10 @@ export default function Register() {
                   >
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                       <PlaceIcon />
-                      Trainer di Bekasi, DKI Jakarta
+                      Trainer di {city?.name}, {province?.name}
                     </Box>
                     <Paper sx={{ p: 2 }}>
-                      {false ? (
+                      {loading ? (
                         <Box
                           sx={{
                             display: "flex",
@@ -311,12 +707,7 @@ export default function Register() {
                             alignItems: "center",
                           }}
                         >
-                          <Typography>
-                            Tidak menemukan trainer di Bekasi, DKI Jakarta
-                          </Typography>
-                          <Button onClick={next}>
-                            Lihat semua trainer aktif?
-                          </Button>
+                          <CircularProgress />
                         </Box>
                       ) : (
                         <Grid
@@ -324,59 +715,131 @@ export default function Register() {
                           spacing={2}
                           sx={{ overflowY: "auto", maxHeight: 650 }}
                         >
-                          {[...Array(10)].map((_, i) => (
-                            <Grid item xs={12} sm={4} key={i}>
-                              <Card>
-                                <CardMedia
-                                  component="img"
-                                  height="300"
-                                  image="/person-placeholder.jpg"
-                                  alt="swoole doge"
-                                />
-                                <CardContent>
-                                  <Typography
-                                    gutterBottom
-                                    variant="h5"
-                                    component="div"
-                                  >
-                                    NATHANEL KUSUMA
-                                  </Typography>
-                                  <Typography
-                                    variant="body2"
-                                    color="text.secondary"
-                                  >
-                                    GOD OF WAR
-                                  </Typography>
-                                </CardContent>
-                                <Box
-                                  sx={{
-                                    p: 1,
-                                    display: "flex",
-                                    justifyContent: "space-between",
+                          {getParentCandidate ? (
+                            <Card>
+                              <CardMedia
+                                component="img"
+                                height="300"
+                                image="/person-placeholder.jpg"
+                                alt="swoole doge"
+                              />
+                              <CardContent>
+                                <Typography
+                                  gutterBottom
+                                  variant="h5"
+                                  component="div"
+                                >
+                                  {getParentCandidate.name}
+                                </Typography>
+                                <Typography
+                                  variant="body2"
+                                  color="text.secondary"
+                                >
+                                  {getParentCandidate.title}
+                                </Typography>
+                              </CardContent>
+                              <Box
+                                sx={{
+                                  p: 1,
+                                  display: "flex",
+                                  justifyContent: "space-between",
+                                }}
+                              >
+                                <IconButton
+                                  onClick={() => {
+                                    if (window.open)
+                                      //@ts-ignore
+                                      window
+                                        .open(
+                                          getParentCandidate?.url_facebook ??
+                                            "",
+                                          "_blank"
+                                        )
+                                        .focus();
                                   }}
                                 >
-                                  <IconButton>
-                                    <FacebookIcon />
-                                  </IconButton>
-                                  <IconButton>
-                                    <TwitterIcon />
-                                  </IconButton>
-                                  <IconButton>
-                                    <InstagramIcon />
-                                  </IconButton>
-                                  <IconButton>
-                                    <LinkedInIcon />
-                                  </IconButton>
+                                  <FacebookIcon />
+                                </IconButton>
+                                <IconButton
+                                  onClick={() => {
+                                    if (window.open)
+                                      //@ts-ignore
+                                      window
+                                        .open(
+                                          getParentCandidate?.url_twitter ?? "",
+                                          "_blank"
+                                        )
+                                        .focus();
+                                  }}
+                                >
+                                  <TwitterIcon />
+                                </IconButton>
+                                <IconButton
+                                  onClick={() => {
+                                    if (window.open)
+                                      //@ts-ignore
+                                      window
+                                        .open(
+                                          getParentCandidate?.url_instagram ??
+                                            "",
+                                          "_blank"
+                                        )
+                                        .focus();
+                                  }}
+                                >
+                                  <InstagramIcon />
+                                </IconButton>
+                                <IconButton
+                                  onClick={() => {
+                                    if (window.open)
+                                      //@ts-ignore
+                                      window
+                                        .open(
+                                          getParentCandidate?.url_linkedin ??
+                                            "",
+                                          "_blank"
+                                        )
+                                        .focus();
+                                  }}
+                                >
+                                  <LinkedInIcon />
+                                </IconButton>
+                              </Box>
+                              {showAll && (
+                                <Box
+                                  sx={{ display: "flex", alignItems: "center" }}
+                                >
+                                  <PlaceIcon /> {getParentCandidate?.city?.name}
+                                  , {getParentCandidate?.province?.name}
                                 </Box>
-
-                                <CardActions>
-                                  <Button fullWidth variant="contained">
-                                    pilih trainer
-                                  </Button>
-                                </CardActions>
-                              </Card>
-                            </Grid>
-                          ))}
+                              )}
+                              <CardActions>
+                                <Button
+                                  fullWidth
+                                  variant="contained"
+                                  onClick={() => refetch()}
+                                >
+                                  GANTI TRAINER
+                                </Button>
+                              </CardActions>
+                            </Card>
+                          ) : (
+                            <Box
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Typography>
+                                Tidak menemukan trainer di {city?.name},{" "}
+                                {province?.name}
+                              </Typography>
+                              <Button onClick={() => setShowAll(true)}>
+                                Lihat semua trainer aktif?
+                              </Button>
+                            </Box>
+                          )}
                         </Grid>
                       )}
                     </Paper>
@@ -426,33 +889,62 @@ export default function Register() {
                       </Grid>
                     ))}
                   </Grid>
-                  <Box
-                    {...getRootProps()}
-                    sx={{
-                      backgroundColor: "lightgray",
-                      height: 300,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      border: "2px dashed gray",
-                      borderStyle: "dashed",
-                    }}
-                  >
-                    <input {...getInputProps()} />
-                    {isDragActive ? (
-                      <p>Taruh file disini</p>
-                    ) : (
-                      <p>Taruh atau klik untuk mengupload bukti pembayaran</p>
-                    )}
-                  </Box>
+                  {proves ? (
+                    <Box
+                      sx={{
+                        backgroundColor: "lightgray",
+                        height: 300,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        border: "2px dashed gray",
+                        borderStyle: "dashed",
+                        position: "relative",
+                      }}
+                    >
+                      <Image
+                        src={proves.path}
+                        alt={proves.name}
+                        layout="fill"
+                      />
+                    </Box>
+                  ) : (
+                    <Box
+                      {...getRootProps()}
+                      sx={{
+                        backgroundColor: "lightgray",
+                        height: 300,
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        border: "2px dashed gray",
+                        borderStyle: "dashed",
+                      }}
+                    >
+                      <input {...getInputProps()} />
+                      {isDragActive ? (
+                        <p>Taruh file disini</p>
+                      ) : (
+                        <p>Taruh atau klik untuk mengupload bukti pembayaran</p>
+                      )}
+                      {lUpload && <CircularProgress />}
+                    </Box>
+                  )}
                 </Box>
               )}
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Button onClick={reset}>Ubah Tipe Pendaftaran</Button>
-                <Button variant="contained" onClick={next}>
-                  Selanjutnya
-                </Button>
-              </Box>
+              {!["FINISH", "Pilih Acara"].includes(stepType ?? "") && (
+                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                  <Button onClick={reset}>Ubah Tipe Pendaftaran</Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      next();
+                    }}
+                  >
+                    {stepType == "Pembayaran" ? "Selesai" : "Selanjutnya"}
+                  </Button>
+                </Box>
+              )}
             </Box>
           ) : (
             <Box>

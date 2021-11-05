@@ -27,6 +27,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useRouter } from "next/dist/client/router";
 import { useAuthStore } from "../store/auth";
 import { useUserStore } from "../store/user";
+import { Roles } from "../types/type";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -136,7 +137,7 @@ const AdminRoutes: Array<LinkItemProps> = [
   {
     name: "Member",
     icon: "people",
-    route: "/childrens",
+    route: "/admins/members",
   },
   // { name: "Pages", icon: FiPackage, route: "/admins/pages" },
   {
@@ -166,7 +167,12 @@ const MemberRoutes: Array<LinkItemProps> = [
   },
 ];
 
+const PaymentRoutes: Array<LinkItemProps> = [
+  { name: "Halaman Utama", icon: "money", route: "/members" },
+];
+
 const LinkItems: { [e: string]: Array<LinkItemProps> } = {
+  payments: PaymentRoutes,
   members: MemberRoutes,
   trainers: TrainerRoutes,
   admins: AdminRoutes,
@@ -208,10 +214,12 @@ export default function DashboardLayout({
 
   const { setToken } = useAuthStore();
 
+  const notPayed = !user?.subscription_verified && user?.roles == Roles.Member;
+
   const logout = () => {
     setToken("");
     setUser(null);
-    push("/login");
+    window.location.replace("/login");
   };
 
   return (
@@ -291,14 +299,16 @@ export default function DashboardLayout({
         </DrawerHeader>
         <Divider />
         <List>
-          {LinkItems[routeName]?.map(({ icon, name, route }) => (
-            <ListItem button key={name} onClick={() => push(route)}>
-              <ListItemIcon>
-                <Icon>{icon}</Icon>
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItem>
-          ))}
+          {LinkItems[notPayed ? "payments" : routeName]?.map(
+            ({ icon, name, route }) => (
+              <ListItem button key={name} onClick={() => push(route)}>
+                <ListItemIcon>
+                  <Icon>{icon}</Icon>
+                </ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            )
+          )}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
