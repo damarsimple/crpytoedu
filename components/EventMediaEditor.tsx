@@ -14,7 +14,7 @@ interface FileInputProp {
   onUpload?: () => Promise<any>;
 }
 
-const UploadZone = ({
+export const UploadZone = ({
   accept,
   fileable_id,
   fileable_type,

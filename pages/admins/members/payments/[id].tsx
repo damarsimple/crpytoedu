@@ -124,6 +124,24 @@ export default function Id() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
+                      Username
+                    </TableCell>
+                    <TableCell align="right">{user?.username}</TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      Subscription Type
+                    </TableCell>
+                    <TableCell align="right">
+                      {user?.subscription_type}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
                       Orang Tua
                     </TableCell>
                     <TableCell align="right">{user?.myparent?.name}</TableCell>

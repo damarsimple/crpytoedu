@@ -1,7 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Box,
   Button,
+  Modal,
   Paper,
   Tab,
   Table,
@@ -11,9 +12,13 @@ import {
   TableHead,
   TableRow,
   Tabs,
+  TextField,
+  Typography,
 } from "@mui/material";
+import { style } from "d3";
 import withRouter, { WithRouterProps } from "next/dist/client/with-router";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import DashboardLayout from "../../../components/DashboardLayout";
 import TableLoader from "../../../components/TableLoader";
 import {
@@ -56,14 +61,130 @@ function Index({ router: { push } }: WithRouterProps) {
         first: 10,
         name: wildCardFormatter(name),
       },
+      fetchPolicy: "network-only",
     }
   );
 
+  const { data: { users } = {}, fetchMore: fetchMoreNotification } = useQuery<{
+    users: { edges: UserEdge[]; pageInfo: PageInfo };
+  }>(
+    gql`
+      query Query($first: Int!, $name: String, $after: String) {
+        users(first: $first, name: $name, after: $after) {
+          edges {
+            node {
+              id
+              name
+              roles
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+            total
+            count
+            currentPage
+            lastPage
+          }
+        }
+      }
+    `,
+    {
+      variables: {
+        first: 10,
+        name: wildCardFormatter(name),
+      },
+      fetchPolicy: "network-only",
+    }
+  );
+
+  const [sendNotificationId, setSendNotificationId] = useState("");
+
+  const [handleSend] = useMutation(gql`
+    mutation CreateBasicNotificationMutation($input: CreateBasicNotification!) {
+      createBasicNotification(input: $input) {
+        id
+        name
+      }
+    }
+  `);
+
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   return (
     <DashboardLayout>
       <Box>
+        <Modal
+          open={Boolean(sendNotificationId)}
+          onClose={() => setSendNotificationId("")}
+        >
+          <Box
+            sx={{
+              position: "absolute" as "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 400,
+              bgcolor: "background.paper",
+              border: "2px solid #000",
+              boxShadow: 24,
+              p: 4,
+              display: "flex",
+              flexDirection: "column",
+              gap: 1,
+            }}
+          >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Pesan
+            </Typography>
+
+            <TextField
+              label="Name"
+              variant="outlined"
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <TextField
+              label="Konten"
+              variant="outlined"
+              onChange={(e) => setContent(e.target.value)}
+            />
+
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={() => {
+                if (Boolean(title) && Boolean(content)) {
+                  handleSend({
+                    variables: {
+                      input: {
+                        name: title,
+                        text: content,
+                        user_id: sendNotificationId,
+                      },
+                    },
+                  }).then((e) => {
+                    toast.success("Berhasil mengirim notifikasi");
+                    setSendNotificationId("");
+                  });
+                } else {
+                  toast.error("Anda belum mengisi formulir dengan lengkap");
+                }
+              }}
+            >
+              KIRIM
+            </Button>
+          </Box>
+        </Modal>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs value={tabs} onChange={(_, e) => setTabs(e)}>
+          <Tabs
+            value={tabs}
+            onChange={(_, e) => {
+              setTabs(e);
+              setName("");
+            }}
+          >
             <Tab label="Data" />
             <Tab label="Pembayaran User" />
             <Tab label="Notifikasi" />
@@ -72,6 +193,14 @@ function Index({ router: { push } }: WithRouterProps) {
 
         {tabs == 1 && (
           <TableContainer component={Paper}>
+            <Box sx={{ p: 1 }}>
+              <TextField
+                fullWidth
+                label="Cari User"
+                variant="standard"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Box>
             <Table sx={{ width: "100%" }} aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -114,6 +243,67 @@ function Index({ router: { push } }: WithRouterProps) {
                 fullWidth
                 onClick={() =>
                   fetchMore({
+                    variables: {
+                      first: 10,
+                      after: usersNotPayment?.pageInfo?.endCursor,
+                    },
+                  })
+                }
+              >
+                AMBIL LAGI
+              </Button>
+            )}
+          </TableContainer>
+        )}
+
+        {tabs == 2 && (
+          <TableContainer component={Paper}>
+            <Box sx={{ p: 1 }}>
+              <TextField
+                fullWidth
+                label="Cari User"
+                variant="standard"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </Box>
+            <Table sx={{ width: "100%" }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>ID</TableCell>
+                  <TableCell>Nama</TableCell>
+                  <TableCell>Roles</TableCell>
+                  <TableCell>Kirim Notifikasi</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {users?.edges?.map(({ node: { id, name, roles } }) => (
+                  <TableRow
+                    key={id}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {id}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {name}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {roles}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      <Button onClick={() => setSendNotificationId(id)}>
+                        Kirim
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            {usersNotPayment?.pageInfo?.hasNextPage && (
+              <Button
+                fullWidth
+                onClick={() =>
+                  fetchMoreNotification({
                     variables: {
                       first: 10,
                       after: usersNotPayment?.pageInfo?.endCursor,

@@ -78,6 +78,9 @@ export interface User {
   children: User[];
   trainers_parent: User[];
   payment_proves: File[];
+  basicnotificationsCount: number;
+  my_main_event: Maybe<Classroom>;
+  my_staging_event: Maybe<Classroom>;
 }
 
 export interface Province {

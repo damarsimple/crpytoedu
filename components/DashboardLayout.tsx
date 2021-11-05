@@ -269,10 +269,15 @@ export default function DashboardLayout({
           <Box sx={{ display: { xs: "flex" } }}>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
+              onClick={() => {
+                push("/notifications");
+              }}
             >
-              <Badge badgeContent={17} color="error">
+              <Badge
+                badgeContent={user?.basicnotificationsCount ?? 0}
+                color="error"
+              >
                 <NotificationsIcon />
               </Badge>
             </IconButton>

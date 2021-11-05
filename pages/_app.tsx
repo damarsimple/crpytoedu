@@ -89,6 +89,7 @@ export const client = new ApolloClient({
             "comments",
             "likes",
             "usersNotPayment",
+            "basicnotifications",
           ].reduce((o, key) => ({ ...o, [key]: relayStylePagination() }), {}),
         },
       },
@@ -115,6 +116,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             query GetMe {
               me {
                 subscription_verified
+                basicnotificationsCount
               }
             }
           `,
@@ -124,6 +126,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             setUser({
               ...user,
               subscription_verified: me.subscription_verified,
+              basicnotificationsCount: me.basicnotificationsCount,
             });
           } else {
             pathname != "/members" && push("/members");

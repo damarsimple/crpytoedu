@@ -675,6 +675,7 @@ export default function Register() {
                                   variant="contained"
                                   onClick={() => {
                                     setEvent(node);
+                                    console.log(node)
                                     next();
                                   }}
                                 >
@@ -817,7 +818,7 @@ export default function Register() {
                                 <Button
                                   fullWidth
                                   variant="contained"
-                                  onClick={() => refetch()}
+                                  onClick={() => refetch().then(e => toast.success("berhasil mengganti trainer"))}
                                 >
                                   GANTI TRAINER
                                 </Button>
@@ -834,6 +835,7 @@ export default function Register() {
                               <Typography>
                                 Tidak menemukan trainer di {city?.name},{" "}
                                 {province?.name}
+                                {JSON.stringify(getParentCandidate)}
                               </Typography>
                               <Button onClick={() => setShowAll(true)}>
                                 Lihat semua trainer aktif?

@@ -72,6 +72,7 @@ const LOGIN = gql`
         url_twitter
         url_instagram
         url_linkedin
+        basicnotificationsCount
       }
     }
   }
