@@ -210,9 +210,8 @@ export default function DashboardLayout({
 
   const { user, setUser } = useUserStore();
 
-  const routeName = user?.roles?.toLowerCase() + "s";
-
   const { setToken } = useAuthStore();
+  const routeName = user?.roles?.toLowerCase() + "s";
 
   const notPayed = !user?.subscription_verified && user?.roles == Roles.Member;
 
