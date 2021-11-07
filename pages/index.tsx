@@ -727,6 +727,74 @@ function Index({ router: { query } }: WithRouterProps) {
                 <Learnmore />
               </Box>
             </Box>
+            <Box sx={{ p: 10 }}>
+              <TextComponent id={`pricing-title`} />
+              <Grid container spacing={3}>
+                {["pricing-1", "pricing-2", "pricing-3"].map((e, i) => (
+                  <Grid item xs={12} md={4} key={e}>
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      sx={{
+                        textAlign: "center",
+                        gap: i == 1 ? 3 : 2,
+                        backgroundColor: i == 1 ? "#7d3ad3" : "white",
+                        color: i == 1 ? "white" : "dark",
+                        p: 10,
+                        borderRadius: "24px",
+                      }}
+                    >
+                      <TextComponent id={`${e}-title`} />
+                      <TextComponent id={`${e}-description`} />
+                      <TextComponent id={`${e}-price`} />
+                      <Learnmore />
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+
+            <Box sx={{ p: 10, backgroundColor: "#451288", color: "white" }}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={3}>
+                  <TextComponent id="footer-title" />
+                  <TextComponent id="footer-description" />
+                </Grid>
+                <Grid item xs={12} md={3}>
+                  <TextComponent id="footer-title" />
+                  <TextComponent id="footer-description" />
+                </Grid>
+                <Grid item xs={12} md={3}>
+                  <Grid container spacing={3}>
+                    {[
+                      "gallery-1",
+                      "gallery-2",
+                      "gallery-3",
+                      "gallery-4",
+                      "gallery-5",
+                      "gallery-6",
+                    ].map((e) => (
+                      <Grid item xs={12} md={4} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignItems="center"
+                          sx={{ textAlign: "center" }}
+                        >
+                          <ImageComponent id={`${e}-image`} />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Grid>
+
+                <Grid item xs={12} md={3}>
+                  <TextComponent id="footer-title" />
+                  <TextComponent id="footer-description" />
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
         </Box>
       </Grid>
@@ -2027,6 +2095,84 @@ const useStore = create<PageStore>((set, getData) => ({
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
+    },
+
+    "pricing-title": {
+      children: "Langganan",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "40px", textAlign: "center" },
+    },
+
+    "pricing-1-title": {
+      children: "The Moon",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+    "pricing-1-description": {
+      children: "Pengguna bisa mengakses acara ke luar angkasa",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+    "pricing-1-price": {
+      children: "Rp. 300.000",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "pricing-2-title": {
+      children: "The Moon",
+      variant: "caption",
+      component: "p",
+      style: { fontSize: "20px" },
+    },
+    "pricing-2-description": {
+      children: "Pengguna bisa mengakses acara ke luar angkasa",
+      variant: "caption",
+      component: "p",
+      style: { fontSize: "15px" },
+    },
+    "pricing-2-price": {
+      children: "Rp. 300.000",
+      variant: "caption",
+      component: "p",
+      style: { fontSize: "15px" },
+    },
+
+    "pricing-3-title": {
+      children: "The Moon",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+    "pricing-3-description": {
+      children: "Pengguna bisa mengakses acara ke luar angkasa",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+    "pricing-3-price": {
+      children: "Rp. 300.000",
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "footer-title": {
+      children: "CHAMPIONTRADING",
+      variant: "caption",
+      component: "p",
+      style: { fontSize: "40px", fontStyle: "bold" },
+    },
+
+    "footer-description": {
+      children: "CHAMPIONTRADING adalah platform blablabalbalbalbalbalb",
+      variant: "caption",
+      component: "p",
+      style: { fontSize: "20px", maxWidth: "75ch" },
     },
   },
   setImage: (image) => set({ image }),
