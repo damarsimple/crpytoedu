@@ -1,5 +1,5 @@
 import { gql, useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardLayout from "../../components/DashboardLayout";
 import TableLoader from "../../components/TableLoader";
 import { CorePageInfoField } from "../../fragments/fragments";
@@ -37,13 +37,19 @@ import EventMapEditor from "../../components/EventMediaEditor";
 import EventTrainerEditor from "../../components/EventTrainerEditor";
 import { toast } from "react-toastify";
 import { useModalStore } from "../../store/modal";
+import withRouter, { WithRouterProps } from "next/dist/client/with-router";
 
-export default function Index() {
+function Index({ router: { query } }: WithRouterProps) {
   const { provinces, cities, districts, setCity, setProvince } = usePlaces({});
 
   const [editMap, setEditMap] = useState("");
   const [editTrainer, setEditTrainer] = useState("");
 
+  useEffect(() => {
+    if (query.tabs) {
+      setTabs(parseInt(query.tabs as string));
+    }
+  }, [query]);
   const [tabs, setTabs] = useState(0);
 
   const [name, setName] = useState("");
@@ -494,3 +500,5 @@ export default function Index() {
     </DashboardLayout>
   );
 }
+
+export default withRouter(Index);

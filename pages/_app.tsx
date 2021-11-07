@@ -148,12 +148,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet"
-        />
-      </Head>
+      <Head></Head>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <ApolloProvider client={client}>
           <ThemeProvider theme={theme}>

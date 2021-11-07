@@ -162,7 +162,7 @@ export interface Page {
   created_at: string;
   updated_at: string;
   route: string;
-  data: string;
+  data: Maybe<string>;
 }
 
 export interface Classroom {

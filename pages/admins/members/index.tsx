@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import { style } from "d3";
 import withRouter, { WithRouterProps } from "next/dist/client/with-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import DashboardLayout from "../../../components/DashboardLayout";
 import TableLoader from "../../../components/TableLoader";
@@ -27,7 +27,13 @@ import {
 } from "../../../helpers/formatters";
 import { UserEdge, User, Roles, PageInfo } from "../../../types/type";
 
-function Index({ router: { push } }: WithRouterProps) {
+function Index({ router: { push, query } }: WithRouterProps) {
+  useEffect(() => {
+    if (query.tabs) {
+      setTabs(parseInt(query.tabs as string));
+    }
+  }, [query]);
+
   const [tabs, setTabs] = useState(0);
   const [name, setName] = useState("");
   const { data: { usersNotPayment } = {}, fetchMore } = useQuery<{

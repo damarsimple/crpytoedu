@@ -139,7 +139,7 @@ const AdminRoutes: Array<LinkItemProps> = [
     icon: "people",
     route: "/admins/members",
   },
-  // { name: "Pages", icon: FiPackage, route: "/admins/pages" },
+  { name: "Homepage Editor", icon: "web", route: "/?editor=true" },
   {
     name: "Settings",
     icon: "settings",
