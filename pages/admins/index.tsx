@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import {
   Card,
   CardContent,
@@ -23,7 +23,7 @@ import TableLoader from "../../components/TableLoader";
 import { getRange } from "../../helpers/date";
 import { selectObjectExtractor } from "../../helpers/formatters";
 import usePlaces from "../../hooks/usePlaces";
-import { Category, Roles } from "../../types/type";
+import { Category, Classroom, Roles, User } from "../../types/type";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 export default function Index() {
@@ -42,6 +42,84 @@ export default function Index() {
     provinces,
     cities,
   } = usePlaces({});
+
+  const [selectedRoles, setSelectedRoles] = useState<Roles | undefined>(
+    undefined
+  );
+
+  const { data } = useQuery<{ usersAll: User[] }>(
+    gql`
+      query UsersAll(
+        $province_id: ID
+        $city_id: ID
+        $district_id: ID
+        $roles: Roles
+      ) {
+        usersAll(
+          province_id: $province_id
+          city_id: $city_id
+          district_id: $district_id
+          roles: $roles
+        ) {
+          id
+          name
+          created_at
+        }
+      }
+    `,
+    {
+      variables: {
+        city_id: city?.id,
+        district_id: district?.id,
+        province_id: province?.id,
+        roles: selectedRoles,
+      },
+    }
+  );
+
+  const { data: cData } = useQuery<{ classroomsAll: Classroom[] }>(
+    gql`
+      query ClassroomsAll($province_id: ID, $city_id: ID, $district_id: ID) {
+        classroomsAll(
+          province_id: $province_id
+          city_id: $city_id
+          district_id: $district_id
+        ) {
+          id
+          name
+          created_at
+        }
+      }
+    `,
+    {
+      variables: {
+        city_id: city?.id,
+        district_id: district?.id,
+        province_id: province?.id,
+      },
+    }
+  );
+
+  const reduced = data?.usersAll?.reduce((acc, curr) => {
+    const date = moment(curr.created_at).format("DD-M");
+
+    if (acc[date]) {
+      return { ...acc, [date]: acc[date] + 1 };
+    } else {
+      return { ...acc, [date]: 1 };
+    }
+  }, {} as { [key: string]: number });
+
+  const reduced2 = cData?.classroomsAll?.reduce((acc, curr) => {
+    const date = moment(curr.created_at).format("DD-M");
+
+    if (acc[date]) {
+      return { ...acc, [date]: acc[date] + 1 };
+    } else {
+      return { ...acc, [date]: 1 };
+    }
+  }, {} as { [key: string]: number });
+
   return (
     <DashboardLayout>
       <Box
@@ -165,7 +243,7 @@ export default function Index() {
                 )}
               />
             </Grid>
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <Autocomplete
                 options={[
                   { label: "Perminggu" },
@@ -178,9 +256,9 @@ export default function Index() {
                   <TextField {...params} label="Periode" />
                 )}
               />
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={4}>
+            {/* <Grid item xs={4}>
               <DesktopDatePicker
                 label="Dari Tanggal"
                 inputFormat="MM/dd/yyyy"
@@ -197,7 +275,7 @@ export default function Index() {
                 // onChange={handleChange}
                 renderInput={(params) => <TextField fullWidth {...params} />}
               />
-            </Grid>
+            </Grid> */}
             {tabs == 0 && (
               <Grid item xs={4}>
                 <Autocomplete
@@ -205,7 +283,7 @@ export default function Index() {
                     ...e,
                   }))}
                   fullWidth
-                  // onChange={(_, v) => v?.rest && setProvince(v.rest)}
+                  onChange={(_, v) => setSelectedRoles(v?.value as Roles)}
                   renderInput={(params) => (
                     <TextField {...params} label="Roles" />
                   )}
@@ -213,54 +291,60 @@ export default function Index() {
               </Grid>
             )}
           </Grid>
-          {tabs == 0 && (
-            <ChartWrapper
-              options={{
-                chart: {
-                  height: 350,
-                  type: "line",
-                  zoom: {
-                    enabled: false,
-                  },
+          <ChartWrapper
+            options={{
+              chart: {
+                height: 350,
+                type: "line",
+                zoom: {
+                  enabled: false,
                 },
-                dataLabels: {
-                  enabled: true,
+              },
+              dataLabels: {
+                enabled: true,
+              },
+              stroke: {
+                curve: "straight",
+              },
+              title: {
+                text: tabs == 0 ? "Perkembangan User" : "Perkembangan Acara",
+                align: "left",
+              },
+              grid: {
+                row: {
+                  colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+                  opacity: 0.5,
                 },
-                stroke: {
-                  curve: "straight",
-                },
-                title: {
-                  text: "Perkembangan User",
-                  align: "left",
-                },
-                grid: {
-                  row: {
-                    colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-                    opacity: 0.5,
-                  },
-                },
-                xaxis: {
-                  categories: getRange(
-                    moment().subtract(1, "month").toDate(),
-                    moment().toDate(),
-                    "days"
-                  ).map((e) => e.format("DD-M")),
-                },
-              }}
-              series={[
-                {
-                  name: "User",
-                  data: getRange(
-                    moment().subtract(1, "month").toDate(),
-                    moment().toDate(),
-                    "days"
-                  ).map((e) => 120),
-                },
-              ]}
-              type="line"
-              height={600}
-            />
-          )}
+              },
+              xaxis: {
+                categories: getRange(
+                  moment().subtract(1, "month").toDate(),
+                  moment().add(2, "days").toDate(),
+                  "days"
+                ).map((e) => e.format("DD-M")),
+              },
+            }}
+            series={[
+              {
+                name: tabs == 0 ? "User" : "Acara",
+                data: getRange(
+                  moment().subtract(1, "month").toDate(),
+                  moment().add(2, "days").toDate(),
+                  "days"
+                ).map((e) =>
+                  tabs == 0
+                    ? reduced
+                      ? reduced[e.format("DD-M")] ?? 0
+                      : 0
+                    : reduced2
+                    ? reduced2[e.format("DD-M")] ?? 0
+                    : 0
+                ),
+              },
+            ]}
+            type="line"
+            height={600}
+          />
         </Box>
       </Box>
     </DashboardLayout>

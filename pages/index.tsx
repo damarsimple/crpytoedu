@@ -239,7 +239,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
             ) : (
               <>
                 <Button sx={{ color: "white" }} onClick={() => push("/login")}>
-                  LOGIN {scrollPosition}
+                  LOGIN
                 </Button>
                 <Button
                   sx={{ color: "white" }}
