@@ -364,7 +364,17 @@ function Index({ router: { push, query } }: WithRouterProps) {
                   field: "email",
                   headerName: "Email",
                   flex: 1,
-                  editable: false,
+                  editable: true,
+                  createable: true,
+                },
+                {
+                  //@ts-ignore
+                  field: "password",
+                  headerName: "Password",
+                  flex: 1,
+                  hide: true,
+                  editable: true,
+                  createable: true,
                 },
                 {
                   field: "username",

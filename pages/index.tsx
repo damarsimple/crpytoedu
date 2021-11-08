@@ -193,7 +193,11 @@ function Index({ router: { query, push } }: WithRouterProps) {
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem
+            onClick={() => push(user?.roles?.toLocaleLowerCase() + "s")}
+          >
+            Profile
+          </MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
       )}

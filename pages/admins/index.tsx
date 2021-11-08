@@ -150,7 +150,12 @@ export default function Index() {
               icon: "event_available",
             },
             { name: "Video", content: "10", url: "/videos", icon: "videocam" },
-            { name: "Member", content: "10", url: "/members", icon: "person" },
+            {
+              name: "Member",
+              content: "10",
+              url: "/admins/members",
+              icon: "person",
+            },
             {
               name: "Trainer",
               content: "10",

@@ -148,7 +148,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head></Head>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <ApolloProvider client={client}>
           <ThemeProvider theme={theme}>

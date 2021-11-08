@@ -1,3 +1,4 @@
+//@ts-nocheck
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-css-tags */
 /* eslint-disable @next/next/no-img-element */

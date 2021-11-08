@@ -238,7 +238,11 @@ export default function DashboardLayout({
           open={isMenuOpen}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+          <MenuItem
+            onClick={() => push(user?.roles?.toLocaleLowerCase() + "s")}
+          >
+            Profile
+          </MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
       )}
