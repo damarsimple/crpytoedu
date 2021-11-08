@@ -658,7 +658,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <Box sx={{ textAlign: "center" }}>
                   <TextComponent id={`team-title`} />
                 </Box>
-                <Grid container spacing={5} sx={{ mt: 4 }}>
+                <Grid container spacing={10} sx={{ mt: 4 }}>
                   {["team-1", "team-2", "team-3", "team-4"].map((e) => (
                     <Grid
                       key={e}
