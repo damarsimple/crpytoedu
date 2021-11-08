@@ -27,7 +27,13 @@ import {
   TextField,
   Autocomplete,
   Grid,
+  createTheme,
 } from "@mui/material";
+
+import { Theme } from "@mui/material/styles";
+//@ts-ignore
+import { createStyles, makeStyles } from "@mui/styles";
+
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { DocumentNode, gql, useMutation, useQuery } from "@apollo/client";
@@ -220,6 +226,61 @@ function DateTimeInput({
   );
 }
 
+const defaultTheme = createTheme();
+const useStyles = makeStyles(
+  (theme: Theme) =>
+    createStyles({
+      root: {
+        border: 0,
+        color:
+          theme.palette.mode === "light"
+            ? "rgba(0,0,0,.85)"
+            : "rgba(255,255,255,0.85)",
+        fontFamily: [
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          '"Helvetica Neue"',
+          "Arial",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(","),
+        WebkitFontSmoothing: "auto",
+        letterSpacing: "normal",
+        "& .MuiDataGrid-columnsContainer": {
+          backgroundColor:
+            theme.palette.mode === "light" ? "#fafafa" : "#1d1d1d",
+        },
+        "& .MuiDataGrid-iconSeparator": {
+          display: "none",
+        },
+        "& .MuiDataGrid-columnHeader, .MuiDataGrid-cell": {
+          borderRight: `1px solid ${
+            theme.palette.mode === "light" ? "#f0f0f0" : "#303030"
+          }`,
+        },
+        "& .MuiDataGrid-columnsContainer, .MuiDataGrid-cell": {
+          borderBottom: `1px solid ${
+            theme.palette.mode === "light" ? "#f0f0f0" : "#303030"
+          }`,
+        },
+        "& .MuiDataGrid-cell": {
+          color:
+            theme.palette.mode === "light"
+              ? "rgba(0,0,0,.85)"
+              : "rgba(255,255,255,0.65)",
+        },
+        "& .MuiPaginationItem-root": {
+          borderRadius: 0,
+        },
+      },
+    }),
+  { defaultTheme }
+);
+
 export default function TableLoader<T>({
   columns,
   label,
@@ -243,6 +304,8 @@ export default function TableLoader<T>({
   deleteQuery?: DocumentNode;
   formatSubmit?: (e: object) => object;
 }) {
+  const classes = useStyles();
+
   const { popModal } = useModalStore();
 
   const [pageSize, setPageSize] = React.useState<number>(10);
@@ -610,6 +673,7 @@ export default function TableLoader<T>({
 
       <div style={{ height: "80vh", width: "100%" }}>
         <DataGrid
+          className={classes.root}
           rowCount={pageInfo?.total ?? 0}
           rows={edges?.map((e) => e.node) ?? []}
           sortModel={sortModel}
