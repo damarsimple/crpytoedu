@@ -5,6 +5,10 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
             rel="preconnect"

@@ -574,7 +574,7 @@ export default function TableLoader<T>({
                   if (x.errors) {
                     for (const err of x.errors) {
                       const { validation } = err.extensions;
-                      Object.keys(validation).forEach((e) => {
+                      Object.keys(validation ?? {}).forEach((e) => {
                         validation[e].forEach(toast.error);
                       });
                     }

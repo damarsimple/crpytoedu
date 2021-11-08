@@ -24,7 +24,9 @@ import TableLoader from "../../../components/TableLoader";
 import {
   wildCardFormatter,
   selectObjectExtractor,
+  selectExtractor,
 } from "../../../helpers/formatters";
+import usePlaces from "../../../hooks/usePlaces";
 import { UserEdge, User, Roles, PageInfo } from "../../../types/type";
 
 function Index({ router: { push, query } }: WithRouterProps) {
@@ -119,6 +121,19 @@ function Index({ router: { push, query } }: WithRouterProps) {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const {
+    provinces,
+    cities,
+    districts,
+    setCity,
+    setDistrict,
+    setProvince,
+    city,
+    province,
+    district,
+  } = usePlaces({});
+
   return (
     <DashboardLayout>
       <Box>
@@ -360,6 +375,7 @@ function Index({ router: { push, query } }: WithRouterProps) {
               columns={[
                 { field: "id", headerName: "ID", flex: 1 },
                 { field: "name", headerName: "Nama", flex: 1, editable: true },
+
                 {
                   field: "email",
                   headerName: "Email",
@@ -397,6 +413,7 @@ function Index({ router: { push, query } }: WithRouterProps) {
                   type: "boolean",
                   flex: 1,
                   editable: true,
+                  createable: false,
                 },
 
                 {
@@ -410,6 +427,11 @@ function Index({ router: { push, query } }: WithRouterProps) {
                   headerName: "Langganan",
                   flex: 1,
                   editable: true,
+                  type: "select",
+                  selects: [
+                    { label: "ONLINE", value: "ONLINE" },
+                    { label: "OFFLINE", value: "OFFLINE" },
+                  ],
                 },
                 // {
                 //   field: "subscription_expired_at",
@@ -418,6 +440,42 @@ function Index({ router: { push, query } }: WithRouterProps) {
                 //   editable: true,
                 //   type: "dateTime",
                 // },
+
+                {
+                  field: "province_id",
+                  headerName: "Provinsi",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: provinces?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) =>
+                    setProvince(provinces.filter((x) => x.id == e)[0]),
+                },
+                {
+                  field: "city_id",
+                  headerName: "Kota / Kabupaten",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: cities?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) => setCity(cities.filter((x) => x.id == e)[0]),
+                },
+                {
+                  field: "district_id",
+                  headerName: "Kecamatan / Kelurahan",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: districts?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) =>
+                    setDistrict(districts.filter((x) => x.id == e)[0]),
+                },
               ]}
               label="Member"
               actions={["edit", "create", "custom"]}
