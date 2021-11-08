@@ -592,7 +592,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     "advantages-5",
                     "advantages-6",
                   ].map((e) => (
-                    <Grid item xs={12} md={4} key={e}>
+                    <Grid item xs={12} sm={4} key={e}>
                       <Box
                         display="flex"
                         flexDirection="column"
@@ -616,13 +616,13 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <TextComponent id={`about-description`} />
                 </Box>
                 <Grid container spacing={1} sx={{ mt: 4 }}>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} sm={6}>
                     <ImageComponent id={`about-image`} />
                   </Grid>
                   <Grid
                     item
                     xs={12}
-                    md={6}
+                    sm={6}
                     sx={{ display: "flex", gap: 2, flexDirection: "column" }}
                   >
                     <TextComponent id={`about-content`} />
@@ -639,7 +639,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <Grid
                     item
                     xs={12}
-                    md={6}
+                    sm={6}
                     sx={{ display: "flex", gap: 2, flexDirection: "column" }}
                   >
                     <ImageComponent id={`stats-quote`} />
@@ -647,7 +647,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     <TextComponent id={`stats-founder`} />
                     <TextComponent id={`stats-founder-position`} />
                   </Grid>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={12} sm={6}>
                     <ImageComponent id={`stats-image`} />
                     <TextComponent id={`stats-image-description`} />
                   </Grid>
@@ -658,80 +658,83 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <Box sx={{ textAlign: "center" }}>
                   <TextComponent id={`team-title`} />
                 </Box>
-                <Grid container spacing={1} sx={{ mt: 4 }}>
-                  {[
-                    "team-1",
-                    "team-2",
-                    "team-3",
-                    "team-4",
-                    "team-5",
-                    "team-6",
-                  ].map((e) => (
+                <Grid container spacing={5} sx={{ mt: 4 }}>
+                  {["team-1", "team-2", "team-3", "team-4"].map((e) => (
                     <Grid
                       key={e}
                       item
                       xs={12}
+                      sm={6}
                       md={3}
-                      lg={2}
-                      sx={{ display: "flex", gap: 2, flexDirection: "column" }}
+                      display="flex"
+                      justifyContent="center"
                     >
-                      <ImageComponent id={`${e}-image`} />
-                      <TextComponent id={`${e}-name`} />
-                      <TextComponent id={`${e}-position`} />
-                      <TextComponent id={`${e}-description`} />
                       <Box
                         sx={{
                           display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          textAlign: "center",
-                          p: 1,
+                          gap: 2,
+                          flexDirection: "column",
+                          width: 270,
                         }}
                       >
-                        <IconButton
-                          onClick={() => {
-                            if (window.open)
-                              //@ts-ignore
-                              window
-                                .open("url_facebook" ?? "", "_blank")
-                                .focus();
+                        <ImageComponent id={`${e}-image`} />
+                        <TextComponent id={`${e}-name`} />
+                        <TextComponent id={`${e}-position`} />
+                        <TextComponent id={`${e}-description`} />
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            textAlign: "center",
+                            p: 1,
                           }}
                         >
-                          <FacebookIcon />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            if (window.open)
-                              //@ts-ignore
-                              window
-                                .open("url_twitter" ?? "", "_blank")
-                                .focus();
-                          }}
-                        >
-                          <TwitterIcon />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            if (window.open)
-                              //@ts-ignore
-                              window
-                                .open("url_instagram" ?? "", "_blank")
-                                .focus();
-                          }}
-                        >
-                          <InstagramIcon />
-                        </IconButton>
-                        <IconButton
-                          onClick={() => {
-                            if (window.open)
-                              //@ts-ignore
-                              window
-                                .open("url_linkedin" ?? "", "_blank")
-                                .focus();
-                          }}
-                        >
-                          <LinkedInIcon />
-                        </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (window.open)
+                                //@ts-ignore
+                                window
+                                  .open("url_facebook" ?? "", "_blank")
+                                  .focus();
+                            }}
+                          >
+                            <FacebookIcon />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (window.open)
+                                //@ts-ignore
+                                window
+                                  .open("url_twitter" ?? "", "_blank")
+                                  .focus();
+                            }}
+                          >
+                            <TwitterIcon />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (window.open)
+                                //@ts-ignore
+                                window
+                                  .open("url_instagram" ?? "", "_blank")
+                                  .focus();
+                            }}
+                          >
+                            <InstagramIcon />
+                          </IconButton>
+                          <IconButton
+                            onClick={() => {
+                              if (window.open)
+                                //@ts-ignore
+                                window
+                                  .open("url_linkedin" ?? "", "_blank")
+                                  .focus();
+                            }}
+                          >
+                            <LinkedInIcon />
+                          </IconButton>
+                        </Box>
                       </Box>
                     </Grid>
                   ))}
@@ -739,30 +742,46 @@ function Index({ router: { query, push } }: WithRouterProps) {
               </Box>
 
               <Box sx={{ p: 10, backgroundColor: "#f5f5f7" }}>
-                <Box>
-                  <TextComponent id={`testimonials-name`} />
+                <TextComponent id={`testimonials-name`} />
 
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    gap={1}
-                    sx={{ backgroundColor: "white", p: 10 }}
-                  >
-                    <Box display="flex" justifyContent={"space-between"}>
-                      <Rating readOnly value={5} />
-                      <TextComponent id={`testimonials-date`} />
-                    </Box>
+                <Grid container spacing={3}>
+                  {[
+                    "testimonials-1",
+                    "testimonials-2",
+                    "testimonials-3",
+                    "testimonials-4",
+                    "testimonials-5",
+                    "testimonials-6",
+                  ].map((e) => (
+                    <Grid item xs={12} sm={6} key={e}>
+                      <Box
+                        display="flex"
+                        flexDirection="column"
+                        gap={1}
+                        sx={{ backgroundColor: "white", p: 2 }}
+                      >
+                        <Box display="flex" justifyContent={"space-between"}>
+                          <Rating readOnly value={5} />
+                          <TextComponent id={`${e}-date`} />
+                        </Box>
 
-                    <TextComponent id={`testimonials-content`} />
-                    <Box display="flex" alignItems={"center"} gap={3} mt={4}>
-                      <ImageComponent id="testimonial-image" />
-                      <Box display="flex" gap="2" flexDirection="column">
-                        <TextComponent id={`testimonials-client-name`} />
-                        <TextComponent id={`testimonials-client-position`} />
+                        <TextComponent id={`${e}-content`} />
+                        <Box
+                          display="flex"
+                          alignItems={"center"}
+                          gap={3}
+                          mt={4}
+                        >
+                          <ImageComponent id="testimonial-image" />
+                          <Box display="flex" gap="2" flexDirection="column">
+                            <TextComponent id={`${e}-client-name`} />
+                            <TextComponent id={`${e}-client-position`} />
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Box>
-                </Box>
+                    </Grid>
+                  ))}
+                </Grid>
               </Box>
 
               <Box sx={{ p: 10 }}>
@@ -775,7 +794,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     "our-values-3",
                     "our-values-4",
                   ].map((e) => (
-                    <Grid item xs={12} md={3} key={e}>
+                    <Grid item xs={12} sm={6} md={3} key={e}>
                       <Box
                         display="flex"
                         flexDirection="column"
@@ -805,9 +824,8 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     "gallery-6",
                     "gallery-7",
                     "gallery-8",
-                    "gallery-9",
                   ].map((e) => (
-                    <Grid item xs={12} md={4} key={e}>
+                    <Grid item xs={12} sm={6} md={4} key={e}>
                       <Box
                         display="flex"
                         flexDirection="column"
@@ -827,14 +845,15 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <Grid container spacing={3}>
                   {["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6"].map(
                     (e) => (
-                      <Grid item xs={12} md={4} key={e}>
+                      <Grid item sm={12} md={2} key={e}>
                         <Box
                           display="flex"
                           flexDirection="column"
-                          justifyContent="center"
-                          alignItems="center"
                           sx={{
                             textAlign: "left",
+                            borderLeft: "2px solid #ccc",
+                            p: 2,
+                            gap: 2,
                           }}
                         >
                           <TextComponent id={`${e}-title`} />
@@ -853,7 +872,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <TextComponent id={`blog-title`} />
                 <Grid container spacing={3}>
                   {["blog-1", "blog-2", "blog-3", "blog-4"].map((e) => (
-                    <Grid item xs={12} md={3} key={e}>
+                    <Grid item xs={12} sm={6} md={3} key={e}>
                       <Box display="flex" flexDirection="column" gap={2}>
                         <ImageComponent id={`${e}-image`} />
                         <TextComponent id={`${e}-author`} />
@@ -868,11 +887,11 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <Learnmore />
                 </Box>
               </Box>
-              <Box sx={{ p: 10 }}>
+              <Box sx={{ p: 8 }}>
                 <TextComponent id={`pricing-title`} />
                 <Grid container spacing={3}>
                   {["pricing-1", "pricing-2", "pricing-3"].map((e, i) => (
-                    <Grid item xs={12} md={4} key={e}>
+                    <Grid item xs={12} sm={4} key={e}>
                       <Box
                         display="flex"
                         flexDirection="column"
@@ -881,7 +900,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                           gap: i == 1 ? 3 : 2,
                           backgroundColor: i == 1 ? "#7d3ad3" : "white",
                           color: i == 1 ? "white" : "dark",
-                          p: 10,
+                          p: 2,
                           borderRadius: "24px",
                         }}
                       >
@@ -895,17 +914,17 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 </Grid>
               </Box>
 
-              <Box sx={{ p: 10, backgroundColor: "#451288", color: "white" }}>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} md={3}>
+              <Box sx={{ p: 2, backgroundColor: "#451288", color: "white" }}>
+                <Grid container spacing={6}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextComponent id="footer-title" />
                     <TextComponent id="footer-description" />
                   </Grid>
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextComponent id="footer-title" />
                     <TextComponent id="footer-description" />
                   </Grid>
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <Grid container spacing={3}>
                       {[
                         "gallery-1",
@@ -915,7 +934,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                         "gallery-5",
                         "gallery-6",
                       ].map((e) => (
-                        <Grid item xs={12} md={4} key={e}>
+                        <Grid item xs={12} sm={4} key={e}>
                           <Box
                             display="flex"
                             flexDirection="column"
@@ -930,7 +949,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     </Grid>
                   </Grid>
 
-                  <Grid item xs={12} md={3}>
+                  <Grid item xs={12} sm={6} md={3}>
                     <TextComponent id="footer-title" />
                     <TextComponent id="footer-description" />
                   </Grid>
@@ -1231,7 +1250,7 @@ const Advertise = () => (
           style: { backgroundColor: "#300d5f" },
         },
       ].map((e) => (
-        <Grid key={e.id} item xs={12} md={6} lg={3}>
+        <Grid key={e.id} item xs={12} sm={6} lg={3}>
           <Box
             style={e.style}
             sx={{
@@ -1393,43 +1412,43 @@ const useStore = create<PageStore>((set, getData) => ({
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
     "team-2-image": {
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
     "team-3-image": {
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
     "team-4-image": {
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
     "team-5-image": {
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
     "team-6-image": {
       src: "/images/team-1-270x270.jpg",
       type: "image",
       alt: "laptop",
-      width: 400,
-      height: 500,
+      width: 270,
+      height: 270,
     },
 
     "testimonial-image": {
@@ -1575,12 +1594,12 @@ const useStore = create<PageStore>((set, getData) => ({
     },
 
     "main-title": {
-      variant: "h4",
+      variant: "h5",
       component: "h1",
       children: "JOINCHAMPIONTRADING",
       style: {
         color: "white",
-        maxWidth: "75ch",
+        maxWidth: "60ch",
       },
     },
 
@@ -1838,9 +1857,7 @@ const useStore = create<PageStore>((set, getData) => ({
     "team-2-description": {
       children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Optio esse totam animi magni hic, alias quo placeat ipsa
-                    cumque tenetur amet error dolorum quidem saepe maxime earum
-                    nesciunt non ex impedit itaque? Et id impedit temporibus
-                    ipsa cumque facere`,
+                    cumque tenetur`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
@@ -1861,9 +1878,7 @@ const useStore = create<PageStore>((set, getData) => ({
     "team-3-description": {
       children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Optio esse totam animi magni hic, alias quo placeat ipsa
-                    cumque tenetur amet error dolorum quidem saepe maxime earum
-                    nesciunt non ex impedit itaque? Et id impedit temporibus
-                    ipsa cumque facere`,
+                    cumque tenetur`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
@@ -1884,9 +1899,7 @@ const useStore = create<PageStore>((set, getData) => ({
     "team-4-description": {
       children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Optio esse totam animi magni hic, alias quo placeat ipsa
-                    cumque tenetur amet error dolorum quidem saepe maxime earum
-                    nesciunt non ex impedit itaque? Et id impedit temporibus
-                    ipsa cumque facere`,
+                    cumque tenetur`,
       variant: "caption",
       component: "p",
       style: {
@@ -1910,9 +1923,7 @@ const useStore = create<PageStore>((set, getData) => ({
     "team-5-description": {
       children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Optio esse totam animi magni hic, alias quo placeat ipsa
-                    cumque tenetur amet error dolorum quidem saepe maxime earum
-                    nesciunt non ex impedit itaque? Et id impedit temporibus
-                    ipsa cumque facere`,
+                    cumque tenetur`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
@@ -1933,9 +1944,7 @@ const useStore = create<PageStore>((set, getData) => ({
     "team-6-description": {
       children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Optio esse totam animi magni hic, alias quo placeat ipsa
-                    cumque tenetur amet error dolorum quidem saepe maxime earum
-                    nesciunt non ex impedit itaque? Et id impedit temporibus
-                    ipsa cumque facere`,
+                    cumque tenetur`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
@@ -1947,28 +1956,168 @@ const useStore = create<PageStore>((set, getData) => ({
       component: "p",
       style: { color: "black", fontSize: "45px", textAlign: "center" },
     },
-    "testimonials-date": {
+    "testimonials-1-date": {
       children: `2 hari yang lalu`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px", fontStyle: "italic" },
     },
 
-    "testimonials-content": {
+    "testimonials-1-content": {
       children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "15px" },
     },
 
-    "testimonials-client-name": {
+    "testimonials-1-client-name": {
       children: `Hanson Kun`,
       variant: "caption",
       component: "p",
       style: { color: "black", fontSize: "20px" },
     },
 
-    "testimonials-client-position": {
+    "testimonials-1-client-position": {
+      children: `Regular Client`,
+      variant: "caption",
+      component: "p",
+      style: { color: "gray", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-2-date": {
+      children: `2 hari yang lalu`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-2-content": {
+      children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "testimonials-2-client-name": {
+      children: `Hanson Kun`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+
+    "testimonials-2-client-position": {
+      children: `Regular Client`,
+      variant: "caption",
+      component: "p",
+      style: { color: "gray", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-3-date": {
+      children: `2 hari yang lalu`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-3-content": {
+      children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "testimonials-3-client-name": {
+      children: `Hanson Kun`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+
+    "testimonials-3-client-position": {
+      children: `Regular Client`,
+      variant: "caption",
+      component: "p",
+      style: { color: "gray", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-4-date": {
+      children: `2 hari yang lalu`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-4-content": {
+      children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "testimonials-4-client-name": {
+      children: `Hanson Kun`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+
+    "testimonials-4-client-position": {
+      children: `Regular Client`,
+      variant: "caption",
+      component: "p",
+      style: { color: "gray", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-5-date": {
+      children: `2 hari yang lalu`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-5-content": {
+      children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "testimonials-5-client-name": {
+      children: `Hanson Kun`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+
+    "testimonials-5-client-position": {
+      children: `Regular Client`,
+      variant: "caption",
+      component: "p",
+      style: { color: "gray", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-6-date": {
+      children: `2 hari yang lalu`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px", fontStyle: "italic" },
+    },
+
+    "testimonials-6-content": {
+      children: `Champion Trading adalah tempat dimana saya bisa belajar berinvestasi crpyto currency 👍`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "15px" },
+    },
+
+    "testimonials-6-client-name": {
+      children: `Hanson Kun`,
+      variant: "caption",
+      component: "p",
+      style: { color: "black", fontSize: "20px" },
+    },
+
+    "testimonials-6-client-position": {
       children: `Regular Client`,
       variant: "caption",
       component: "p",
@@ -2307,14 +2456,14 @@ const useStore = create<PageStore>((set, getData) => ({
       children: "CHAMPIONTRADING",
       variant: "caption",
       component: "p",
-      style: { fontSize: "40px", fontStyle: "bold" },
+      style: { fontSize: "30px", fontStyle: "bold" },
     },
 
     "footer-description": {
       children: "CHAMPIONTRADING adalah platform blablabalbalbalbalbalb",
       variant: "caption",
       component: "p",
-      style: { fontSize: "20px", maxWidth: "75ch" },
+      style: { fontSize: "15px", maxWidth: "75ch" },
     },
   },
   setImage: (image) => set({ image }),
