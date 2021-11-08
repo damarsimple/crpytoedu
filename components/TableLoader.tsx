@@ -156,6 +156,7 @@ function SelectBase({
 
   return (
     <FormControl fullWidth>
+      <InputLabel>{headerName}</InputLabel>
       <Select
         value={value}
         name={field}

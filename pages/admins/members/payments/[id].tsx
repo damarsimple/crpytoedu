@@ -14,6 +14,8 @@ import {
   TableRow,
   Tabs,
   TextField,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import moment from "moment";
 import { useRouter } from "next/dist/client/router";
@@ -201,14 +203,20 @@ export default function Id() {
         )}
         {tabs == 2 && (
           <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-            <Select
-              value={accept}
-              label="Status Langganan"
-              onChange={(e) => setAccept(e.target.value as any)}
-            >
-              <MenuItem value={"true"}>Aktif</MenuItem>
-              <MenuItem value={"false"}>Tidak Aktif</MenuItem>
-            </Select>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">
+                Status Langganan
+              </InputLabel>
+              <Select
+                value={accept}
+                label="Status Langganan"
+                onChange={(e) => setAccept(e.target.value as any)}
+              >
+                <MenuItem value={"true"}>Aktif</MenuItem>
+                <MenuItem value={"false"}>Tidak Aktif</MenuItem>
+              </Select>
+            </FormControl>
+
             <TextField
               label="Alasan Langganan"
               variant="outlined"

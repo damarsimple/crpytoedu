@@ -16,6 +16,8 @@ import {
   Menu,
   createTheme,
   ThemeProvider,
+  FormControl,
+  InputLabel,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -454,29 +456,35 @@ function Index({ router: { query, push } }: WithRouterProps) {
                         </IconButton>
                       </Box>
 
-                      <Select
-                        value={selected?.style?.fontFamily ?? "Undefined"}
-                        label="Font"
-                        onChange={(e) =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: {
-                              ...selected.style,
-                              fontFamily:
-                                (selected as TextProps).style?.fontFamily ==
-                                "Undefined"
-                                  ? undefined
-                                  : e.target.value,
-                            },
-                          })
-                        }
-                      >
-                        <MenuItem value={"Undefined"}>Normal</MenuItem>
-                        <MenuItem value={"Kalam"}>Kalam</MenuItem>
-                        <MenuItem value={"Roboto"}>Roboto</MenuItem>
-                        <MenuItem value={"Montserrat"}>Montserrat</MenuItem>
-                        <MenuItem value={"Open Sans"}>Open Sans</MenuItem>
-                      </Select>
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Font
+                        </InputLabel>
+                        <Select
+                          value={selected?.style?.fontFamily ?? "Undefined"}
+                          label="Font"
+                          onChange={(e) =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: {
+                                ...selected.style,
+                                fontFamily:
+                                  (selected as TextProps).style?.fontFamily ==
+                                  "Undefined"
+                                    ? undefined
+                                    : e.target.value,
+                              },
+                            })
+                          }
+                        >
+                          <MenuItem value={"Undefined"}>Normal</MenuItem>
+                          <MenuItem value={"Kalam"}>Kalam</MenuItem>
+                          <MenuItem value={"Roboto"}>Roboto</MenuItem>
+                          <MenuItem value={"Montserrat"}>Montserrat</MenuItem>
+                          <MenuItem value={"Open Sans"}>Open Sans</MenuItem>
+                        </Select>
+                      </FormControl>
+
                       <Box display="flex" justifyContent="space-between">
                         <span>Color</span>
                         <input
@@ -526,20 +534,24 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     </>
                   ) : (
                     <>
-                      <Select
-                        value={(selected as ImageProps)?.type}
-                        label="Tipe"
-                        onChange={(e) =>
-                          setImageByKey(editId, {
-                            ...(selected as ImageProps),
-                            type: e.target.value,
-                          })
-                        }
-                      >
-                        <MenuItem value={"icon"}>Icon</MenuItem>
-                        <MenuItem value={"image"}>Image</MenuItem>
-                      </Select>
-
+                      <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">
+                          Tipe Media
+                        </InputLabel>
+                        <Select
+                          value={(selected as ImageProps)?.type}
+                          label="Tipe"
+                          onChange={(e) =>
+                            setImageByKey(editId, {
+                              ...(selected as ImageProps),
+                              type: e.target.value,
+                            })
+                          }
+                        >
+                          <MenuItem value={"icon"}>Icon</MenuItem>
+                          <MenuItem value={"image"}>Image</MenuItem>
+                        </Select>
+                      </FormControl>
                       {(selected as ImageProps)?.type == "icon" ? (
                         <>
                           <TextField
