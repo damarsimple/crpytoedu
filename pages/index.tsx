@@ -665,6 +665,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                       item
                       xs={12}
                       sm={6}
+                      md={3}
                       display="flex"
                       justifyContent="center"
                     >
