@@ -14,6 +14,8 @@ import {
   Toolbar,
   Badge,
   Menu,
+  createTheme,
+  ThemeProvider,
 } from "@mui/material";
 import React, { useEffect } from "react";
 import Image from "next/image";
@@ -68,6 +70,57 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+const theme = createTheme({
+  typography: {
+    fontFamily: [
+      "Roboto",
+      "Sans-Serif",
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+  },
+  // components: {
+  //   MuiButtonBase: {
+  //     styleOverrides: {
+  //       root: {
+  //         color: "black",
+  //       },
+  //     },
+  //   },
+  //   MuiIconButton: {
+  //     styleOverrides: {
+  //       root: {
+  //         color: "black",
+  //       },
+  //     },
+  //   },
+  //   MuiButton: {
+  //     styleOverrides: {
+  //       root: {
+  //         color: "black",
+  //       },
+  //     },
+  //   },
+  // },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 576,
+      md: 768,
+      lg: 992,
+      xl: 1200,
+    },
+  },
+});
 
 function Index({ router: { query, push } }: WithRouterProps) {
   const { user, setUser } = useUserStore();
@@ -178,787 +231,799 @@ function Index({ router: { query, push } }: WithRouterProps) {
 
   return (
     <>
-      {anchorEl && (
-        <Menu
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-          open={isMenuOpen}
-          onClose={handleMenuClose}
-        >
-          <MenuItem
-            onClick={() => push(user?.roles?.toLocaleLowerCase() + "s")}
+      <ThemeProvider theme={theme}>
+        {anchorEl && (
+          <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
           >
-            Profile
-          </MenuItem>
-          <MenuItem onClick={logout}>Logout</MenuItem>
-        </Menu>
-      )}
-      <AppBar elevation={0} position="fixed">
-        <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
-          >
-            CrptoEdu
-          </Typography>
+            <MenuItem
+              onClick={() => push(user?.roles?.toLocaleLowerCase() + "s")}
+            >
+              Profile
+            </MenuItem>
+            <MenuItem onClick={logout}>Logout</MenuItem>
+          </Menu>
+        )}
+        <AppBar elevation={0} position="fixed">
+          <Toolbar>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ display: { xs: "none", sm: "block" } }}
+            >
+              CrptoEdu
+            </Typography>
 
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "flex" } }}>
-            {user ? (
-              <>
-                {" "}
-                <IconButton
-                  size="large"
-                  color="inherit"
-                  onClick={() => {
-                    push("/notifications");
-                  }}
-                >
-                  <Badge
-                    badgeContent={user?.basicnotificationsCount ?? 0}
-                    color="error"
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: "flex" } }}>
+              {user ? (
+                <>
+                  {" "}
+                  <IconButton
+                    size="large"
+                    color="inherit"
+                    onClick={() => {
+                      push("/notifications");
+                    }}
                   >
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton
-                  size="large"
-                  edge="end"
-                  onClick={handleProfileMenuOpen}
-                  color="inherit"
-                >
-                  <AccountCircle />
-                </IconButton>
-              </>
-            ) : (
-              <>
-                <Button sx={{ color: "white" }} onClick={() => push("/login")}>
-                  LOGIN
-                </Button>
-                <Button
-                  sx={{ color: "white" }}
-                  onClick={() => push("/register")}
-                >
-                  REGISTER
-                </Button>
-              </>
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Grid container>
-        {onEdit && (
-          <Grid item xs={2}>
-            {editId && type && selected && (
-              <Box
-                display="flex"
-                flexDirection={"column"}
-                justifyContent="center"
-                gap={3}
-                p={2}
-              >
-                <Typography
-                  component={"h1"}
-                  variant="h6"
-                >{`[${type}] ${editId}`}</Typography>
-                {type == "text" ? (
-                  <>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        width: "fit-content",
-                        border: (theme) => `1px solid ${theme.palette.divider}`,
-                        borderRadius: 1,
-                        bgcolor: "background.paper",
-                        color: "text.secondary",
-                        "& svg": {
-                          m: 1.5,
-                        },
-                        "& hr": {
-                          mx: 0.5,
-                        },
-                      }}
+                    <Badge
+                      badgeContent={user?.basicnotificationsCount ?? 0}
+                      color="error"
                     >
-                      <IconButton
+                      <NotificationsIcon />
+                    </Badge>
+                  </IconButton>
+                  <IconButton
+                    size="large"
+                    edge="end"
+                    onClick={handleProfileMenuOpen}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                </>
+              ) : (
+                <>
+                  <Button
+                    sx={{ color: "white" }}
+                    onClick={() => push("/login")}
+                  >
+                    LOGIN
+                  </Button>
+                  <Button
+                    sx={{ color: "white" }}
+                    onClick={() => push("/register")}
+                  >
+                    REGISTER
+                  </Button>
+                </>
+              )}
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <Grid container>
+          {onEdit && (
+            <Grid item xs={2}>
+              {editId && type && selected && (
+                <Box
+                  display="flex"
+                  flexDirection={"column"}
+                  justifyContent="center"
+                  gap={3}
+                  p={2}
+                >
+                  <Typography
+                    component={"h1"}
+                    variant="h6"
+                  >{`[${type}] ${editId}`}</Typography>
+                  {type == "text" ? (
+                    <>
+                      <Box
                         sx={{
-                          backgroundColor:
-                            (selected as TextProps).style?.textAlign == "left"
-                              ? "lightgray"
-                              : "white",
-                          borderRadius: 0,
-                        }}
-                        onClick={() =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: { ...selected.style, textAlign: "left" },
-                          })
-                        }
-                      >
-                        <FormatAlignLeftIcon />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          backgroundColor:
-                            (selected as TextProps).style?.textAlign == "center"
-                              ? "lightgray"
-                              : "white",
-                          borderRadius: 0,
-                        }}
-                        onClick={() =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: { ...selected.style, textAlign: "center" },
-                          })
-                        }
-                      >
-                        <FormatAlignCenterIcon />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          backgroundColor:
-                            (selected as TextProps).style?.textAlign == "right"
-                              ? "lightgray"
-                              : "white",
-                          borderRadius: 0,
-                        }}
-                        onClick={() =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: { ...selected.style, textAlign: "right" },
-                          })
-                        }
-                      >
-                        <FormatAlignRightIcon />
-                      </IconButton>
-                      <Divider orientation="vertical" flexItem />
-                      <IconButton
-                        sx={{
-                          backgroundColor:
-                            (selected as TextProps).style?.fontWeight == "bold"
-                              ? "lightgray"
-                              : "white",
-                          borderRadius: 0,
-                        }}
-                        onClick={() =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: {
-                              ...selected.style,
-                              fontWeight:
-                                (selected as TextProps).style?.fontWeight ==
-                                "bold"
-                                  ? undefined
-                                  : "bold",
-                            },
-                          })
-                        }
-                      >
-                        <FormatBoldIcon />
-                      </IconButton>
-                      <IconButton
-                        sx={{
-                          backgroundColor:
-                            (selected as TextProps).style?.fontStyle == "italic"
-                              ? "lightgray"
-                              : "white",
-                          borderRadius: 0,
-                        }}
-                        onClick={() =>
-                          setTextByKey(editId, {
-                            ...(selected as TextProps),
-                            style: {
-                              ...selected.style,
-                              fontStyle:
-                                (selected as TextProps).style?.fontStyle ==
-                                "italic"
-                                  ? undefined
-                                  : "italic",
-                            },
-                          })
-                        }
-                      >
-                        <FormatItalicIcon />
-                      </IconButton>
-                    </Box>
-
-                    <Select
-                      value={selected?.style?.fontFamily ?? "Undefined"}
-                      label="Font"
-                      onChange={(e) =>
-                        setTextByKey(editId, {
-                          ...(selected as TextProps),
-                          style: {
-                            ...selected.style,
-                            fontFamily:
-                              (selected as TextProps).style?.fontFamily ==
-                              "Undefined"
-                                ? undefined
-                                : e.target.value,
+                          display: "flex",
+                          alignItems: "center",
+                          width: "fit-content",
+                          border: (theme) =>
+                            `1px solid ${theme.palette.divider}`,
+                          borderRadius: 1,
+                          bgcolor: "background.paper",
+                          color: "text.secondary",
+                          "& svg": {
+                            m: 1.5,
                           },
-                        })
-                      }
-                    >
-                      <MenuItem value={"Undefined"}>Normal</MenuItem>
-                      <MenuItem value={"Kalam"}>Kalam</MenuItem>
-                      <MenuItem value={"Roboto"}>Roboto</MenuItem>
-                      <MenuItem value={"Montserrat"}>Montserrat</MenuItem>
-                      <MenuItem value={"Open Sans"}>Open Sans</MenuItem>
-                    </Select>
-                    <Box display="flex" justifyContent="space-between">
-                      <span>Color</span>
-                      <input
-                        type="color"
-                        value={(selected as TextProps)?.style?.color ?? "#000"}
+                          "& hr": {
+                            mx: 0.5,
+                          },
+                        }}
+                      >
+                        <IconButton
+                          sx={{
+                            backgroundColor:
+                              (selected as TextProps).style?.textAlign == "left"
+                                ? "lightgray"
+                                : "white",
+                            borderRadius: 0,
+                          }}
+                          onClick={() =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: { ...selected.style, textAlign: "left" },
+                            })
+                          }
+                        >
+                          <FormatAlignLeftIcon />
+                        </IconButton>
+                        <IconButton
+                          sx={{
+                            backgroundColor:
+                              (selected as TextProps).style?.textAlign ==
+                              "center"
+                                ? "lightgray"
+                                : "white",
+                            borderRadius: 0,
+                          }}
+                          onClick={() =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: { ...selected.style, textAlign: "center" },
+                            })
+                          }
+                        >
+                          <FormatAlignCenterIcon />
+                        </IconButton>
+                        <IconButton
+                          sx={{
+                            backgroundColor:
+                              (selected as TextProps).style?.textAlign ==
+                              "right"
+                                ? "lightgray"
+                                : "white",
+                            borderRadius: 0,
+                          }}
+                          onClick={() =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: { ...selected.style, textAlign: "right" },
+                            })
+                          }
+                        >
+                          <FormatAlignRightIcon />
+                        </IconButton>
+                        <Divider orientation="vertical" flexItem />
+                        <IconButton
+                          sx={{
+                            backgroundColor:
+                              (selected as TextProps).style?.fontWeight ==
+                              "bold"
+                                ? "lightgray"
+                                : "white",
+                            borderRadius: 0,
+                          }}
+                          onClick={() =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: {
+                                ...selected.style,
+                                fontWeight:
+                                  (selected as TextProps).style?.fontWeight ==
+                                  "bold"
+                                    ? undefined
+                                    : "bold",
+                              },
+                            })
+                          }
+                        >
+                          <FormatBoldIcon />
+                        </IconButton>
+                        <IconButton
+                          sx={{
+                            backgroundColor:
+                              (selected as TextProps).style?.fontStyle ==
+                              "italic"
+                                ? "lightgray"
+                                : "white",
+                            borderRadius: 0,
+                          }}
+                          onClick={() =>
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
+                              style: {
+                                ...selected.style,
+                                fontStyle:
+                                  (selected as TextProps).style?.fontStyle ==
+                                  "italic"
+                                    ? undefined
+                                    : "italic",
+                              },
+                            })
+                          }
+                        >
+                          <FormatItalicIcon />
+                        </IconButton>
+                      </Box>
+
+                      <Select
+                        value={selected?.style?.fontFamily ?? "Undefined"}
+                        label="Font"
                         onChange={(e) =>
                           setTextByKey(editId, {
                             ...(selected as TextProps),
                             style: {
                               ...selected.style,
-                              color:
-                                (selected as TextProps).style?.color == "#000"
+                              fontFamily:
+                                (selected as TextProps).style?.fontFamily ==
+                                "Undefined"
                                   ? undefined
                                   : e.target.value,
                             },
                           })
                         }
-                      />
-                    </Box>
-                    <TextField
-                      label="Ukuran Font (pixel)"
-                      fullWidth
-                      value={(selected as TextProps)?.style?.fontSize}
-                      onChange={(e) =>
-                        setTextByKey(editId, {
-                          ...(selected as TextProps),
-                          style: {
-                            ...selected.style,
-                            fontSize: `${e.target.value}`,
-                          },
-                        })
-                      }
-                    />
-                    <TextField
-                      label="Konten"
-                      fullWidth
-                      value={(selected as TextProps)?.children}
-                      onChange={(e) =>
-                        setTextByKey(editId, {
-                          ...(selected as TextProps),
-                          children: e.target.value,
-                        })
-                      }
-                    />
-                  </>
-                ) : (
-                  <>
-                    <Select
-                      value={(selected as ImageProps)?.type}
-                      label="Tipe"
-                      onChange={(e) =>
-                        setImageByKey(editId, {
-                          ...(selected as ImageProps),
-                          type: e.target.value,
-                        })
-                      }
-                    >
-                      <MenuItem value={"icon"}>Icon</MenuItem>
-                      <MenuItem value={"image"}>Image</MenuItem>
-                    </Select>
-
-                    {(selected as ImageProps)?.type == "icon" ? (
-                      <>
-                        <TextField
-                          label="Icon Key"
-                          fullWidth
-                          helperText={`https://fonts.google.com/icons?selected=Material+Icons`}
-                          value={(selected as ImageProps)?.src}
-                          onChange={(e) =>
-                            setImageByKey(editId, {
-                              ...(selected as ImageProps),
-                              src: e.target.value,
-                            })
+                      >
+                        <MenuItem value={"Undefined"}>Normal</MenuItem>
+                        <MenuItem value={"Kalam"}>Kalam</MenuItem>
+                        <MenuItem value={"Roboto"}>Roboto</MenuItem>
+                        <MenuItem value={"Montserrat"}>Montserrat</MenuItem>
+                        <MenuItem value={"Open Sans"}>Open Sans</MenuItem>
+                      </Select>
+                      <Box display="flex" justifyContent="space-between">
+                        <span>Color</span>
+                        <input
+                          type="color"
+                          value={
+                            (selected as TextProps)?.style?.color ?? "#000"
                           }
-                        />
-                        <TextField
-                          label="Icon Size (px)"
-                          fullWidth
-                          value={(selected as ImageProps)?.style?.fontSize}
                           onChange={(e) =>
-                            setImageByKey(editId, {
-                              ...(selected as ImageProps),
+                            setTextByKey(editId, {
+                              ...(selected as TextProps),
                               style: {
-                                ...selected?.style,
-                                fontSize: e.target.value,
+                                ...selected.style,
+                                color:
+                                  (selected as TextProps).style?.color == "#000"
+                                    ? undefined
+                                    : e.target.value,
                               },
                             })
                           }
                         />
-                      </>
-                    ) : (
-                      <>
-                        <UploadZone
-                          accept="image/*"
-                          roles={"IMAGE_CONTENT"}
-                          fileable_id="1"
-                          fileable_type="App\Models\Page"
-                          onUploaded={(e) =>
-                            setImageByKey(editId, {
-                              ...(selected as ImageProps),
-                              src: e.path,
-                            })
-                          }
-                        />
-                        <TextField
-                          label="Width "
-                          fullWidth
-                          value={(selected as ImageProps)?.width}
-                          onChange={(e) =>
-                            setImageByKey(editId, {
-                              ...(selected as ImageProps),
-                              width: parseInt(e.target.value) ?? 0,
-                            })
-                          }
-                        />
-                        <TextField
-                          label="Height "
-                          fullWidth
-                          value={(selected as ImageProps)?.height}
-                          onChange={(e) =>
-                            setImageByKey(editId, {
-                              ...(selected as ImageProps),
-                              height: parseInt(e.target.value) ?? 0,
-                            })
-                          }
-                        />
-                      </>
-                    )}
-                  </>
-                )}
-              </Box>
-            )}
-            <Button
-              variant="contained"
-              fullWidth
-              onClick={() =>
-                updatePageMutation({
-                  variables: {
-                    id: page?.id,
-                    input: {
-                      name: page?.name,
-                      route: page?.route,
-                      data: JSON.stringify({
-                        text,
-                        image,
-                      }),
+                      </Box>
+                      <TextField
+                        label="Ukuran Font (pixel)"
+                        fullWidth
+                        value={(selected as TextProps)?.style?.fontSize}
+                        onChange={(e) =>
+                          setTextByKey(editId, {
+                            ...(selected as TextProps),
+                            style: {
+                              ...selected.style,
+                              fontSize: `${e.target.value}`,
+                            },
+                          })
+                        }
+                      />
+                      <TextField
+                        label="Konten"
+                        fullWidth
+                        value={(selected as TextProps)?.children}
+                        onChange={(e) =>
+                          setTextByKey(editId, {
+                            ...(selected as TextProps),
+                            children: e.target.value,
+                          })
+                        }
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Select
+                        value={(selected as ImageProps)?.type}
+                        label="Tipe"
+                        onChange={(e) =>
+                          setImageByKey(editId, {
+                            ...(selected as ImageProps),
+                            type: e.target.value,
+                          })
+                        }
+                      >
+                        <MenuItem value={"icon"}>Icon</MenuItem>
+                        <MenuItem value={"image"}>Image</MenuItem>
+                      </Select>
+
+                      {(selected as ImageProps)?.type == "icon" ? (
+                        <>
+                          <TextField
+                            label="Icon Key"
+                            fullWidth
+                            helperText={`https://fonts.google.com/icons?selected=Material+Icons`}
+                            value={(selected as ImageProps)?.src}
+                            onChange={(e) =>
+                              setImageByKey(editId, {
+                                ...(selected as ImageProps),
+                                src: e.target.value,
+                              })
+                            }
+                          />
+                          <TextField
+                            label="Icon Size (px)"
+                            fullWidth
+                            value={(selected as ImageProps)?.style?.fontSize}
+                            onChange={(e) =>
+                              setImageByKey(editId, {
+                                ...(selected as ImageProps),
+                                style: {
+                                  ...selected?.style,
+                                  fontSize: e.target.value,
+                                },
+                              })
+                            }
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <UploadZone
+                            accept="image/*"
+                            roles={"IMAGE_CONTENT"}
+                            fileable_id="1"
+                            fileable_type="App\Models\Page"
+                            onUploaded={(e) =>
+                              setImageByKey(editId, {
+                                ...(selected as ImageProps),
+                                src: e.path,
+                              })
+                            }
+                          />
+                          <TextField
+                            label="Width "
+                            fullWidth
+                            value={(selected as ImageProps)?.width}
+                            onChange={(e) =>
+                              setImageByKey(editId, {
+                                ...(selected as ImageProps),
+                                width: parseInt(e.target.value) ?? 0,
+                              })
+                            }
+                          />
+                          <TextField
+                            label="Height "
+                            fullWidth
+                            value={(selected as ImageProps)?.height}
+                            onChange={(e) =>
+                              setImageByKey(editId, {
+                                ...(selected as ImageProps),
+                                height: parseInt(e.target.value) ?? 0,
+                              })
+                            }
+                          />
+                        </>
+                      )}
+                    </>
+                  )}
+                </Box>
+              )}
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={() =>
+                  updatePageMutation({
+                    variables: {
+                      id: page?.id,
+                      input: {
+                        name: page?.name,
+                        route: page?.route,
+                        data: JSON.stringify({
+                          text,
+                          image,
+                        }),
+                      },
                     },
-                  },
-                }).then((e) => toast.success("Berhasil menyimpan perubahan"))
-              }
-            >
-              simpan perubahan
-            </Button>
-          </Grid>
-        )}
-        <Grid item xs={onEdit ? 10 : 12}>
-          <Box sx={{ height: "100vh", overflowY: "auto" }}>
-            <Box
-              display="flex"
-              flexDirection="column"
-              sx={{ overflowY: "auto" }}
-            >
-              <LandingSection />
-              <Advertise />
+                  }).then((e) => toast.success("Berhasil menyimpan perubahan"))
+                }
+              >
+                simpan perubahan
+              </Button>
+            </Grid>
+          )}
+          <Grid item xs={onEdit ? 10 : 12}>
+            <Box sx={{ height: "100vh", overflowY: "auto" }}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                sx={{ overflowY: "auto" }}
+              >
+                <LandingSection />
+                <Advertise />
 
-              <Box sx={{ p: 10 }}>
-                <TextComponent id={`advantages-title`} />
-                <TextComponent id={`advantages-description`} />
-                <Grid container spacing={1}>
-                  {[
-                    "advantages-1",
-                    "advantages-2",
-                    "advantages-3",
-                    "advantages-4",
-                    "advantages-5",
-                    "advantages-6",
-                  ].map((e) => (
-                    <Grid item xs={12} sm={4} key={e}>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        gap={2}
-                        justifyContent="center"
-                        alignItems="center"
-                        sx={{ textAlign: "center" }}
-                      >
-                        <ImageComponent id={`${e}-image`} />
-                        <TextComponent id={`${e}-title`} />
-                        <TextComponent id={`${e}-description`} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10 }}>
-                <Box sx={{ textAlign: "center" }}>
-                  <TextComponent id={`about-title`} />
-                  <TextComponent id={`about-description`} />
-                </Box>
-                <Grid container spacing={1} sx={{ mt: 4 }}>
-                  <Grid item xs={12} sm={6}>
-                    <ImageComponent id={`about-image`} />
-                  </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    sx={{ display: "flex", gap: 2, flexDirection: "column" }}
-                  >
-                    <TextComponent id={`about-content`} />
-                    <Learnmore />
-                  </Grid>
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10, backgroundColor: "#451288" }}>
-                <Box sx={{ textAlign: "center" }}>
-                  <TextComponent id={`stats-title`} />
-                </Box>
-                <Grid container spacing={1} sx={{ mt: 4 }}>
-                  <Grid
-                    item
-                    xs={12}
-                    sm={6}
-                    sx={{ display: "flex", gap: 2, flexDirection: "column" }}
-                  >
-                    <ImageComponent id={`stats-quote`} />
-                    <TextComponent id={`stats-content`} />
-                    <TextComponent id={`stats-founder`} />
-                    <TextComponent id={`stats-founder-position`} />
-                  </Grid>
-                  <Grid item xs={12} sm={6}>
-                    <ImageComponent id={`stats-image`} />
-                    <TextComponent id={`stats-image-description`} />
-                  </Grid>
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10 }}>
-                <Box sx={{ textAlign: "center" }}>
-                  <TextComponent id={`team-title`} />
-                </Box>
-                <Grid container spacing={10} sx={{ mt: 4 }}>
-                  {["team-1", "team-2", "team-3", "team-4"].map((e) => (
-                    <Grid
-                      key={e}
-                      item
-                      xs={12}
-                      sm={6}
-                      md={3}
-                      display="flex"
-                      justifyContent="center"
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          gap: 2,
-                          flexDirection: "column",
-                          width: 270,
-                        }}
-                      >
-                        <ImageComponent id={`${e}-image`} />
-                        <TextComponent id={`${e}-name`} />
-                        <TextComponent id={`${e}-position`} />
-                        <TextComponent id={`${e}-description`} />
-                        <Box
-                          sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            textAlign: "center",
-                            p: 1,
-                          }}
-                        >
-                          <IconButton
-                            onClick={() => {
-                              if (window.open)
-                                //@ts-ignore
-                                window
-                                  .open("url_facebook" ?? "", "_blank")
-                                  .focus();
-                            }}
-                          >
-                            <FacebookIcon />
-                          </IconButton>
-                          <IconButton
-                            onClick={() => {
-                              if (window.open)
-                                //@ts-ignore
-                                window
-                                  .open("url_twitter" ?? "", "_blank")
-                                  .focus();
-                            }}
-                          >
-                            <TwitterIcon />
-                          </IconButton>
-                          <IconButton
-                            onClick={() => {
-                              if (window.open)
-                                //@ts-ignore
-                                window
-                                  .open("url_instagram" ?? "", "_blank")
-                                  .focus();
-                            }}
-                          >
-                            <InstagramIcon />
-                          </IconButton>
-                          <IconButton
-                            onClick={() => {
-                              if (window.open)
-                                //@ts-ignore
-                                window
-                                  .open("url_linkedin" ?? "", "_blank")
-                                  .focus();
-                            }}
-                          >
-                            <LinkedInIcon />
-                          </IconButton>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10, backgroundColor: "#f5f5f7" }}>
-                <TextComponent id={`testimonials-name`} />
-
-                <Grid container spacing={3}>
-                  {[
-                    "testimonials-1",
-                    "testimonials-2",
-                    "testimonials-3",
-                    "testimonials-4",
-                    "testimonials-5",
-                    "testimonials-6",
-                  ].map((e) => (
-                    <Grid item xs={12} sm={6} key={e}>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        gap={1}
-                        sx={{ backgroundColor: "white", p: 2 }}
-                      >
-                        <Box display="flex" justifyContent={"space-between"}>
-                          <Rating readOnly value={5} />
-                          <TextComponent id={`${e}-date`} />
-                        </Box>
-
-                        <TextComponent id={`${e}-content`} />
-                        <Box
-                          display="flex"
-                          alignItems={"center"}
-                          gap={3}
-                          mt={4}
-                        >
-                          <ImageComponent id="testimonial-image" />
-                          <Box display="flex" gap="2" flexDirection="column">
-                            <TextComponent id={`${e}-client-name`} />
-                            <TextComponent id={`${e}-client-position`} />
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10 }}>
-                <TextComponent id={`our-values-title`} />
-                <TextComponent id={`our-values-description`} />
-                <Grid container spacing={3}>
-                  {[
-                    "our-values-1",
-                    "our-values-2",
-                    "our-values-3",
-                    "our-values-4",
-                  ].map((e) => (
-                    <Grid item xs={12} sm={6} md={3} key={e}>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        gap={3}
-                        justifyContent="center"
-                        alignItems="center"
-                        sx={{ textAlign: "center" }}
-                      >
-                        <ImageComponent id={`${e}-image`} />
-                        <TextComponent id={`${e}-title`} />
-                        <TextComponent id={`${e}-description`} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10 }}>
-                <TextComponent id={`gallery-title`} />
-                <Grid container spacing={3}>
-                  {[
-                    "gallery-1",
-                    "gallery-2",
-                    "gallery-3",
-                    "gallery-4",
-                    "gallery-5",
-                    "gallery-6",
-                    "gallery-7",
-                    "gallery-8",
-                  ].map((e) => (
-                    <Grid item xs={12} sm={6} md={4} key={e}>
-                      <Box
-                        display="flex"
-                        flexDirection="column"
-                        justifyContent="center"
-                        alignItems="center"
-                        sx={{ textAlign: "center" }}
-                      >
-                        <ImageComponent id={`${e}-image`} />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-
-              <Box sx={{ p: 10 }}>
-                <TextComponent id={`faq-title`} />
-                <Grid container spacing={3}>
-                  {["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6"].map(
-                    (e) => (
-                      <Grid item sm={12} md={2} key={e}>
+                <Box sx={{ p: 10 }}>
+                  <TextComponent id={`advantages-title`} />
+                  <TextComponent id={`advantages-description`} />
+                  <Grid container spacing={1}>
+                    {[
+                      "advantages-1",
+                      "advantages-2",
+                      "advantages-3",
+                      "advantages-4",
+                      "advantages-5",
+                      "advantages-6",
+                    ].map((e) => (
+                      <Grid item xs={12} sm={4} key={e}>
                         <Box
                           display="flex"
                           flexDirection="column"
-                          sx={{
-                            textAlign: "left",
-                            borderLeft: "2px solid #ccc",
-                            p: 2,
-                            gap: 2,
-                          }}
+                          gap={2}
+                          justifyContent="center"
+                          alignItems="center"
+                          sx={{ textAlign: "center" }}
                         >
+                          <ImageComponent id={`${e}-image`} />
                           <TextComponent id={`${e}-title`} />
                           <TextComponent id={`${e}-description`} />
                         </Box>
                       </Grid>
-                    )
-                  )}
-                </Grid>
-                <Box display="flex" mt={5}>
-                  <Learnmore />
+                    ))}
+                  </Grid>
                 </Box>
-              </Box>
 
-              <Box sx={{ p: 10 }}>
-                <TextComponent id={`blog-title`} />
-                <Grid container spacing={3}>
-                  {["blog-1", "blog-2", "blog-3", "blog-4"].map((e) => (
-                    <Grid item xs={12} sm={6} md={3} key={e}>
-                      <Box display="flex" flexDirection="column" gap={2}>
-                        <ImageComponent id={`${e}-image`} />
-                        <TextComponent id={`${e}-author`} />
-                        <TextComponent id={`${e}-title`} />
-                        <TextComponent id={`${e}-description`} />
-                        <TextComponent id={`${e}-date`} />
-                      </Box>
+                <Box sx={{ p: 10 }}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <TextComponent id={`about-title`} />
+                    <TextComponent id={`about-description`} />
+                  </Box>
+                  <Grid container spacing={1} sx={{ mt: 4 }}>
+                    <Grid item xs={12} sm={6}>
+                      <ImageComponent id={`about-image`} />
                     </Grid>
-                  ))}
-                </Grid>
-                <Box display="flex" mt={5}>
-                  <Learnmore />
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      sx={{ display: "flex", gap: 2, flexDirection: "column" }}
+                    >
+                      <TextComponent id={`about-content`} />
+                      <Learnmore />
+                    </Grid>
+                  </Grid>
                 </Box>
-              </Box>
-              <Box sx={{ p: 8 }}>
-                <TextComponent id={`pricing-title`} />
-                <Grid container spacing={3}>
-                  {["pricing-1", "pricing-2", "pricing-3"].map((e, i) => (
-                    <Grid item xs={12} sm={4} key={e}>
-                      <Box
+
+                <Box sx={{ p: 10, backgroundColor: "#451288" }}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <TextComponent id={`stats-title`} />
+                  </Box>
+                  <Grid container spacing={1} sx={{ mt: 4 }}>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={6}
+                      sx={{ display: "flex", gap: 2, flexDirection: "column" }}
+                    >
+                      <ImageComponent id={`stats-quote`} />
+                      <TextComponent id={`stats-content`} />
+                      <TextComponent id={`stats-founder`} />
+                      <TextComponent id={`stats-founder-position`} />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <ImageComponent id={`stats-image`} />
+                      <TextComponent id={`stats-image-description`} />
+                    </Grid>
+                  </Grid>
+                </Box>
+
+                <Box sx={{ p: 10 }}>
+                  <Box sx={{ textAlign: "center" }}>
+                    <TextComponent id={`team-title`} />
+                  </Box>
+                  <Grid container spacing={10} sx={{ mt: 4 }}>
+                    {["team-1", "team-2", "team-3", "team-4"].map((e) => (
+                      <Grid
+                        key={e}
+                        item
+                        xs={12}
+                        sm={6}
+                        md={3}
                         display="flex"
-                        flexDirection="column"
-                        sx={{
-                          textAlign: "center",
-                          gap: i == 1 ? 3 : 2,
-                          backgroundColor: i == 1 ? "#7d3ad3" : "white",
-                          color: i == 1 ? "white" : "dark",
-                          p: 2,
-                          borderRadius: "24px",
-                        }}
+                        justifyContent="center"
                       >
-                        <TextComponent id={`${e}-title`} />
-                        <TextComponent id={`${e}-description`} />
-                        <TextComponent id={`${e}-price`} />
-                        <Learnmore />
-                      </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            gap: 2,
+                            flexDirection: "column",
+                            width: 270,
+                          }}
+                        >
+                          <ImageComponent id={`${e}-image`} />
+                          <TextComponent id={`${e}-name`} />
+                          <TextComponent id={`${e}-position`} />
+                          <TextComponent id={`${e}-description`} />
+                          <Box
+                            sx={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              textAlign: "center",
+                              p: 1,
+                            }}
+                          >
+                            <IconButton
+                              onClick={() => {
+                                if (window.open)
+                                  //@ts-ignore
+                                  window
+                                    .open("url_facebook" ?? "", "_blank")
+                                    .focus();
+                              }}
+                            >
+                              <FacebookIcon />
+                            </IconButton>
+                            <IconButton
+                              onClick={() => {
+                                if (window.open)
+                                  //@ts-ignore
+                                  window
+                                    .open("url_twitter" ?? "", "_blank")
+                                    .focus();
+                              }}
+                            >
+                              <TwitterIcon />
+                            </IconButton>
+                            <IconButton
+                              onClick={() => {
+                                if (window.open)
+                                  //@ts-ignore
+                                  window
+                                    .open("url_instagram" ?? "", "_blank")
+                                    .focus();
+                              }}
+                            >
+                              <InstagramIcon />
+                            </IconButton>
+                            <IconButton
+                              onClick={() => {
+                                if (window.open)
+                                  //@ts-ignore
+                                  window
+                                    .open("url_linkedin" ?? "", "_blank")
+                                    .focus();
+                              }}
+                            >
+                              <LinkedInIcon />
+                            </IconButton>
+                          </Box>
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
 
-              <Box sx={{ p: 2, backgroundColor: "#451288", color: "white" }}>
-                <Grid container spacing={6}>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <TextComponent id="footer-title" />
-                    <TextComponent id="footer-description" />
+                <Box sx={{ p: 10, backgroundColor: "#f5f5f7" }}>
+                  <TextComponent id={`testimonials-name`} />
+
+                  <Grid container spacing={3}>
+                    {[
+                      "testimonials-1",
+                      "testimonials-2",
+                      "testimonials-3",
+                      "testimonials-4",
+                      "testimonials-5",
+                      "testimonials-6",
+                    ].map((e) => (
+                      <Grid item xs={12} sm={6} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap={1}
+                          sx={{ backgroundColor: "white", p: 2 }}
+                        >
+                          <Box display="flex" justifyContent={"space-between"}>
+                            <Rating readOnly value={5} />
+                            <TextComponent id={`${e}-date`} />
+                          </Box>
+
+                          <TextComponent id={`${e}-content`} />
+                          <Box
+                            display="flex"
+                            alignItems={"center"}
+                            gap={3}
+                            mt={4}
+                          >
+                            <ImageComponent id="testimonial-image" />
+                            <Box display="flex" gap="2" flexDirection="column">
+                              <TextComponent id={`${e}-client-name`} />
+                              <TextComponent id={`${e}-client-position`} />
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <TextComponent id="footer-title" />
-                    <TextComponent id="footer-description" />
+                </Box>
+
+                <Box sx={{ p: 10 }}>
+                  <TextComponent id={`our-values-title`} />
+                  <TextComponent id={`our-values-description`} />
+                  <Grid container spacing={3}>
+                    {[
+                      "our-values-1",
+                      "our-values-2",
+                      "our-values-3",
+                      "our-values-4",
+                    ].map((e) => (
+                      <Grid item xs={12} sm={6} md={3} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap={3}
+                          justifyContent="center"
+                          alignItems="center"
+                          sx={{ textAlign: "center" }}
+                        >
+                          <ImageComponent id={`${e}-image`} />
+                          <TextComponent id={`${e}-title`} />
+                          <TextComponent id={`${e}-description`} />
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
-                  <Grid item xs={12} sm={6} md={3}>
-                    <Grid container spacing={3}>
-                      {[
-                        "gallery-1",
-                        "gallery-2",
-                        "gallery-3",
-                        "gallery-4",
-                        "gallery-5",
-                        "gallery-6",
-                      ].map((e) => (
-                        <Grid item xs={12} sm={4} key={e}>
+                </Box>
+
+                <Box sx={{ p: 10 }}>
+                  <TextComponent id={`gallery-title`} />
+                  <Grid container spacing={3}>
+                    {[
+                      "gallery-1",
+                      "gallery-2",
+                      "gallery-3",
+                      "gallery-4",
+                      "gallery-5",
+                      "gallery-6",
+                      "gallery-7",
+                      "gallery-8",
+                    ].map((e) => (
+                      <Grid item xs={12} sm={6} md={4} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          justifyContent="center"
+                          alignItems="center"
+                          sx={{ textAlign: "center" }}
+                        >
+                          <ImageComponent id={`${e}-image`} />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+
+                <Box sx={{ p: 10 }}>
+                  <TextComponent id={`faq-title`} />
+                  <Grid container spacing={3}>
+                    {["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6"].map(
+                      (e) => (
+                        <Grid item sm={12} md={2} key={e}>
                           <Box
                             display="flex"
                             flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            sx={{ textAlign: "center" }}
+                            sx={{
+                              textAlign: "left",
+                              borderLeft: "2px solid #ccc",
+                              p: 2,
+                              gap: 2,
+                            }}
                           >
-                            <ImageComponent id={`${e}-image`} />
+                            <TextComponent id={`${e}-title`} />
+                            <TextComponent id={`${e}-description`} />
                           </Box>
                         </Grid>
-                      ))}
+                      )
+                    )}
+                  </Grid>
+                  <Box display="flex" mt={5}>
+                    <Learnmore />
+                  </Box>
+                </Box>
+
+                <Box sx={{ p: 10 }}>
+                  <TextComponent id={`blog-title`} />
+                  <Grid container spacing={3}>
+                    {["blog-1", "blog-2", "blog-3", "blog-4"].map((e) => (
+                      <Grid item xs={12} sm={6} md={3} key={e}>
+                        <Box display="flex" flexDirection="column" gap={2}>
+                          <ImageComponent id={`${e}-image`} />
+                          <TextComponent id={`${e}-author`} />
+                          <TextComponent id={`${e}-title`} />
+                          <TextComponent id={`${e}-description`} />
+                          <TextComponent id={`${e}-date`} />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                  <Box display="flex" mt={5}>
+                    <Learnmore />
+                  </Box>
+                </Box>
+                <Box sx={{ p: 8 }}>
+                  <TextComponent id={`pricing-title`} />
+                  <Grid container spacing={3}>
+                    {["pricing-1", "pricing-2", "pricing-3"].map((e, i) => (
+                      <Grid item xs={12} sm={4} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          sx={{
+                            textAlign: "center",
+                            gap: i == 1 ? 3 : 2,
+                            backgroundColor: i == 1 ? "#7d3ad3" : "white",
+                            color: i == 1 ? "white" : "dark",
+                            p: 2,
+                            borderRadius: "24px",
+                          }}
+                        >
+                          <TextComponent id={`${e}-title`} />
+                          <TextComponent id={`${e}-description`} />
+                          <TextComponent id={`${e}-price`} />
+                          <Learnmore />
+                        </Box>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+
+                <Box sx={{ p: 2, backgroundColor: "#451288", color: "white" }}>
+                  <Grid container spacing={6}>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <TextComponent id="footer-title" />
+                      <TextComponent id="footer-description" />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <TextComponent id="footer-title" />
+                      <TextComponent id="footer-description" />
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Grid container spacing={3}>
+                        {[
+                          "gallery-1",
+                          "gallery-2",
+                          "gallery-3",
+                          "gallery-4",
+                          "gallery-5",
+                          "gallery-6",
+                        ].map((e) => (
+                          <Grid item xs={12} sm={4} key={e}>
+                            <Box
+                              display="flex"
+                              flexDirection="column"
+                              justifyContent="center"
+                              alignItems="center"
+                              sx={{ textAlign: "center" }}
+                            >
+                              <ImageComponent id={`${e}-image`} />
+                            </Box>
+                          </Grid>
+                        ))}
+                      </Grid>
+                    </Grid>
+
+                    <Grid item xs={12} sm={6} md={3}>
+                      <TextComponent id="footer-title" />
+                      <TextComponent id="footer-description" />
                     </Grid>
                   </Grid>
-
-                  <Grid item xs={12} sm={6} md={3}>
-                    <TextComponent id="footer-title" />
-                    <TextComponent id="footer-description" />
-                  </Grid>
-                </Grid>
+                </Box>
               </Box>
             </Box>
-          </Box>
+          </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </>
   );
 }
