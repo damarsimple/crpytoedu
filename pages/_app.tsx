@@ -98,6 +98,29 @@ export const client = new ApolloClient({
 });
 
 const theme = createTheme({
+  components: {
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          color: "black",
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: "black",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "black",
+        },
+      },
+    },
+  },
   breakpoints: {
     values: {
       xs: 0,
