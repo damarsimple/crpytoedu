@@ -48,6 +48,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import { AccountCircle, VideoCall } from "@mui/icons-material";
 import { useAuthStore } from "../store/auth";
 import useScrollsPosition from "../hooks/useScrollsPosition";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface AppBarProps extends MuiAppBarProps {
   transparent?: boolean;
@@ -164,6 +165,9 @@ function Index({ router: { query, push } }: WithRouterProps) {
       },
     }
   );
+
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up("md"));
 
   const {
     data: { page } = {},
@@ -735,13 +739,24 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     <TextComponent id={`team-title`} />
                   </Box>
                   <Grid container spacing={1} sx={{ mt: 4 }}>
+                    {matches && (
+                      <Grid
+                        item
+                        xs={12}
+                        sm={6}
+                        md={2}
+                        display="flex"
+                        justifyContent="center"
+                      />
+                    )}
+
                     {["team-1", "team-2", "team-3", "team-4"].map((e) => (
                       <Grid
                         key={e}
                         item
                         xs={12}
                         sm={6}
-                        md={3}
+                        md={2}
                         display="flex"
                         justifyContent="center"
                       >
