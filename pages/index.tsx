@@ -734,7 +734,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <Box sx={{ textAlign: "center" }}>
                     <TextComponent id={`team-title`} />
                   </Box>
-                  <Grid container spacing={10} sx={{ mt: 4 }}>
+                  <Grid container spacing={1} sx={{ mt: 4 }}>
                     {["team-1", "team-2", "team-3", "team-4"].map((e) => (
                       <Grid
                         key={e}
@@ -900,6 +900,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                       "gallery-6",
                       "gallery-7",
                       "gallery-8",
+                      "gallery-9",
                     ].map((e) => (
                       <Grid item xs={12} sm={6} md={4} key={e}>
                         <Box
@@ -919,25 +920,23 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <Box sx={{ p: 10 }}>
                   <TextComponent id={`faq-title`} />
                   <Grid container spacing={3}>
-                    {["faq-1", "faq-2", "faq-3", "faq-4", "faq-5", "faq-6"].map(
-                      (e) => (
-                        <Grid item sm={12} md={2} key={e}>
-                          <Box
-                            display="flex"
-                            flexDirection="column"
-                            sx={{
-                              textAlign: "left",
-                              borderLeft: "2px solid #ccc",
-                              p: 2,
-                              gap: 2,
-                            }}
-                          >
-                            <TextComponent id={`${e}-title`} />
-                            <TextComponent id={`${e}-description`} />
-                          </Box>
-                        </Grid>
-                      )
-                    )}
+                    {["faq-1", "faq-2", "faq-3"].map((e) => (
+                      <Grid item sm={12} md={2} key={e}>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          sx={{
+                            textAlign: "left",
+                            borderLeft: "2px solid #ccc",
+                            p: 2,
+                            gap: 2,
+                          }}
+                        >
+                          <TextComponent id={`${e}-title`} />
+                          <TextComponent id={`${e}-description`} />
+                        </Box>
+                      </Grid>
+                    ))}
                   </Grid>
                   <Box display="flex" mt={5}>
                     <Learnmore />
