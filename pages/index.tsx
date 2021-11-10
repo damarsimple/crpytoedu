@@ -738,7 +738,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <Box sx={{ textAlign: "center" }}>
                     <TextComponent id={`team-title`} />
                   </Box>
-                  <Grid container spacing={1} sx={{ mt: 4 }}>
+                  <Grid container spacing={3} sx={{ mt: 4 }}>
                     {matches && (
                       <Grid
                         item
@@ -766,6 +766,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                             gap: 2,
                             flexDirection: "column",
                             width: 270,
+                            mx: 2,
                           }}
                         >
                           <ImageComponent id={`${e}-image`} />
@@ -936,7 +937,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <TextComponent id={`faq-title`} />
                   <Grid container spacing={3}>
                     {["faq-1", "faq-2", "faq-3"].map((e) => (
-                      <Grid item sm={12} md={2} key={e}>
+                      <Grid item sm={12} md={4} key={e}>
                         <Box
                           display="flex"
                           flexDirection="column"
