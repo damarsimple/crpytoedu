@@ -1,4 +1,4 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import {
   Box,
   Tabs,
@@ -13,7 +13,7 @@ import { useDropzone } from "react-dropzone";
 import { toast } from "react-toastify";
 import DashboardLayout from "../components/DashboardLayout";
 import { useUserStore } from "../store/user";
-import { BasicOutput, User } from "../types/type";
+import { BasicOutput, File as FileType, User } from "../types/type";
 import Image from "next/image";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -28,7 +28,7 @@ export default function Setting() {
     setTabs(newValue);
   };
 
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
 
   const [handleChangePassword] = useMutation<{
     updatePassword: BasicOutput;
@@ -50,6 +50,65 @@ export default function Setting() {
       }
     }
   `);
+
+  const { refetch } = useQuery<{ me: User }>(
+    gql`
+      query Query {
+        me {
+          id
+          name
+          username
+          title
+          subscription_type
+          roles
+          is_admin
+          description
+          is_banned
+          banned_reason
+          parent_id
+          metadata
+          email
+          created_at
+          updated_at
+          subscription_expired_at
+          subscription_reason
+          subscription_verified
+          province_id
+          city_id
+          district_id
+          thumbnail {
+            id
+            name
+            path
+            mime
+            user_id
+            created_at
+            updated_at
+          }
+          cover {
+            id
+            name
+            path
+            mime
+            user_id
+            created_at
+            updated_at
+          }
+          url_facebook
+          url_twitter
+          url_instagram
+          url_linkedin
+          got_children
+          basicnotificationsCount
+        }
+      }
+    `,
+    {
+      onCompleted: ({ me }) => {
+        setUser(me);
+      },
+    }
+  );
 
   return (
     <DashboardLayout>
@@ -292,7 +351,7 @@ export default function Setting() {
               )}
             </Grid>
             <Grid item xs={6}>
-              <ImageDropZone label="Cover" />
+              <ImageDropZone label="Cover" roles="COVER" onFinish={refetch} />
             </Grid>
             <Grid item xs={6} sx={{ height: 600, position: "relative" }}>
               {user?.thumbnail?.path && (
@@ -305,7 +364,11 @@ export default function Setting() {
               )}
             </Grid>
             <Grid item xs={6}>
-              <ImageDropZone label="Thumbnail" />
+              <ImageDropZone
+                label="Thumbnail"
+                roles="THUMBNAIL"
+                onFinish={refetch}
+              />
             </Grid>
           </Grid>
         )}
@@ -417,10 +480,64 @@ export default function Setting() {
   );
 }
 
-function ImageDropZone({ label }: { label: string }) {
-  const onDrop = useCallback((acceptedFiles) => {
-    // Do something with the files
-  }, []);
+function ImageDropZone({
+  label,
+  roles,
+  onFinish,
+}: {
+  label: string;
+  roles: string;
+  onFinish?: () => void;
+}) {
+  const { user } = useUserStore();
+  const [handleUpload, { loading: lUpload }] = useMutation<{
+    uploadFile: {
+      status: boolean;
+      message?: string;
+      file?: FileType;
+    };
+  }>(gql`
+    mutation Mutation($input: UploadFile!) {
+      uploadFile(input: $input) {
+        status
+        message
+        file {
+          id
+          name
+          mime
+          path
+        }
+      }
+    }
+  `);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      const file = acceptedFiles[0];
+
+      handleUpload({
+        variables: {
+          input: {
+            name: file.name,
+            mime: file.type,
+            roles,
+            file,
+            fileable_type: "App\\Models\\User",
+            fileable_id: user?.id,
+          },
+        },
+      }).then((e) => {
+        if (e.data?.uploadFile?.status && e.data.uploadFile.file) {
+          const f = e.data.uploadFile.file;
+        } else {
+          toast({
+            description: e.data?.uploadFile.message,
+          });
+        }
+        onFinish && onFinish();
+      });
+    },
+    [handleUpload, roles, user]
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (

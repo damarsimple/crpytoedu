@@ -1,12 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { Group } from "@visx/group";
 import { Tree, hierarchy } from "@visx/hierarchy";
 import { HierarchyPointNode } from "@visx/hierarchy/lib/types";
 import { LinkHorizontal } from "@visx/shape";
 import { LinearGradient } from "@visx/gradient";
 import { User } from "../types/type";
+import { gql, useQuery } from "@apollo/client";
+import create from "zustand";
+import { Box, Button } from "@mui/material";
+import { toast } from "react-toastify";
+
+const useStore = create((set) => ({
+  selectedId: "",
+  setSelectedId: (id: string) => set({ selectedId: id }),
+}));
 
 const peach = "#fd9b93";
 const pink = "#fe6e9e";
@@ -29,6 +39,8 @@ function Node({ node }: { node: HierarchyNode }) {
   const isRoot = node.depth === 0;
   const isParent = !!node.children;
 
+  const { setSelectedId } = useStore();
+
   if (isRoot) return <RootNode node={node} />;
   if (isParent) return <ParentNode node={node} />;
 
@@ -46,7 +58,7 @@ function Node({ node }: { node: HierarchyNode }) {
         strokeOpacity={0.6}
         rx={10}
         onClick={() => {
-          alert(`clicked: ${JSON.stringify(node.data.name)}`);
+          setSelectedId(node.data.id);
         }}
       />
       <text
@@ -87,6 +99,8 @@ function ParentNode({ node }: { node: HierarchyNode }) {
   const centerX = -width / 2;
   const centerY = -height / 2;
 
+  const { setSelectedId } = useStore();
+
   return (
     <Group top={node.x} left={node.y}>
       <rect
@@ -98,7 +112,7 @@ function ParentNode({ node }: { node: HierarchyNode }) {
         stroke={blue}
         strokeWidth={1}
         onClick={() => {
-          alert(`clicked: ${JSON.stringify(node.data.name)}`);
+          setSelectedId(node.data.id);
         }}
       />
       <text
@@ -167,15 +181,49 @@ export default function ParentagesTree({
   user: User;
   parentages: User[];
 }) {
+  const { selectedId, setSelectedId } = useStore();
+
+  useEffect(() => {
+    if (user?.id) {
+      setSelectedId(user.id);
+    }
+  }, [user]);
+
+  const {
+    data: { user: userClicked } = {},
+    loading,
+    error,
+  } = useQuery<{ user: User }>(
+    gql`
+      query Query($id: ID!) {
+        user(id: $id) {
+          id
+          name
+          parentages
+        }
+      }
+    `,
+    {
+      variables: { id: selectedId ?? user?.id },
+    }
+  );
+
+  if (loading || !userClicked) return <div>Loading...</div>;
+
   return (
-    <ParentSize>
-      {({ width, height }) => (
-        <Example
-          width={width}
-          height={height}
-          rawTree={{ ...user, children: parentages }}
-        />
-      )}
-    </ParentSize>
+    <Box sx={{ height: "100%", width: "100%" }}>
+      <ParentSize>
+        {({ width, height }) => (
+          <Example
+            width={width}
+            height={height}
+            rawTree={{
+              ...userClicked,
+              children: JSON.parse(userClicked.parentages ?? "") ?? [],
+            }}
+          />
+        )}
+      </ParentSize>
+    </Box>
   );
 }

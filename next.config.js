@@ -2,6 +2,11 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["source.unsplash.com", "i.ytimg.com", "localhost"],
+    domains: [
+      "192.168.1.231",
+      "source.unsplash.com",
+      "i.ytimg.com",
+      "localhost",
+    ],
   },
 };

@@ -31,12 +31,17 @@ export default function UserCard({
   const { push } = useRouter();
   return (
     <Card>
-      <CardMedia
-        component="img"
-        height="300"
-        image={cover?.path ?? "/person-placeholder.jpg"}
-        alt={name}
-      />
+      <Box sx={{ height: 300 }}>
+        <CardMedia
+          component="img"
+          image={cover?.path ?? "/person-placeholder.jpg"}
+          sx={{
+            height: 300,
+            objectFit: "cover",
+          }}
+          alt={name}
+        />
+      </Box>
       <CardContent>
         <Typography
           gutterBottom

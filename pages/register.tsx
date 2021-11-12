@@ -675,7 +675,7 @@ export default function Register() {
                                   variant="contained"
                                   onClick={() => {
                                     setEvent(node);
-                                    console.log(node)
+                                    console.log(node);
                                     next();
                                   }}
                                 >
@@ -718,12 +718,20 @@ export default function Register() {
                         >
                           {getParentCandidate ? (
                             <Card>
-                              <CardMedia
-                                component="img"
-                                height="300"
-                                image="/person-placeholder.jpg"
-                                alt="swoole doge"
-                              />
+                              <Box sx={{ height: 300 }}>
+                                <CardMedia
+                                  component="img"
+                                  image={
+                                    getParentCandidate?.cover?.path ??
+                                    "/person-placeholder.jpg"
+                                  }
+                                  sx={{
+                                    height: 300,
+                                    objectFit: "cover",
+                                  }}
+                                  alt={getParentCandidate.name}
+                                />
+                              </Box>
                               <CardContent>
                                 <Typography
                                   gutterBottom
@@ -818,7 +826,13 @@ export default function Register() {
                                 <Button
                                   fullWidth
                                   variant="contained"
-                                  onClick={() => refetch().then(e => toast.success("berhasil mengganti trainer"))}
+                                  onClick={() =>
+                                    refetch().then((e) =>
+                                      toast.success(
+                                        "berhasil mengganti trainer"
+                                      )
+                                    )
+                                  }
                                 >
                                   GANTI TRAINER
                                 </Button>
@@ -835,7 +849,6 @@ export default function Register() {
                               <Typography>
                                 Tidak menemukan trainer di {city?.name},{" "}
                                 {province?.name}
-                                {JSON.stringify(getParentCandidate)}
                               </Typography>
                               <Button onClick={() => setShowAll(true)}>
                                 Lihat semua trainer aktif?
