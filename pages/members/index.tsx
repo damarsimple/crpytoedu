@@ -399,6 +399,7 @@ export default function Index() {
                       style={{
                         objectFit: "cover",
                       }}
+                      alt={userByUsername?.username}
                     />
                     <p className="legend">{name}</p>
                   </Box>

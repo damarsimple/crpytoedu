@@ -158,6 +158,15 @@ export default function Index() {
     }
   );
 
+  if (loading)
+    return (
+      <DashboardLayout>
+        <Box display="flex" justifyContent="center">
+          <CircularProgress />
+        </Box>
+      </DashboardLayout>
+    );
+
   return (
     <DashboardLayout>
       {me?.my_main_event?.id ? (
@@ -165,7 +174,10 @@ export default function Index() {
           <Typography variant="h3" component="h1">
             Acara anda
           </Typography>
-          <EventPages id={me.my_main_event.id} />
+          <EventPages
+            id={me.my_main_event.id}
+            onJoinStatusChange={() => refetch()}
+          />
         </>
       ) : (
         <>

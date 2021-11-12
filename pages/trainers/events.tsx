@@ -19,6 +19,7 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  TableHead,
 } from "@mui/material";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -174,20 +175,37 @@ export default function Events() {
   };
 
   const {
-    data: { me } = {},
+    data: { me, myEvents } = {},
     refetch,
     loading,
-  } = useQuery<{ me: User }>(
+  } = useQuery<{ me: User; myEvents: Classroom[] }>(
     gql`
       query GetMe {
+        myEvents {
+          id
+          name
+          status
+          user {
+            id
+            name
+          }
+          updated_at
+          created_at
+          rejected_reason
+        }
         me {
           my_staging_event {
+            id
+          }
+          my_main_event {
             id
           }
         }
       }
     `
   );
+
+  const mainEvent = me?.my_staging_event ?? me?.my_main_event;
 
   return (
     <DashboardLayout>
@@ -198,12 +216,15 @@ export default function Events() {
         </Tabs>
       </Box>
 
-      <Box>
-        {me?.my_staging_event ? (
-          <EventPages id={me.my_staging_event.id} />
-        ) : (
-          <>
-            {value == 0 && (
+      {value == 0 && (
+        <>
+          {mainEvent ? (
+            <EventPages
+              id={mainEvent?.id}
+              onJoinStatusChange={() => refetch()}
+            />
+          ) : (
+            <>
               <Box display="flex" flexDirection="column" gap={1} p={3}>
                 <Stepper nonLinear activeStep={currentStep}>
                   {["Data Acara", "Trainer", "Media", "Finish"].map(
@@ -550,10 +571,45 @@ export default function Events() {
                   </Button>
                 </Box>
               </Box>
-            )}
-          </>
-        )}
-      </Box>
+            </>
+          )}
+        </>
+      )}
+      {value == 1 && (
+        <Box>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Nama Acara</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                  <TableCell align="right">Penyelenggara</TableCell>
+                  <TableCell align="right">Alasan Penolakan</TableCell>
+                  <TableCell align="right">Update Pada</TableCell>
+                  <TableCell align="right">Dibuat Pada</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {myEvents?.map((row) => (
+                  <TableRow
+                    key={row.name}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.status}</TableCell>
+                    <TableCell align="right">{row.rejected_reason}</TableCell>
+                    <TableCell align="right">{row.user?.name}</TableCell>
+                    <TableCell align="right">{row.updated_at}</TableCell>
+                    <TableCell align="right">{row.created_at}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>
+      )}
     </DashboardLayout>
   );
 }

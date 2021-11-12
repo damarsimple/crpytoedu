@@ -121,6 +121,7 @@ function Username({ router }: WithRouterProps) {
               <Image
                 src={userByUsername?.thumbnail?.path ?? "/offline-meeting.jpg"}
                 layout="fill"
+                alt={userByUsername?.name}
                 objectFit="cover"
               />
             </Box>

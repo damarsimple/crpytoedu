@@ -718,7 +718,7 @@ export interface resetTrainerClassroomArgs {
   classroom_id: string;
 }
 
-export interface handleJoinclassroomArgs {
+export interface handleJoinClassroomArgs {
   classroom_id: string;
 }
 

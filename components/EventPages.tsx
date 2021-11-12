@@ -23,7 +23,13 @@ import { Classroom, BasicOutput, Roles, ClassroomStatus } from "../types/type";
 import DashboardLayout from "./DashboardLayout";
 import UserCard from "./UserCard";
 
-export default function EventPages({ id }: { id: string }) {
+export default function EventPages({
+  id,
+  onJoinStatusChange,
+}: {
+  id: string;
+  onJoinStatusChange?: (e: "JOIN" | "QUIT") => void;
+}) {
   const {
     data: { classroom } = {},
     loading,
@@ -117,10 +123,10 @@ export default function EventPages({ id }: { id: string }) {
     }
   );
 
-  const [handleJoin] = useMutation<{ handleJoinclassroom: BasicOutput }>(
+  const [handleJoin] = useMutation<{ handleJoinClassroom: BasicOutput }>(
     gql`
       mutation Mutation($id: ID!) {
-        handleJoinclassroom(classroom_id: $id) {
+        handleJoinClassroom(classroom_id: $id) {
           status
           message
         }
@@ -128,7 +134,7 @@ export default function EventPages({ id }: { id: string }) {
     `,
     {
       variables: { id },
-      onCompleted: ({ handleJoinclassroom: { status, message } }) => {
+      onCompleted: ({ handleJoinClassroom: { status, message } }) => {
         if (status) {
           toast.success("Gagal bergabung kelas");
         } else {
@@ -136,6 +142,7 @@ export default function EventPages({ id }: { id: string }) {
         }
         toast.success("Berhasil bergabung kelas");
         refetch();
+        onJoinStatusChange && onJoinStatusChange("JOIN");
       },
     }
   );
@@ -158,6 +165,7 @@ export default function EventPages({ id }: { id: string }) {
           toast.error(message);
         }
         refetch();
+        onJoinStatusChange && onJoinStatusChange("QUIT");
       },
     }
   );
