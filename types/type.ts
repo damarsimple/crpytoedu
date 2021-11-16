@@ -13,6 +13,15 @@
 // *******************************************************
 // 💙
 
+export interface DashboardData {
+  unpaid_user: number;
+  event_submission: number;
+  event_ongoing: number;
+  member: number;
+  trainer: number;
+  video: number;
+}
+
 export type Maybe<T> = T | null;
 export interface SelectValue {
   label: string;

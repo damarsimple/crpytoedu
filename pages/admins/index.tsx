@@ -23,7 +23,13 @@ import TableLoader from "../../components/TableLoader";
 import { getRange } from "../../helpers/date";
 import { selectObjectExtractor } from "../../helpers/formatters";
 import usePlaces from "../../hooks/usePlaces";
-import { Category, Classroom, Roles, User } from "../../types/type";
+import {
+  Category,
+  Classroom,
+  DashboardData,
+  Roles,
+  User,
+} from "../../types/type";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 
 export default function Index() {
@@ -120,6 +126,21 @@ export default function Index() {
     }
   }, {} as { [key: string]: number });
 
+  const { data: { getDashboardData } = {}, loading } = useQuery<{
+    getDashboardData: DashboardData;
+  }>(gql`
+    query GetDashboardData {
+      getDashboardData {
+        unpaid_user
+        event_submission
+        event_ongoing
+        member
+        trainer
+        video
+      }
+    }
+  `);
+
   return (
     <DashboardLayout>
       <Box
@@ -133,37 +154,42 @@ export default function Index() {
           {[
             {
               name: "Verifikasi Pembayaran User",
-              content: "10",
+              content: getDashboardData?.unpaid_user,
               url: "/admins/members?tabs=1",
               icon: "payments",
             },
             {
               name: "Pengajuan Acara",
-              content: "10",
+              content: getDashboardData?.event_submission,
               url: "/admins/events?tabs=1",
               icon: "event",
             },
             {
               name: "Acara Aktif",
-              content: "10",
+              content: getDashboardData?.event_ongoing,
               url: "/admins/events",
               icon: "event_available",
             },
-            { name: "Video", content: "10", url: "/videos", icon: "videocam" },
+            {
+              name: "Video",
+              content: getDashboardData?.video,
+              url: "/videos",
+              icon: "videocam",
+            },
             {
               name: "Member",
-              content: "10",
+              content: getDashboardData?.member,
               url: "/admins/members",
               icon: "person",
             },
             {
               name: "Trainer",
-              content: "10",
+              content: getDashboardData?.trainer,
               url: "/admins/members",
               icon: "supervisor_account",
             },
           ].map((e) => (
-            <Grid item xs={4} md={3} lg={2} key={e.url}>
+            <Grid item xs={6} md={4} lg={2} key={e.url}>
               <Card>
                 <CardContent>
                   <Box
