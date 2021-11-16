@@ -32,12 +32,14 @@ import {
   TextField,
   Stack,
   Chip,
+  CircularProgress,
 } from "@mui/material";
 import EventMapEditor from "../../components/EventMediaEditor";
 import EventTrainerEditor from "../../components/EventTrainerEditor";
 import { toast } from "react-toastify";
 import { useModalStore } from "../../store/modal";
 import withRouter, { WithRouterProps } from "next/dist/client/with-router";
+import NonMuiTableLoader from "../../components/NonMuiTableLoader";
 
 function Index({ router: { query } }: WithRouterProps) {
   const { provinces, cities, districts, setCity, setProvince } = usePlaces({});
@@ -51,99 +53,6 @@ function Index({ router: { query } }: WithRouterProps) {
     }
   }, [query]);
   const [tabs, setTabs] = useState(0);
-
-  const [name, setName] = useState("");
-
-  const [status, setStatus] = useState<ClassroomStatus>(
-    ClassroomStatus.Pending
-  );
-
-  const {
-    data: { classrooms } = {},
-    fetchMore,
-    refetch,
-  } = useQuery<{
-    classrooms: { edges: ClassroomEdge[]; pageInfo: PageInfo };
-  }>(
-    gql`
-      ${CorePageInfoField}
-      query GetClassrooms(
-        $name: String
-        $status: ClassroomStatus
-        $first: Int!
-        $after: String
-      ) {
-        classrooms(name: $name, status: $status, first: $first, after: $after) {
-          edges {
-            node {
-              id
-              name
-              status
-              rejected_reason
-              description
-              address
-              begin_at
-              finish_at
-              max_join
-              province_id
-              city_id
-              district_id
-              cover {
-                id
-                path
-              }
-              map {
-                id
-                path
-              }
-              thumbnail {
-                id
-                path
-              }
-              user {
-                id
-                name
-              }
-            }
-          }
-          pageInfo {
-            ...CorePageInfoField
-          }
-        }
-      }
-    `,
-    {
-      fetchPolicy: "network-only",
-      variables: {
-        name: wildCardFormatter(name),
-        first: 10,
-        status,
-      },
-    }
-  );
-
-  const [handleUpdate] = useMutation(gql`
-    mutation UpdateClassroomMutation($id: ID!, $input: UpdateClassroom!) {
-      updateClassroom(id: $id, input: $input) {
-        id
-      }
-    }
-  `);
-
-  const { popModal, close } = useModalStore();
-
-  const updateStatus = (id: string, status: ClassroomStatus) => {
-    handleUpdate({
-      variables: {
-        id,
-        input: { status },
-      },
-    }).then((e) => {
-      refetch();
-      toast.success("Berhasil mengupdate status acara");
-      close();
-    });
-  };
 
   return (
     <DashboardLayout>
@@ -187,124 +96,11 @@ function Index({ router: { query } }: WithRouterProps) {
           </Tabs>
         </Box>
         {tabs == 1 && (
-          <TableContainer component={Paper}>
-            <Box
-              sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}
-            >
-              <TextField
-                fullWidth
-                label="Cari User"
-                variant="standard"
-                onChange={(e) => setName(e.target.value)}
-              />
-              <Stack direction="row" spacing={1}>
-                {Object.values(ClassroomStatus).map((e) => {
-                  return e == status ? (
-                    <Chip key={e} label={e} onClick={() => setStatus(e)} />
-                  ) : (
-                    <Chip
-                      key={e}
-                      label={e}
-                      variant="outlined"
-                      onClick={() => setStatus(e)}
-                    />
-                  );
-                })}
-              </Stack>
-            </Box>
-            <Table sx={{ width: "100%" }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell>Nama</TableCell>
-                  <TableCell>Pengaju</TableCell>
-                  <TableCell>Lihat Trainer</TableCell>
-                  <TableCell>Lihat Media</TableCell>
-                  <TableCell>Aksi</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {classrooms?.edges?.map(
-                  ({ node: { id, name, status, user } }) => (
-                    <TableRow
-                      key={id}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {id}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {name}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {user?.name}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Button onClick={() => setEditTrainer(id)}>
-                          Lihat Trainer
-                        </Button>
-                      </TableCell>
-
-                      <TableCell component="th" scope="row">
-                        <Button onClick={() => setEditMap(id)}>
-                          Lihat Media
-                        </Button>
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        <Box sx={{ display: "flex", gap: 1 }}>
-                          <Button
-                            variant="contained"
-                            sx={{ width: "50&" }}
-                            color="success"
-                            onClick={() => {
-                              popModal(
-                                "Anda yakin mengubah status " + name,
-                                () => updateStatus(id, ClassroomStatus.Approved)
-                              );
-                            }}
-                          >
-                            Approve
-                          </Button>
-                          <Button
-                            variant="contained"
-                            color="error"
-                            sx={{ width: "50&" }}
-                            onClick={() => {
-                              popModal(
-                                "Anda yakin mengubah status " + name,
-                                () => updateStatus(id, ClassroomStatus.Rejected)
-                              );
-                            }}
-                          >
-                            Reject
-                          </Button>
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  )
-                )}
-              </TableBody>
-            </Table>
-            {classrooms?.pageInfo?.hasNextPage && (
-              <Button
-                fullWidth
-                onClick={() =>
-                  fetchMore({
-                    variables: {
-                      first: 10,
-                      after: classrooms?.pageInfo?.endCursor,
-                    },
-                  })
-                }
-              >
-                AMBIL LAGI
-              </Button>
-            )}
-          </TableContainer>
+          <SecondTab setEditMap={setEditMap} setEditTrainer={setEditTrainer} />
         )}
         {tabs == 0 && (
           <Box>
-            <TableLoader<Classroom>
+            <NonMuiTableLoader<Classroom>
               columns={[
                 { field: "id", headerName: "ID" },
                 { field: "name", headerName: "Judul Acara", editable: true },
@@ -390,7 +186,7 @@ function Index({ router: { query } }: WithRouterProps) {
               }}
               getQuery={gql`
                 ${CorePageInfoField}
-                query GetClassrooms(
+                query GetClassroomsAll(
                   $name: String
                   $first: Int!
                   $after: String
@@ -498,6 +294,245 @@ function Index({ router: { query } }: WithRouterProps) {
         )}
       </Box>
     </DashboardLayout>
+  );
+}
+
+function SecondTab({
+  setEditTrainer,
+  setEditMap,
+}: {
+  setEditTrainer: (e: string) => void;
+  setEditMap: (e: string) => void;
+}) {
+  const [name, setName] = useState("");
+
+  const [status, setStatus] = useState<ClassroomStatus>(
+    ClassroomStatus.Pending
+  );
+
+  const {
+    loading,
+    data: { classrooms } = {},
+    fetchMore,
+    refetch,
+  } = useQuery<{
+    classrooms: { edges: ClassroomEdge[]; pageInfo: PageInfo };
+  }>(
+    gql`
+      ${CorePageInfoField}
+      query GetClassroomsFromStatus(
+        $name: String
+        $status: ClassroomStatus
+        $first: Int!
+        $after: String
+      ) {
+        classrooms(name: $name, status: $status, first: $first, after: $after) {
+          edges {
+            node {
+              id
+              name
+              status
+              rejected_reason
+              description
+              address
+              begin_at
+              finish_at
+              max_join
+              province_id
+              city_id
+              district_id
+              cover {
+                id
+                path
+              }
+              map {
+                id
+                path
+              }
+              thumbnail {
+                id
+                path
+              }
+              user {
+                id
+                name
+              }
+            }
+          }
+          pageInfo {
+            ...CorePageInfoField
+          }
+        }
+      }
+    `,
+    {
+      fetchPolicy: "network-only",
+      variables: {
+        name: wildCardFormatter(name),
+        first: 10,
+        status,
+      },
+    }
+  );
+
+  const [handleUpdate] = useMutation(gql`
+    mutation UpdateClassroomMutation($id: ID!, $input: UpdateClassroom!) {
+      updateClassroom(id: $id, input: $input) {
+        id
+      }
+    }
+  `);
+
+  const { popModal, close } = useModalStore();
+
+  const updateStatus = (id: string, status: ClassroomStatus) => {
+    handleUpdate({
+      variables: {
+        id,
+        input: { status },
+      },
+    }).then((e) => {
+      refetch();
+      toast.success("Berhasil mengupdate status acara");
+      close();
+    });
+  };
+
+  return (
+    <TableContainer component={Paper}>
+      <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
+        <TextField
+          fullWidth
+          label="Cari User"
+          variant="standard"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <Stack direction="row" spacing={1}>
+          {Object.values(ClassroomStatus).map((e) => {
+            return e == status ? (
+              <Chip key={e} label={e} onClick={() => setStatus(e)} />
+            ) : (
+              <Chip
+                key={e}
+                label={e}
+                variant="outlined"
+                onClick={() => setStatus(e)}
+              />
+            );
+          })}
+        </Stack>
+      </Box>
+      <Table sx={{ width: "100%" }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>ID</TableCell>
+            <TableCell>Nama</TableCell>
+            <TableCell>Pengaju</TableCell>
+            <TableCell>Lihat Trainer</TableCell>
+            <TableCell>Lihat Media</TableCell>
+            <TableCell>Aksi</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {loading && (
+            <Box
+              display="flex"
+              alignItems={"center"}
+              justifyContent="center"
+              width="100%"
+            >
+              <CircularProgress />
+            </Box>
+          )}
+          {classrooms?.edges?.map(({ node: { id, name, status, user } }) => (
+            <TableRow
+              key={id}
+              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {id}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {name}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                {user?.name}
+              </TableCell>
+              <TableCell component="th" scope="row">
+                <Button onClick={() => setEditTrainer(id)}>
+                  Lihat Trainer
+                </Button>
+              </TableCell>
+
+              <TableCell component="th" scope="row">
+                <Button onClick={() => setEditMap(id)}>Lihat Media</Button>
+              </TableCell>
+              <TableCell component="th" scope="row">
+                <Box sx={{ display: "flex", gap: 1 }}>
+                  {status != ClassroomStatus.Approved && (
+                    <Button
+                      variant="contained"
+                      sx={{ width: "50&" }}
+                      color="success"
+                      onClick={() => {
+                        popModal("Anda yakin mengubah status " + name, () =>
+                          updateStatus(id, ClassroomStatus.Approved)
+                        );
+                      }}
+                    >
+                      Approve
+                    </Button>
+                  )}
+                  {status != ClassroomStatus.Pending && (
+                    <Button
+                      variant="contained"
+                      sx={{ width: "50&" }}
+                      color="warning"
+                      onClick={() => {
+                        popModal("Anda yakin mengubah status " + name, () =>
+                          updateStatus(id, ClassroomStatus.Pending)
+                        );
+                      }}
+                    >
+                      Pending
+                    </Button>
+                  )}
+                  {status != ClassroomStatus.Rejected && (
+                    <Button
+                      variant="contained"
+                      color="error"
+                      sx={{ width: "50&" }}
+                      onClick={() => {
+                        popModal("Anda yakin mengubah status " + name, () =>
+                          updateStatus(id, ClassroomStatus.Rejected)
+                        );
+                      }}
+                    >
+                      Reject
+                    </Button>
+                  )}
+                </Box>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      {classrooms?.pageInfo?.hasNextPage && (
+        <Button
+          fullWidth
+          onClick={() =>
+            fetchMore({
+              variables: {
+                first: 10,
+                after: classrooms?.pageInfo?.endCursor,
+              },
+            })
+          }
+        >
+          AMBIL LAGI
+        </Button>
+      )}
+    </TableContainer>
   );
 }
 
