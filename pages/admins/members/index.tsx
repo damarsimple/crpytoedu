@@ -495,7 +495,7 @@ function Index({ router: { push, query } }: WithRouterProps) {
                           )
                         }
                       >
-                        Setting User
+                        Setting
                       </Button>
                     </>
                   ),
