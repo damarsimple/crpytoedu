@@ -390,93 +390,93 @@ function Index({ router: { push, query } }: WithRouterProps) {
                   flex: 1,
                   editable: true,
                 },
-                // {
-                //   //@ts-ignore
-                //   field: "password",
-                //   headerName: "Password",
-                //   flex: 1,
-                //   hide: true,
-                //   editable: true,
-                //   createable: true,
-                // },
+                {
+                  //@ts-ignore
+                  field: "password",
+                  headerName: "Password",
+                  flex: 1,
+                  hide: true,
+                  editable: true,
+                  createable: true,
+                },
 
-                // {
-                //   field: "roles",
-                //   headerName: "Roles",
-                //   type: "select",
-                //   selects: selectObjectExtractor(Roles),
-                //   flex: 1,
-                //   editable: true,
-                // },
-                // {
-                //   field: "is_admin",
-                //   headerName: "Admin?",
-                //   type: "boolean",
-                //   flex: 1,
-                //   editable: true,
-                //   createable: false,
-                // },
+                {
+                  field: "roles",
+                  headerName: "Roles",
+                  type: "select",
+                  selects: selectObjectExtractor(Roles),
+                  flex: 1,
+                  editable: true,
+                },
+                {
+                  field: "is_admin",
+                  headerName: "Admin?",
+                  type: "boolean",
+                  flex: 1,
+                  editable: true,
+                  createable: false,
+                },
 
-                // {
-                //   field: "title",
-                //   headerName: "Title",
-                //   flex: 1,
-                //   editable: true,
-                // },
-                // {
-                //   field: "subscription_type",
-                //   headerName: "Langganan",
-                //   flex: 1,
-                //   editable: true,
-                //   type: "select",
-                //   selects: [
-                //     { label: "ONLINE", value: "ONLINE" },
-                //     { label: "OFFLINE", value: "OFFLINE" },
-                //   ],
-                // },
-                // {
-                //   field: "subscription_expired_at",
-                //   headerName: "Langganan Habis",
-                //   flex: 1,
-                //   editable: true,
-                //   type: "dateTime",
-                // },
+                {
+                  field: "title",
+                  headerName: "Title",
+                  flex: 1,
+                  editable: true,
+                },
+                {
+                  field: "subscription_type",
+                  headerName: "Langganan",
+                  flex: 1,
+                  editable: true,
+                  type: "select",
+                  selects: [
+                    { label: "ONLINE", value: "ONLINE" },
+                    { label: "OFFLINE", value: "OFFLINE" },
+                  ],
+                },
+                {
+                  field: "subscription_expired_at",
+                  headerName: "Langganan Habis",
+                  flex: 1,
+                  editable: true,
+                  type: "dateTime",
+                },
 
-                // {
-                //   field: "province_id",
-                //   headerName: "Provinsi",
-                //   flex: 1,
-                //   hide: false,
-                //   editable: true,
-                //   createable: true,
-                //   selects: provinces?.map(selectExtractor),
-                //   type: "select",
-                //   onChange: (e) =>
-                //     setProvince(provinces.filter((x) => x.id == e)[0]),
-                // },
-                // {
-                //   field: "city_id",
-                //   headerName: "Kota / Kabupaten",
-                //   flex: 1,
-                //   hide: false,
-                //   editable: true,
-                //   createable: true,
-                //   selects: cities?.map(selectExtractor),
-                //   type: "select",
-                //   onChange: (e) => setCity(cities.filter((x) => x.id == e)[0]),
-                // },
-                // {
-                //   field: "district_id",
-                //   headerName: "Kecamatan / Kelurahan",
-                //   flex: 1,
-                //   hide: false,
-                //   editable: true,
-                //   createable: true,
-                //   selects: districts?.map(selectExtractor),
-                //   type: "select",
-                //   onChange: (e) =>
-                //     setDistrict(districts.filter((x) => x.id == e)[0]),
-                // },
+                {
+                  field: "province_id",
+                  headerName: "Provinsi",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: provinces?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) =>
+                    setProvince(provinces.filter((x) => x.id == e)[0]),
+                },
+                {
+                  field: "city_id",
+                  headerName: "Kota / Kabupaten",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: cities?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) => setCity(cities.filter((x) => x.id == e)[0]),
+                },
+                {
+                  field: "district_id",
+                  headerName: "Kecamatan / Kelurahan",
+                  flex: 1,
+                  hide: false,
+                  editable: true,
+                  createable: true,
+                  selects: districts?.map(selectExtractor),
+                  type: "select",
+                  onChange: (e) =>
+                    setDistrict(districts.filter((x) => x.id == e)[0]),
+                },
               ]}
               label="Member"
               actions={["edit", "create", "custom"]}
@@ -491,7 +491,7 @@ function Index({ router: { push, query } }: WithRouterProps) {
                         onClick={() =>
                           push(
                             "/admins/members/profiles/" +
-                              e.api.getCellValue(e.id, "username")
+                            e.api.getCellValue(e.id, "username")
                           )
                         }
                       >
@@ -510,8 +510,8 @@ function Index({ router: { push, query } }: WithRouterProps) {
                         onClick={() =>
                           push(
                             "/users/" +
-                              e.api.getCellValue(e.id, "username") +
-                              "/?tab=trees"
+                            e.api.getCellValue(e.id, "username") +
+                            "/?tab=trees"
                           )
                         }
                       >
