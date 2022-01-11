@@ -1187,7 +1187,7 @@ const ContainerComponent = ({}: ContainerProps) => {};
 
 const LandingSection = () => {
   const {
-    data: { url_twitter, url_facebook, url_linkedin, url_instagram },
+    data: { url_twitter, url_facebook, url_linkedin, url_instagram } = {},
   } = useQuery(gql`
     query {
       getLandingSocial {
@@ -1226,7 +1226,7 @@ const LandingSection = () => {
       >
         <TextComponent id="main-title" />
 
-        <BaseButtonComponent id="main-button" />
+        {/* <BaseButtonComponent id="main-button" /> */}
       </Box>
 
       <Box

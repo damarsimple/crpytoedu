@@ -1,0 +1,1148 @@
+{
+  "text": {
+    "phone-number": {
+      "children": "0812-8143-1595",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "call-us-context": {
+      "children": "Call Center",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "yellow", "fontSize": "20px" }
+    },
+    "main-title": {
+      "variant": "h5",
+      "component": "h1",
+      "children": "Champion Trading Community atau disingkat CTC merupakan komunitas trading khususnya Crypto Currency. Tujuan dibentuknya CTC ini agar masyakarat luas dapat belajar  crypto Bersama para trainer dengan ,metode pembelajaran  yang mudah dipahami, dan para peserta yang ikut kelas akan tetap belajar lebih lanjut lagi. CTC punya 4 trainer dan miliki kemampuan atau menguasai bidangnya masing-masing.",
+      "style": { "color": "white", "maxWidth": "60ch" }
+    },
+    "advertise-1-title": {
+      "children": "Trading Dengan Rasa Aman",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "advertise-1-description": {
+      "children": "Kembangkan Portofolio anda dengan belajar dengan trainer kami dan yang pasti aman",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "15px" }
+    },
+    "advertise-2-title": {
+      "children": "Trainer Yang Handal",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "advertise-2-description": {
+      "children": "Trainer kami berkompeten pada bidangnya masing-masing",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "15px" }
+    },
+    "advertise-3-title": {
+      "children": "Ahli Beranalisis",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "advertise-3-description": {
+      "children": "Analisis yang para Trainer berikan berdakan best on experience",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "15px" }
+    },
+    "advertise-4-title": {
+      "children": "Komunitas Trading",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "advertise-4-description": {
+      "children": "Komunitas Trading sebagai wadah bagi para Trader untuk saling berdiskusi",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "15px" }
+    },
+    "advantages-title": {
+      "children": "Kenapa Memilih C.T.C?",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "advantages-description": {
+      "children": "Ini adalah alasan para Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "10", "textAlign": "center" }
+    },
+    "advantages-1-title": {
+      "children": "Memantau Hasil Profit Harian",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-1-description": {
+      "children": "Para Champion'ers sangat senang dapat profit yang mereka dapatkan. Minimal profit yang didapat 0.5% - 1%. Lebih dari 1% itu adalah BONUS.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "advantages-2-title": {
+      "children": "Metode Pembelajaran Dasar Trading Mudah Dipahami",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-2-description": {
+      "children": "Saat mengikuti kelas yang diselenggarakan CTC para peserta akan mendapatkan modul yang sudah dicetak, guna model tersebut agar dapat dibaca kembali dan dipahami materinya.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "advantages-3-title": {
+      "children": "Menyelenggarakan Kelas Onlien/Offline",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-3-description": {
+      "children": "CTC rutin membuka kelas online dengan Trainer",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "advantages-4-title": {
+      "children": "Grup Khusus Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-4-description": {
+      "children": "Grup yang kami buat khusus bagi member atau yang sudah mengikuti kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "advantages-5-title": {
+      "children": "Update Market",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-5-description": {
+      "children": "Champion'ers akan dapatkan update tentang Market stay terus untuk lihat grup karna banyak sekali informasi yang diberikan.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "advantages-6-title": {
+      "children": "Memberikan Analisis Yang Tepat",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "advantages-6-description": {
+      "children": "Analisis yang diberikan oleh para Trainer ini sudah di resource dan segera dibagikan para Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "about-title": {
+      "children": "Tentang C.T.C",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px" }
+    },
+    "about-description": {
+      "children": "Perkenalkan kami Champion Trading Community",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "8" }
+    },
+    "about-content": {
+      "children": "Champion Trading Community atau disingkat CTC merupakan komunitas trading khususnya Crypto Currency. Tujuan dibentuknya CTC ini agar masyakarat luas dapat belajar  crypto Bersama para trainer dengan ,metode pembelajaran  yang mudah dipahami, dan para peserta yang ikut kelas akan tetap belajar lebih lanjut lagi. CTC punya 4 trainer dan miliki kemampuan atau menguasai bidangnya masing-masing.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "stats-title": {
+      "children": "Statistik Market Binance Spot",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "40px" }
+    },
+    "stats-content": {
+      "children": "Platform kami membantu memudahkan anda dalam Trading di Market Binance. Dibuat secara otomatis",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px", "fontStyle": "italic" }
+    },
+    "stats-founder": {
+      "children": "Aryanto Hong",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "yellow", "fontSize": "15px" }
+    },
+    "stats-founder-position": {
+      "children": "Founder & Coin Trainer CTC",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "stats-image-description": {
+      "children": "Candlestick ",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "white", "fontSize": "20px" }
+    },
+    "team-title": {
+      "children": "C.T.C Founder",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "45px" }
+    },
+    "team-1-name": {
+      "children": "Yohanes",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-1-position": {
+      "children": "Founder & Trading Knowledge",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-1-description": {
+      "children": "Founder kami ini, memiliki banyak pengetahuan tentang dunia trading. Terjun dalam dunia trading sudah cukup lama tidak heran dengan posisi Trading Knowledge.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "team-2-name": {
+      "children": "Aryanto Hong",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-2-position": {
+      "children": "Founder & Coin Trainer",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-2-description": {
+      "children": "Dalam pilihan koin dan fundamental koin tersebut sudah dipahami terlebih dahulu oleh Trainer agar informasi yang diberikan sudah akurat dan profit.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "team-3-name": {
+      "children": "Maryadi",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-3-position": {
+      "children": "Founder & Application Trainer",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-3-description": {
+      "children": "Appication Trainer dapat membantu anda saat kurang paham penggunaan aplikasi ada fitur apa saja dalam aplikasi tersebut dapat dijelaskan oleh Trainer kami ini.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "team-4-name": {
+      "children": "Lorenzio",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-4-position": {
+      "children": "Founder & Market Trainer",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-4-description": {
+      "children": "Market setiap hari atu setiap minggu pasti akan berubah-ubah, dan trainer kami sangat kompeten karena bidang pekerjaan diperbankan pun menganalisa market.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "team-5-name": {
+      "children": "Samuel Eclair",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-5-position": {
+      "children": "CEO & Founder",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-5-description": {
+      "children": "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n                    Optio esse totam animi magni hic, alias quo placeat ipsa\n                    cumque tenetur",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "team-6-name": {
+      "children": "Samuel Eclair",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "team-6-position": {
+      "children": "CEO & Founder",
+      "variant": "caption",
+      "component": "p",
+      "style": {
+        "color": "lightgray",
+        "fontSize": "15px",
+        "fontStyle": "italic"
+      }
+    },
+    "team-6-description": {
+      "children": "Lorem, ipsum dolor sit amet consectetur adipisicing elit.\n                    Optio esse totam animi magni hic, alias quo placeat ipsa\n                    cumque tenetur",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonial-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+    "testimonial-1-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+
+    "testimonial-2-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+
+    "testimonial-3-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+
+    "testimonial-4-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+
+    "testimonial-5-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+    "testimonial-6-image": {
+      "src": "/images/user-1-64x64.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": {
+        "borderRadius": "9999px"
+      }
+    },
+    "testimonials-name": {
+      "children": "Testimoni",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "45px", "textAlign": "center" }
+    },
+    "testimonials-1-date": {
+      "children": "4 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-1-content": {
+      "children": "Belajar trading di CTC metodenya gampang bgt buat kita ngerti",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-1-client-name": {
+      "children": "Muhammad Rinaldy",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-1-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-2-date": {
+      "children": "2 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-2-content": {
+      "children": "Belajar trading ya di Champion Trading lah!",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-2-client-name": {
+      "children": "Haidy",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-2-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-3-date": {
+      "children": "15 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-3-content": {
+      "children": "Gak nyesel deh join CTC profit terus",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-3-client-name": {
+      "children": "Teuku Reza",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-3-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-4-date": {
+      "children": "4 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-4-content": {
+      "children": "Champion Trading the best deh!",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-4-client-name": {
+      "children": "Vera",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-4-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-5-date": {
+      "children": "25 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-5-content": {
+      "children": "Dulu saya trauma trading karna ditinggal sama leader gak profit adanya boncos terus",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-5-client-name": {
+      "children": "Ahmad Habibi",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-5-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-6-date": {
+      "children": "20 hari yang lalu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "testimonials-6-content": {
+      "children": "pelan-pelan saya ngerti crypto nih berkat belajar bareng trainer CTC",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "testimonials-6-client-name": {
+      "children": "Malia",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "testimonials-6-client-position": {
+      "children": "Peserta Kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "gray", "fontSize": "15px", "fontStyle": "italic" }
+    },
+    "our-values-1-title": {
+      "children": "Hasil Profit Harian",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "our-values-1-description": {
+      "children": "Pengguna dapat tarik profit harian, minimal profit 0,5% - 1%",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "our-values-2-title": {
+      "children": "Informasi Up to date",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "our-values-2-description": {
+      "children": "Grup yang disediakan selalun berikan informasi terbaru.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "our-values-3-title": {
+      "children": "Aplikasi CTC",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "our-values-3-description": {
+      "children": "Aplikasi yang selalu berikan profit",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "our-values-4-title": {
+      "children": "DYOR",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "our-values-4-description": {
+      "children": "i \"Do Your Own Research\" dan artinya cukup mudah. Artinya, Anda melakukan riset sebelum berinvestasi sendiri.",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "our-values-title": {
+      "children": "Nilai CTC",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "our-values-description": {
+      "children": "Kami selalu mengutamakan yang ada dalam Champion Trading Community",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15", "textAlign": "center" }
+    },
+    "gallery-title": {
+      "children": "Galeri C.T.C",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "faq-title": {
+      "children": "Pertanyaan yang sering ditanyakan",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "faq-1-title": {
+      "children": "Cara Atasi Floating",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-1-description": {
+      "children": "Jangan panik floating itu bukan uang hilang. melainkan uang yang kita investasikan tetap tersimpan",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "faq-2-title": {
+      "children": "Cara Ambil Profit Harian",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-2-description": {
+      "children": "Pengguna kami bisa memesan tiket ke luar angkasa",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "faq-3-title": {
+      "children": "Jadwal Kelas Online/Offline",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-3-description": {
+      "children": "Pengguna kami bisa memesan tiket ke luar angkasa",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "faq-4-title": {
+      "children": "To The Moon",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-4-description": {
+      "children": "Pengguna kami bisa memesan tiket ke luar angkasa",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "faq-5-title": {
+      "children": "To The Moon",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-5-description": {
+      "children": "Pengguna kami bisa memesan tiket ke luar angkasa",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "faq-6-title": {
+      "children": "To The Moon",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "faq-6-description": {
+      "children": "Pengguna kami bisa memesan tiket ke luar angkasa",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-title": {
+      "children": "Posting Blog Terbaru",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "blog-1-title": {
+      "children": "Kegiatan Kelas Offline",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "blog-1-author": {
+      "children": "by Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-1-description": {
+      "children": "Sudah terlaksana kegiatan kelas offline yang pertama kali kita adakan. Dan cukup banyak peserta yang minta untuk bergabung dalam kelas",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-1-date": {
+      "children": "4 Desember 2021",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-2-title": {
+      "children": "Kegiatan Kelas Online",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "blog-2-author": {
+      "children": "by Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-2-description": {
+      "children": "Kelas trading online CTC ",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-2-date": {
+      "children": "20-22 Desember 2021",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-3-title": {
+      "children": "Kegiatan Gathering",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "blog-3-author": {
+      "children": "by Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-3-description": {
+      "children": "Kegiatan gathering CTC setiap hari Sabtu pukul 13.00WIB",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-3-date": {
+      "children": "Setiap Hari Sabtu",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-4-title": {
+      "children": "Jadwal Zoom",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "blog-4-author": {
+      "children": "by Champion'ers",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-4-description": {
+      "children": "Jadwal Kegiatan Zoom setiap Senin, Rabu, Jumat Pukul 19.30 - Selesai",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "blog-4-date": {
+      "children": "Setiap Hari SENIN, RABU, JUMAT",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "pricing-title": {
+      "children": "Langganan",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "40px", "textAlign": "center" }
+    },
+    "pricing-1-title": {
+      "children": "Kelas Trading Offline",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "pricing-1-description": {
+      "children": "Kegiatan Kelas Trading Offline 1 kelas 20 Peserta",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "pricing-1-price": {
+      "children": "Rp. 990.000",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "pricing-2-title": {
+      "children": "Kelas Trading Online",
+      "variant": "caption",
+      "component": "p",
+      "style": { "fontSize": "20px" }
+    },
+    "pricing-2-description": {
+      "children": "Kegiatan Kelas Trading Online 1 kelas 20 Peserta",
+      "variant": "caption",
+      "component": "p",
+      "style": { "fontSize": "15px" }
+    },
+    "pricing-2-price": {
+      "children": "Rp. 990.000",
+      "variant": "caption",
+      "component": "p",
+      "style": { "fontSize": "15px" }
+    },
+    "pricing-3-title": {
+      "children": "Kegiatan Zoom",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "20px" }
+    },
+    "pricing-3-description": {
+      "children": "Kegiatan Zoom SENIN, RABU, JUMAT peserta unlimite",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "pricing-3-price": {
+      "children": "Rp.0",
+      "variant": "caption",
+      "component": "p",
+      "style": { "color": "black", "fontSize": "15px" }
+    },
+    "footer-title": {
+      "children": "CHAMPION TRADING",
+      "variant": "caption",
+      "component": "p",
+      "style": { "fontSize": "30px", "fontStyle": "bold" }
+    },
+    "footer-description": {
+      "children": "CHAMPION TRADING adalah platform edukasi crypto",
+      "variant": "caption",
+      "component": "p",
+      "style": { "fontSize": "15px", "maxWidth": "75ch" }
+    }
+  },
+  "image": {
+    "main-image": {
+      "src": "http://crpyto.damaral.my.id/storage/600x400px header.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 600,
+      "height": 400
+    },
+    "advertise-1-image": {
+      "src": "trending_up",
+      "type": "icon",
+      "style": { "fontSize": "40px", "color": "white" }
+    },
+    "advertise-2-image": {
+      "src": "groups",
+      "type": "icon",
+      "style": { "fontSize": "40px", "color": "white" }
+    },
+    "advertise-3-image": {
+      "src": "analytics",
+      "type": "icon",
+      "style": { "fontSize": "40px", "color": "white" }
+    },
+    "advertise-4-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "40px", "color": "white" }
+    },
+    "advantages-1-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "advantages-2-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "advantages-3-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "advantages-4-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "advantages-5-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "advantages-6-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "black" }
+    },
+    "about-image": {
+      "src": "http://crpyto.damaral.my.id/storage/600x400px.png",
+      "type": "image",
+      "alt": "laptop",
+      "width": 600,
+      "height": 400
+    },
+    "stats-image": {
+      "src": "http://crpyto.damaral.my.id/storage/600x400 px.png",
+      "type": "image",
+      "alt": "laptop",
+      "width": 600,
+      "height": 400
+    },
+    "stats-quote": {
+      "src": "format_quote",
+      "type": "icon",
+      "style": { "fontSize": "50px", "color": "white" }
+    },
+    "team-1-image": {
+      "src": "http://crpyto.damaral.my.id/storage/pa yohanes.png",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "team-2-image": {
+      "src": "http://crpyto.damaral.my.id/storage/pak ary.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "team-3-image": {
+      "src": "http://crpyto.damaral.my.id/storage/pa maryadi.png",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "team-4-image": {
+      "src": "http://crpyto.damaral.my.id/storage/pak loren.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "team-5-image": {
+      "src": "/images/team-1-270x270.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "team-6-image": {
+      "src": "/images/team-1-270x270.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 270,
+      "height": 270
+    },
+    "testimonial-image": {
+      "src": "http://crpyto.damaral.my.id/storage/x.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 80,
+      "height": 80,
+      "style": { "borderRadius": "9999px" }
+    },
+    "our-values-1-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "100px", "color": "black" }
+    },
+    "our-values-2-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "100px", "color": "black" }
+    },
+    "our-values-3-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "100px", "color": "black" }
+    },
+    "our-values-4-image": {
+      "src": "account_tree",
+      "type": "icon",
+      "style": { "fontSize": "100px", "color": "black" }
+    },
+    "gallery-1-image": {
+      "src": "http://crpyto.damaral.my.id/storage/1.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-2-image": {
+      "src": "http://crpyto.damaral.my.id/storage/2.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-3-image": {
+      "src": "http://crpyto.damaral.my.id/storage/3.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-4-image": {
+      "src": "http://crpyto.damaral.my.id/storage/4.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-5-image": {
+      "src": "http://crpyto.damaral.my.id/storage/5.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-6-image": {
+      "src": "http://crpyto.damaral.my.id/storage/6.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-7-image": {
+      "src": "http://crpyto.damaral.my.id/storage/7.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-8-image": {
+      "src": "http://crpyto.damaral.my.id/storage/8.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "gallery-9-image": {
+      "src": "http://crpyto.damaral.my.id/storage/9.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "blog-1-image": {
+      "src": "http://crpyto.damaral.my.id/storage/10.1.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 175,
+      "height": 250
+    },
+    "blog-2-image": {
+      "src": "http://crpyto.damaral.my.id/storage/11.1.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 175,
+      "height": 250
+    },
+    "blog-3-image": {
+      "src": "http://crpyto.damaral.my.id/storage/12.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 300,
+      "height": 250
+    },
+    "blog-4-image": {
+      "src": "http://crpyto.damaral.my.id/storage/13.jpg",
+      "type": "image",
+      "alt": "laptop",
+      "width": 175,
+      "height": 250
+    }
+  },
+  "button": {
+    "about-button": {
+      "style": { "width": "100%" },
+      "text": "pelajari",
+      "path": "/"
+    },
+    "faq-button": {
+      "style": { "width": "100%" },
+      "text": "pelajari",
+      "path": "/"
+    },
+    "blog-button": {
+      "style": { "width": "100%" },
+      "text": "pelajari",
+      "path": "/"
+    },
+    "pricing-button": {
+      "style": { "width": "100%" },
+      "text": "pelajari",
+      "path": "/"
+    },
+    "main-button": {
+      "style": { "width": "100%" },
+      "text": "pelajari",
+      "path": "/"
+    }
+  }
+}
