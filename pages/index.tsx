@@ -1085,11 +1085,23 @@ const ImageComponent = ({ id }: { id: string }) => {
     src,
   } = getImageByKey(id) || {};
 
+  if (!src || !width || !height) {
+    console.log(id);
+    return <></>;
+  }
+
   const Component = () => {
     if (imageType == "icon") {
       return <Icon style={style}>{src}</Icon>;
     } else {
-      return <Image src={src} alt={src} width={width} height={height} />;
+      return (
+        <Image
+          src={src ?? "/dogememe.jpg"}
+          alt={src}
+          width={width}
+          height={height}
+        />
+      );
     }
   };
 

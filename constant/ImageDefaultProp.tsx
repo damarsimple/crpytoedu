@@ -133,7 +133,7 @@ export default {
       borderRadius: "9999px",
     },
   },
-  "testimonial-1-image": {
+  "testimonials-1-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -144,7 +144,7 @@ export default {
     },
   },
 
-  "testimonial-2-image": {
+  "testimonials-2-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -155,7 +155,7 @@ export default {
     },
   },
 
-  "testimonial-3-image": {
+  "testimonials-3-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -166,7 +166,7 @@ export default {
     },
   },
 
-  "testimonial-4-image": {
+  "testimonials-4-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -177,7 +177,7 @@ export default {
     },
   },
 
-  "testimonial-5-image": {
+  "testimonials-5-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -187,7 +187,7 @@ export default {
       borderRadius: "9999px",
     },
   },
-  "testimonial-6-image": {
+  "testimonials-6-image": {
     src: "/images/user-1-64x64.jpg",
     type: "image",
     alt: "laptop",
@@ -197,7 +197,6 @@ export default {
       borderRadius: "9999px",
     },
   },
-
 
   "our-values-1-image": {
     src: "account_tree",

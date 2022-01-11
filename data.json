@@ -346,7 +346,7 @@
         "borderRadius": "9999px"
       }
     },
-    "testimonial-1-image": {
+    "testimonials-1-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
@@ -357,7 +357,7 @@
       }
     },
 
-    "testimonial-2-image": {
+    "testimonials-2-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
@@ -368,7 +368,7 @@
       }
     },
 
-    "testimonial-3-image": {
+    "testimonials-3-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
@@ -379,7 +379,7 @@
       }
     },
 
-    "testimonial-4-image": {
+    "testimonials-4-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
@@ -390,7 +390,7 @@
       }
     },
 
-    "testimonial-5-image": {
+    "testimonials-5-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
@@ -400,7 +400,7 @@
         "borderRadius": "9999px"
       }
     },
-    "testimonial-6-image": {
+    "testimonials-6-image": {
       "src": "/images/user-1-64x64.jpg",
       "type": "image",
       "alt": "laptop",
