@@ -392,7 +392,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                           sx={{
                             backgroundColor:
                               (selected as TextProps).style?.textAlign ==
-                              "center"
+                                "center"
                                 ? "lightgray"
                                 : "white",
                             borderRadius: 0,
@@ -410,7 +410,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                           sx={{
                             backgroundColor:
                               (selected as TextProps).style?.textAlign ==
-                              "right"
+                                "right"
                                 ? "lightgray"
                                 : "white",
                             borderRadius: 0,
@@ -429,7 +429,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                           sx={{
                             backgroundColor:
                               (selected as TextProps).style?.fontWeight ==
-                              "bold"
+                                "bold"
                                 ? "lightgray"
                                 : "white",
                             borderRadius: 0,
@@ -441,7 +441,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                                 ...selected.style,
                                 fontWeight:
                                   (selected as TextProps).style?.fontWeight ==
-                                  "bold"
+                                    "bold"
                                     ? undefined
                                     : "bold",
                               },
@@ -454,7 +454,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                           sx={{
                             backgroundColor:
                               (selected as TextProps).style?.fontStyle ==
-                              "italic"
+                                "italic"
                                 ? "lightgray"
                                 : "white",
                             borderRadius: 0,
@@ -466,7 +466,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                                 ...selected.style,
                                 fontStyle:
                                   (selected as TextProps).style?.fontStyle ==
-                                  "italic"
+                                    "italic"
                                     ? undefined
                                     : "italic",
                               },
@@ -491,7 +491,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                                 ...selected.style,
                                 fontFamily:
                                   (selected as TextProps).style?.fontFamily ==
-                                  "Undefined"
+                                    "Undefined"
                                     ? undefined
                                     : e.target.value,
                               },
@@ -1085,7 +1085,7 @@ const ImageComponent = ({ id }: { id: string }) => {
     src,
   } = getImageByKey(id) || {};
 
-  if (!src || !width || !height) {
+  if (type == "image" && (!src || !width || !height)) {
     console.log(id);
     return <></>;
   }
@@ -1195,7 +1195,7 @@ interface ContainerProps {
   data?: object;
 }
 
-const ContainerComponent = ({}: ContainerProps) => {};
+const ContainerComponent = ({ }: ContainerProps) => { };
 
 const LandingSection = () => {
   // const {
