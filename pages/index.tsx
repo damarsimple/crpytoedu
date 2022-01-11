@@ -1085,7 +1085,7 @@ const ImageComponent = ({ id }: { id: string }) => {
     src,
   } = getImageByKey(id) || {};
 
-  if (type == "image" && (!src || !width || !height)) {
+  if (imageType == "image" && (!src || !width || !height)) {
     console.log(id);
     return <></>;
   }
