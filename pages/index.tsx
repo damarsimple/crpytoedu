@@ -883,7 +883,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                             gap={3}
                             mt={4}
                           >
-                            <ImageComponent id="testimonial-image" />
+                            <ImageComponent id={`${e}-image`} />
                             <Box display="flex" gap="2" flexDirection="column">
                               <TextComponent id={`${e}-client-name`} />
                               <TextComponent id={`${e}-client-position`} />
@@ -1185,6 +1185,16 @@ interface ContainerProps {
 
 const ContainerComponent = ({}: ContainerProps) => {};
 
+const {data: { url_twitter,url_facebook,url_linkedin,url_instagram }} = useQuery(gql`
+query{
+  getLandingSocial{
+    url_twitter
+    url_facebook
+    url_linkedin
+    url_instagram
+  }
+}`)
+
 const LandingSection = () => {
   return (
     <Box
@@ -1247,7 +1257,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open("url_facebook" ?? "", "_blank").focus();
+              window.open(url_facebook ?? "", "_blank").focus();
           }}
         >
           <FacebookIcon />
@@ -1261,7 +1271,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open("url_twitter" ?? "", "_blank").focus();
+              window.open(url_twitter ?? "", "_blank").focus();
           }}
         >
           <TwitterIcon />
@@ -1275,7 +1285,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open("url_instagram" ?? "", "_blank").focus();
+              window.open(url_instagram ?? "", "_blank").focus();
           }}
         >
           <InstagramIcon />
@@ -1289,7 +1299,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open("url_linkedin" ?? "", "_blank").focus();
+              window.open(url_linkedin ?? "", "_blank").focus();
           }}
         >
           <LinkedInIcon />
