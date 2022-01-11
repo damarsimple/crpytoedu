@@ -1186,18 +1186,18 @@ interface ContainerProps {
 const ContainerComponent = ({}: ContainerProps) => {};
 
 const LandingSection = () => {
-  const {
-    data: { url_twitter, url_facebook, url_linkedin, url_instagram } = {},
-  } = useQuery(gql`
-    query {
-      getLandingSocial {
-        url_twitter
-        url_facebook
-        url_linkedin
-        url_instagram
-      }
-    }
-  `);
+  // const {
+  //   data: { url_twitter, url_facebook, url_linkedin, url_instagram } = {},
+  // } = useQuery(gql`
+  //   query {
+  //     getLandingSocial {
+  //       url_twitter
+  //       url_facebook
+  //       url_linkedin
+  //       url_instagram
+  //     }
+  //   }
+  // `);
 
   return (
     <Box
@@ -1260,7 +1260,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open(url_facebook ?? "", "_blank").focus();
+              window.open("url_facebook" ?? "", "_blank").focus();
           }}
         >
           <FacebookIcon />
@@ -1274,7 +1274,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open(url_twitter ?? "", "_blank").focus();
+              window.open("url_twitter" ?? "", "_blank").focus();
           }}
         >
           <TwitterIcon />
@@ -1288,7 +1288,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open(url_instagram ?? "", "_blank").focus();
+              window.open("url_instagram" ?? "", "_blank").focus();
           }}
         >
           <InstagramIcon />
@@ -1302,7 +1302,7 @@ const LandingSection = () => {
           onClick={() => {
             if (window.open)
               //@ts-ignore
-              window.open(url_linkedin ?? "", "_blank").focus();
+              window.open("url_linkedin" ?? "", "_blank").focus();
           }}
         >
           <LinkedInIcon />
