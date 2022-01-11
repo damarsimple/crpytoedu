@@ -1031,7 +1031,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
                   <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} md={3}>
                       <TextComponent id="footer-1-title" />
-                      <TextComponent id="footer=1-description" />
+                      <TextComponent id="footer-1-description" />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
                       <TextComponent id="footer-2-title" />
