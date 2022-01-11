@@ -182,8 +182,11 @@ function Index({ router: { query, push } }: WithRouterProps) {
             setText(data?.text ?? TextDefaultProp);
             setImage(data?.image ?? ImageDefaultProp);
             setButton(data?.button ?? ButtonDefaultProp);
+            console.log(data?.image);
+
           }
         } catch (error) {
+          console.log(error);
           setText(TextDefaultProp);
           setImage(ImageDefaultProp);
           setButton(ButtonDefaultProp);
@@ -1085,8 +1088,9 @@ const ImageComponent = ({ id }: { id: string }) => {
     src,
   } = getImageByKey(id) || {};
 
-  if (imageType == "image" && (!src || !width || !height)) {
-    console.log(id);
+  if ((!src)) {
+    console.log(`${imageType} ${id} is not found`);
+    // if (imageType == "image" && (!width || !height))
     return <></>;
   }
 
