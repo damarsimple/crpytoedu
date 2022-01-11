@@ -871,16 +871,51 @@ export default {
   },
 
   "footer-title": {
-    children: "CHAMPIONTRADING",
-    variant: "caption",
-    component: "p",
-    style: { fontSize: "30px", fontStyle: "bold" },
+    "children": "CHAMPION TRADING",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
   },
-
   "footer-description": {
-    children: "CHAMPIONTRADING adalah platform blablabalbalbalbalbalb",
-    variant: "caption",
-    component: "p",
-    style: { fontSize: "15px", maxWidth: "75ch" },
+    "children": "CHAMPION TRADING adalah platform edukasi crypto",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "15px", "maxWidth": "75ch" }
   },
+  "footer-1-title": {
+    "children": "CHAMPION TRADING",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-1-description": {
+    "children": "CHAMPION TRADING adalah platform edukasi crypto",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "15px", "maxWidth": "75ch" }
+  },
+  "footer-2-title": {
+    "children": "CHAMPION TRADING",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-2-description": {
+    "children": "CHAMPION TRADING adalah platform edukasi crypto",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "15px", "maxWidth": "75ch" }
+  },
+  "footer-3-title": {
+    "children": "CHAMPION TRADING",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-3-description": {
+    "children": "CHAMPION TRADING adalah platform edukasi crypto",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "15px", "maxWidth": "75ch" }
+  }
 } as const;

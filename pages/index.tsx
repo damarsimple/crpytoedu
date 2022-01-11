@@ -1030,12 +1030,12 @@ function Index({ router: { query, push } }: WithRouterProps) {
                 <Box sx={{ p: 2, backgroundColor: "#451288", color: "white" }}>
                   <Grid container spacing={6}>
                     <Grid item xs={12} sm={6} md={3}>
-                      <TextComponent id="footer-title" />
-                      <TextComponent id="footer-description" />
+                      <TextComponent id="footer-1-title" />
+                      <TextComponent id="footer=1-description" />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
-                      <TextComponent id="footer-title" />
-                      <TextComponent id="footer-description" />
+                      <TextComponent id="footer-2-title" />
+                      <TextComponent id="footer-2-description" />
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
                       <Grid container spacing={3}>
@@ -1063,8 +1063,8 @@ function Index({ router: { query, push } }: WithRouterProps) {
                     </Grid>
 
                     <Grid item xs={12} sm={6} md={3}>
-                      <TextComponent id="footer-title" />
-                      <TextComponent id="footer-description" />
+                      <TextComponent id="footer-3-title" />
+                      <TextComponent id="footer-3-description" />
                     </Grid>
                   </Grid>
                 </Box>
