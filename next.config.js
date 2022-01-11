@@ -7,7 +7,7 @@ module.exports = {
       "source.unsplash.com",
       "i.ytimg.com",
       "localhost",
-      "crpytoedu.damaral.my.id",
+      "crpyto.damaral.my.id",
     ],
   },
 };
