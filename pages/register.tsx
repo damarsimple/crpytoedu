@@ -19,6 +19,11 @@ import {
   Paper,
   IconButton,
   CircularProgress,
+  FormControl,
+  Input,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
 } from "@mui/material";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
@@ -42,21 +47,25 @@ import {
 import { CoreUserInfoMinimalField } from "../fragments/fragments";
 import { useAuthStore } from "../store/auth";
 import { useUserStore } from "../store/user";
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { values } from "lodash";
+
 type RegisterType = "ONLINE" | "OFFLINE";
 
 const images: {
   url: string;
   title: RegisterType;
 }[] = [
-  {
-    url: "/online-meeting.jpg",
-    title: "ONLINE",
-  },
-  {
-    url: "/offline-meeting.jpg",
-    title: "OFFLINE",
-  },
-];
+    {
+      url: "/online-meeting.jpg",
+      title: "ONLINE",
+    },
+    {
+      url: "/offline-meeting.jpg",
+      title: "OFFLINE",
+    },
+  ];
 
 interface CheckAvailable {
   username: "exist" | "notexist";
@@ -78,25 +87,25 @@ const banks: {
   numbers: string;
   names: string;
 }[] = [
-  {
-    url: "/mandiri.png",
-    title: "MANDIRI",
-    numbers: "123456789",
-    names: "a/n Seseorang",
-  },
-  {
-    url: "/bca.png",
-    title: "BCA",
-    numbers: "123456789",
-    names: "a/n Seseorang",
-  },
-  {
-    url: "/bni.png",
-    title: "BNI",
-    numbers: "123456789",
-    names: "a/n Seseorang",
-  },
-];
+    {
+      url: "/mandiri.png",
+      title: "MANDIRI",
+      numbers: "123456789",
+      names: "a/n Seseorang",
+    },
+    {
+      url: "/bca.png",
+      title: "BCA",
+      numbers: "123456789",
+      names: "a/n Seseorang",
+    },
+    {
+      url: "/bni.png",
+      title: "BNI",
+      numbers: "123456789",
+      names: "a/n Seseorang",
+    },
+  ];
 
 type StepType = "Data Diri" | "Pilih Trainer" | "Pembayaran" | "Pilih Acara";
 
@@ -443,6 +452,21 @@ export default function Register() {
     setCurrentStep(0);
   };
 
+  const back = () => {
+    setCurrentStep(currentStep == 0 ? currentStep : currentStep - 1);
+  };
+
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Grid container sx={{ height: "100vh", width: "100vw" }}>
       <Grid item xs={false} sm={3} md={6} sx={{ position: "relative" }}>
@@ -483,6 +507,7 @@ export default function Register() {
                     <TextField
                       fullWidth
                       label="Nama"
+                      defaultValue={data.name}
                       variant="outlined"
                       onChange={(e) =>
                         setData({ ...data, name: e.target.value })
@@ -493,6 +518,8 @@ export default function Register() {
                     <TextField
                       fullWidth
                       label="Username"
+                      defaultValue={data.username}
+
                       variant="outlined"
                       color={
                         checkAvailable?.username == "exist"
@@ -513,6 +540,8 @@ export default function Register() {
                     <TextField
                       fullWidth
                       label="Email"
+                      defaultValue={data.email}
+
                       variant="outlined"
                       type="email"
                       color={
@@ -529,26 +558,54 @@ export default function Register() {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Password"
-                      variant="outlined"
-                      type="password"
-                      onChange={(e) =>
-                        setData({ ...data, password: e.target.value })
-                      }
-                    />
+                    <FormControl variant="outlined">
+                      <InputLabel>Password</InputLabel>
+                      <OutlinedInput
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={(e) =>
+                          setData({ ...data, password: e.target.value })
+                        }
+                        fullWidth
+                        defaultValue={data.password}
+
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
                   </Grid>
                   <Grid item xs={12} sm={6}>
-                    <TextField
-                      fullWidth
-                      label="Konfirmasi Password"
-                      variant="outlined"
-                      type="password"
-                      onChange={(e) =>
-                        setData({ ...data, confirm_password: e.target.value })
-                      }
-                    />
+                    <FormControl variant="outlined">
+                      <InputLabel>Konfirmasi Password</InputLabel>
+                      <OutlinedInput
+                        type={showPassword ? 'text' : 'password'}
+                        onChange={(e) =>
+                          setData({ ...data, confirm_password: e.target.value })
+                        }
+                        fullWidth
+                        defaultValue={data.confirm_password}
+
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={handleClickShowPassword}
+                              onMouseDown={handleMouseDownPassword}
+                            >
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
@@ -761,7 +818,7 @@ export default function Register() {
                                       window
                                         .open(
                                           getParentCandidate?.url_facebook ??
-                                            "",
+                                          "",
                                           "_blank"
                                         )
                                         .focus();
@@ -790,7 +847,7 @@ export default function Register() {
                                       window
                                         .open(
                                           getParentCandidate?.url_instagram ??
-                                            "",
+                                          "",
                                           "_blank"
                                         )
                                         .focus();
@@ -805,7 +862,7 @@ export default function Register() {
                                       window
                                         .open(
                                           getParentCandidate?.url_linkedin ??
-                                            "",
+                                          "",
                                           "_blank"
                                         )
                                         .focus();
@@ -947,6 +1004,7 @@ export default function Register() {
                   )}
                 </Box>
               )}
+              <Button onClick={back}>Kembali</Button>
               {!["FINISH", "Pilih Acara"].includes(stepType ?? "") && (
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Button onClick={reset}>Ubah Tipe Pendaftaran</Button>
