@@ -48,6 +48,7 @@ function Index({ router: { push, query } }: WithRouterProps) {
             node {
               id
               name
+              username
               subscription_type
             }
           }
