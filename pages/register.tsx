@@ -403,7 +403,9 @@ export default function Register() {
           description: e.data?.uploadFile.message,
         });
       }
-    });
+    }).catch((e) => toast({
+      description: `error ${e}`,
+    }));
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -453,7 +455,11 @@ export default function Register() {
   };
 
   const back = () => {
-    setCurrentStep(currentStep == 0 ? currentStep : currentStep - 1);
+    if (!registerType || currentStep == 0) return;
+
+    const step = currentStep - 1
+    setCurrentStep(step);
+    setStepType(steps[registerType][step]);
   };
 
 
@@ -1004,7 +1010,7 @@ export default function Register() {
                   )}
                 </Box>
               )}
-              <Button onClick={back}>Kembali</Button>
+              {currentStep !== 0 && <Button onClick={back}>Kembali</Button>}
               {!["FINISH", "Pilih Acara"].includes(stepType ?? "") && (
                 <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                   <Button onClick={reset}>Ubah Tipe Pendaftaran</Button>
