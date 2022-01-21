@@ -254,6 +254,15 @@ export default function Register() {
   const next = () => {
     if (!registerType) return;
 
+    if (stepType == "Pembayaran") {
+      if (!proves) {
+        toast.error("Anda belum mengupload bukti pembayaran !");
+        return;
+      }
+
+      handleRegister();
+    }
+
     if (currentStep == steps[registerType].length - 1) {
       setStepType("FINISH");
     }
@@ -296,11 +305,7 @@ export default function Register() {
       }
     }
 
-    if (stepType == "Pembayaran") {
-      if (!proves) return toast.error("Anda belum mengupload bukti pembayaran !");
 
-      handleRegister();
-    }
 
     setStepType(steps[registerType][currentStep + 1]);
     setCurrentStep(currentStep + 1);
