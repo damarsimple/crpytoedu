@@ -297,6 +297,8 @@ export default function Register() {
     }
 
     if (stepType == "Pembayaran") {
+      if (!proves) return toast.error("Anda belum mengupload bukti pembayaran !");
+
       handleRegister();
     }
 
