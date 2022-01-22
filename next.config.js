@@ -9,6 +9,7 @@ module.exports = {
       "localhost",
       "crpyto.damaral.my.id",
       "joinchampiontrading.com",
+      "gql.joinchampiontrading.com",
     ],
   },
 };
