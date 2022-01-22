@@ -1085,9 +1085,9 @@ const ImageComponent = ({ id }: { id: string }) => {
     width,
     height,
     type: imageType,
-    src,
+    src: rawSrc,
   } = getImageByKey(id) || {};
-
+  const src = rawSrc?.replace("https://crpyto.damaral.my.id/", "https://gql.joinchampingtrading.com/")
   if ((!src)) {
     console.log(`${imageType} ${id} is not found`);
     // if (imageType == "image" && (!width || !height))
