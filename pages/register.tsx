@@ -610,7 +610,7 @@ export default function Register() {
                   </Grid>
                   <Grid item xs={12}>
                     <Autocomplete
-                      options={provinces?.map((e) => ({
+                      options={[...provinces ?? []].sort((a,b) => a.name.localeCompare(b.name)).map((e) => ({
                         label: e.name,
                         id: e.id,
                         rest: e,

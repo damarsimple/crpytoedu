@@ -125,6 +125,8 @@ export default function Index() {
     }
   );
 
+    const { push } = useRouter();
+
   const {
     data: { me } = {},
     refetch,
@@ -185,7 +187,7 @@ export default function Index() {
             Anda belum bergabung dengan acara
           </Typography>
           <Typography variant="body1" component="p">
-            gabung atau, <Button>Buat Acara?</Button>
+            gabung atau, <Button onClick={()=>push("/trainers/events")}>Buat Ruang Kelas?</Button>
           </Typography>
           <Modal open={setPlace} onClose={close}>
             <Box

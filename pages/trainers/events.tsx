@@ -213,6 +213,8 @@ export default function Events() {
         <Tabs value={value} onChange={(_, e) => setValue(e)}>
           <Tab label="Pengajuan Acara" />
           <Tab label="Histori Acara" />
+    
+
         </Tabs>
       </Box>
 
