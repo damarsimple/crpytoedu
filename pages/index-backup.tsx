@@ -266,7 +266,7 @@ function Index({ router: { query, push } }: WithRouterProps) {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              CrptoEdu
+              {process.env.NEXT_PUBLIC_APP_NAME}
             </Typography>
 
             <Box sx={{ flexGrow: 1 }} />

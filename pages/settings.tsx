@@ -176,7 +176,7 @@ export default function Setting() {
               required
               defaultValue={user?.username}
             />
-            <TextField
+            {/* <TextField
               name="email"
               fullWidth
               label="Email"
@@ -184,7 +184,7 @@ export default function Setting() {
               required
               type="email"
               defaultValue={user?.email}
-            />
+            /> */}
 
             {/* <FormControl fullWidth>
             <InputLabel>Tipe Pendaftaran</InputLabel>

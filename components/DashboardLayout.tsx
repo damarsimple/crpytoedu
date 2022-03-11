@@ -269,7 +269,7 @@ export default function DashboardLayout({
             sx={{ display: { xs: "none", sm: "block" } }}
           >
             <a className="text-white" href="/">
-              CrptoEdu
+              {process.env.NEXT_PUBLIC_APP_NAME}
             </a>
           </Typography>
 

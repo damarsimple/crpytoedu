@@ -22,7 +22,7 @@ function MainHeader() {
                 <div className="rd-navbar-brand">
                   {/* <Link href={"/"}> */}
                     <a className="h4 font-weight-bolder text-white" style={{ cursor: "pointer" }} href="/">
-                      CrptoEdu
+                      {process.env.NEXT_PUBLIC_APP_NAME}
                     </a>
                   {/* </Link> */}
                 </div>
