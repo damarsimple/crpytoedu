@@ -28,6 +28,8 @@ import { useRouter } from "next/dist/client/router";
 import { useAuthStore } from "../store/auth";
 import { useUserStore } from "../store/user";
 import { Roles } from "../types/type";
+import Link from "next/link";
+import { Meta } from "./Meta";
 const drawerWidth = 240;
 
 const openedMixin = (theme: Theme): CSSObject => ({
@@ -223,6 +225,7 @@ export default function DashboardLayout({
 
   return (
     <Box sx={{ display: "flex" }}>
+      <Meta></Meta>
       {anchorEl && (
         <Menu
           anchorEl={anchorEl}
@@ -265,7 +268,9 @@ export default function DashboardLayout({
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            CrptoEdu
+            <a className="text-white" href="/">
+              CrptoEdu
+            </a>
           </Typography>
 
           <Box sx={{ flexGrow: 1 }} />
@@ -309,7 +314,7 @@ export default function DashboardLayout({
         <List>
           {LinkItems[notPayed ? "payments" : routeName]?.map(
             ({ icon, name, route }) => (
-              <ListItem button key={name} onClick={() => push(route)}>
+              <ListItem button key={name} onClick={() => (route == "/?editor=true") ? push(route) : push(route)}>
                 <ListItemIcon>
                   <Icon>{icon}</Icon>
                 </ListItemIcon>

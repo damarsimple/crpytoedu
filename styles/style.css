@@ -83,7 +83,7 @@ html p a:hover {
 * Typography
 */
 body {
-	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 	font-size: 14px;
 	line-height: 1.71429;
 	font-weight: 300;
@@ -728,25 +728,25 @@ Price box
 	background: inherit;
 }
 
-/* @media (min-width: 992px) {
+@media (min-width: 992px) {
 	.price-box-1.price-box-decor-top:after {
 		position: absolute;
-		content: url("../images/section-element.png");
+		content: url("/images/section-element.png");
 		left: -35px;
 		top: -35px;
 		z-index: -1;
 	}
-} */
+}
 
-/* @media (min-width: 992px) {
+@media (min-width: 992px) {
 	.price-box-1.price-box-decor-bottom:after {
 		position: absolute;
-		content: url("../images/section-element.png");
+		content: url("/images/section-element.png");
 		right: -35px;
 		bottom: -35px;
 		z-index: -1;
 	}
-} */
+}
 
 .price-box-1 .title {
 	font-size: 22px;
@@ -4108,13 +4108,13 @@ blockquote .position {
 * Breadcrumbs
 * --------------------------------------------------
 */
-/* .section-bredcrumbs {
+.section-bredcrumbs {
 	padding-top: 60px;
 	padding-bottom: 31px;
 	position: relative;
-	background: url("../images/bg-1.jpg") center;
+	background: url("/images/bg-1.jpg") center;
 	background-size: cover;
-} */
+}
 
 .section-bredcrumbs > * {
 	position: relative;
@@ -5530,9 +5530,9 @@ blockquote .position {
 	opacity: 1;
 }
 
-/* html.boxed body { */
-	/* background: #f5f5f7 url(../images/bg-pattern-boxed.png) repeat fixed;
-} */
+html.boxed body {
+	background: #f5f5f7 url(/images/bg-pattern-boxed.png) repeat fixed;
+}
 
 @media (min-width: 1630px) {
 	html.boxed .page {
@@ -6274,10 +6274,10 @@ html [class*='section-'].section-bottom-0 {
 }
 
 @media (min-width: 992px) {
-	/* .section-decorate:before, .section-decorate:after {
+	.section-decorate:before, .section-decorate:after {
 		position: absolute;
-		content: url("../images/section-element.png");
-	} */
+		content: url("/images/section-element.png");
+	}
 	.section-decorate:before {
 		top: 50px;
 		left: 50px;
@@ -9914,10 +9914,10 @@ html.rd-navbar-fixed-linked .page {
 	}
 }
 
-/* .swiper-bg {
-	background: url("../images/swiper-bg.jpg");
+.swiper-bg {
+	background: url("/images/swiper-bg.jpg");
 	background-size: cover;
-} */
+}
 
 .swiper-bg .swiper-wrapper {
 	background: rgba(0, 0, 0, 0.4);
@@ -10066,7 +10066,7 @@ html.rd-navbar-fixed-linked .page {
 	width: 64px;
 	height: 64px;
 	margin-top: 15px;
-	/* background-image: url("../images/isotope-loader.png"); */
+	background-image: url("/images/isotope-loader.png");
 	background-position: -1152px 0;
 	animation: 0.7s sprite-animation steps(18) infinite;
 	transition: .4s all ease;
@@ -11372,7 +11372,7 @@ yx-axis
 .mCSB_scrollTools .mCSB_buttonDown,
 .mCSB_scrollTools .mCSB_buttonLeft,
 .mCSB_scrollTools .mCSB_buttonRight {
-	/* background-image: url(../images/mCSB_buttons.png); */
+	background-image: url(/images/mCSB_buttons.png);
 	/* css sprites */
 	background-repeat: no-repeat;
 	opacity: 0.4;
@@ -11836,8 +11836,8 @@ yx-axis
 
 @font-face {
 	font-family: lg;
-	/* src: url(../fonts/lg.eot?n1z373); */
-	/* src: url(../fonts/lg.eot?#iefixn1z373) format("embedded-opentype"), url(../fonts/lg.woff?n1z373) format("woff"), url(../fonts/lg.ttf?n1z373) format("truetype"), url(../fonts/lg.svg?n1z373#lg) format("svg"); */
+	src: url(/fonts/lg.eot?n1z373);
+	src: url(/fonts/lg.eot?#iefixn1z373) format("embedded-opentype"), url(/fonts/lg.woff?n1z373) format("woff"), url(/fonts/lg.ttf?n1z373) format("truetype"), url(/fonts/lg.svg?n1z373#lg) format("svg");
 	font-weight: 400;
 	font-style: normal;
 }
@@ -12266,15 +12266,15 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .lg-outer .lg-has-vimeo .lg-video-play {
-	/* background: url(../images/vimeo-play.png) no-repeat; */
+	background: url(/images/vimeo-play.png) no-repeat;
 }
 
 .lg-outer .lg-has-vimeo:hover .lg-video-play {
-	/* background: url(../images/vimeo-play.png) 0 -58px no-repeat; */
+	background: url(/images/vimeo-play.png) 0 -58px no-repeat;
 }
 
 .lg-outer .lg-has-html5 .lg-video-play {
-	/* background: url(../images/video-play.png) no-repeat; */
+	background: url(/images/video-play.png) no-repeat;
 	height: 64px;
 	margin-left: -32px;
 	margin-top: -32px;
@@ -12285,14 +12285,14 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 .lg-outer .lg-has-html5:hover .lg-video-play {
 	opacity: 1;
 }
-/* 
+
 .lg-outer .lg-has-youtube .lg-video-play {
-	background: url(../images/youtube-play.png) no-repeat;
+	background: url(/images/youtube-play.png) no-repeat;
 }
 
 .lg-outer .lg-has-youtube:hover .lg-video-play {
-	background: url(../images/youtube-play.png) 0 -60px no-repeat;
-} */
+	background: url(/images/youtube-play.png) 0 -60px no-repeat;
+}
 
 .lg-outer .lg-video-object {
 	width: 100% !important;
@@ -12750,7 +12750,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 }
 
 .lg-outer .lg-item {
-	/* background: url(../images/loading.gif) center center no-repeat; */
+	background: url(/images/loading.gif) center center no-repeat;
 	display: none !important;
 }
 

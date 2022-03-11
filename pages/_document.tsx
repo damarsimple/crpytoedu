@@ -15,15 +15,24 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <link
+          {/* <link
             href="https://fonts.googleapis.com/css2?family=Kalam&family=Montserrat&family=Open+Sans&family=Roboto&display=swap"
             rel="stylesheet"
+          /> */}
+
+          
+          <link rel="stylesheet" 
+            href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i,400,700,900&display=swap"
           />
+
         </Head>
-        <body>
+        <body> 
           <Main />
           <NextScript />
         </body>
+
+        {/* <script src="/js/core.min.js" async></script> */}
+        {/* <script src="/js/script.js" async></script> */}
       </Html>
     );
   }

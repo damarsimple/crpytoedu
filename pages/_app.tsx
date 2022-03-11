@@ -1,7 +1,10 @@
 import "../styles/globals.css";
-import "../styles/bootstrap.css";
-import "../styles/fonts.css";
-import "../styles/style.css";
+// import "../styles/bootstrap.css";
+// import "../styles/fonts.css";
+// import "../styles/style.css";
+import "../public/css/bootstrap.css";
+import "../public/css/fonts.css";
+import "../public/css/style.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import type { AppProps } from "next/app";
 import {
@@ -151,16 +154,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   };
 
-  // useEffect(() => {
-  //   events.on("routeChangeComplete", handleRouteChange);
-  //   return () => {
-  //     events.off("routeChangeComplete", handleRouteChange);
-  //   };
-  // }, [events]);
-
   useEffect(() => {
     handleRouteChange();
-  }, []);
+  });
+
+  // return (
+  //   <Component {...pageProps} />
+  // );
 
   return (
     <>

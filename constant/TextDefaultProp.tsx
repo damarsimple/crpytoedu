@@ -11,7 +11,6 @@ export default {
     component: "p",
     style: { color: "yellow", fontSize: "20px" },
   },
-
   "main-title": {
     variant: "h5",
     component: "h1",
@@ -21,7 +20,33 @@ export default {
       maxWidth: "60ch",
     },
   },
-
+  "main-description-1": {
+    variant: "h5",
+    component: "h1",
+    children: "Champion Trading Comunity",
+    style: {
+      color: "white",
+      maxWidth: "60ch",
+    },
+  },
+  "main-description-2": {
+    variant: "h5",
+    component: "h1",
+    children: "Komunitas Trading Crypto Currency",
+    style: {
+      color: "white",
+      maxWidth: "60ch",
+    },
+  },
+  "main-description-3": {
+    variant: "h5",
+    component: "h1",
+    children: "Belajar Bersama Trainer Handal Kami",
+    style: {
+      color: "white",
+      maxWidth: "60ch",
+    },
+  },
   "advertise-1-title": {
     children: "Investasi Bersama Kami",
     variant: "caption",
@@ -84,7 +109,7 @@ export default {
     children: "Pengguna kami suka akan hasil yang kami berikan",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "25px", textAlign: "center" },
+    style: { color: "#828590", fontSize: "25px", textAlign: "center" },
   },
 
   "advantages-1-title": {
@@ -97,7 +122,7 @@ export default {
     children: "Pengguna kami suka akan hasil yang kami berikan",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "advantages-2-title": {
@@ -110,7 +135,7 @@ export default {
     children: "Pengguna kami bisa memesan tiket ke luar angkasa",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "advantages-3-title": {
@@ -123,7 +148,7 @@ export default {
     children: "Pengguna kami bisa memesan tiket ke luar angkasa",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "advantages-4-title": {
@@ -136,7 +161,7 @@ export default {
     children: "Decentralized finance is futures 👊",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "advantages-5-title": {
@@ -149,7 +174,7 @@ export default {
     children: "🍕 Bitcoin Pizza Day",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "advantages-6-title": {
@@ -162,20 +187,20 @@ export default {
     children: "Kami memiliki master NFT ... ",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#828590", fontSize: "15px" },
   },
 
   "about-title": {
     children: "Tentang Kami",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "40px" },
+    style: { color: "#29293a", fontSize: "40px" },
   },
   "about-description": {
     children: "Kami memiliki master NFT ... ",
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "25px" },
+    style: { color: "#29293a", fontSize: "25px" },
   },
   "about-content": {
     children: `Lorem, ipsum dolor sit amet consectetur adipisicing elit.
@@ -193,7 +218,19 @@ export default {
                     optio officia pariatur inventore!`,
     variant: "caption",
     component: "p",
-    style: { color: "black", fontSize: "15px" },
+    style: { color: "#29293a", fontSize: "15px" },
+  },
+  "about-article-1": {
+    children: "Komunitas Trading Crypto Currency",
+    variant: "caption",
+    component: "p",
+    style: { color: "#29293a", fontSize: "14px" },
+  },
+  "about-article-2": {
+    children: "Trainer Menguasasi Bidangnya",
+    variant: "caption",
+    component: "p",
+    style: { color: "#29293a", fontSize: "14px" },
   },
   "stats-title": {
     children: "Statistik",
@@ -895,7 +932,25 @@ export default {
     "style": { "fontSize": "15px", "maxWidth": "75ch" }
   },
   "footer-2-title": {
-    "children": "CHAMPION TRADING",
+    "children": "Contact Information",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-2-address": {
+    "children": "Jln. Tunas Bangsa",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-2-phone": {
+    "children": "1-800-1234-567",
+    "variant": "caption",
+    "component": "p",
+    "style": { "fontSize": "30px", "fontStyle": "bold" }
+  },
+  "footer-2-email": {
+    "children": "info@demolink.org",
     "variant": "caption",
     "component": "p",
     "style": { "fontSize": "30px", "fontStyle": "bold" }
