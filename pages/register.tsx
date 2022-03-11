@@ -81,37 +81,25 @@ export const formatCardNumber = (value: string) => {
   );
 };
 
-const banks: {
+interface Bank {
   url: string;
   title: string;
   numbers: string;
   names: string;
-}[] = [
-    {
-      url: "/mandiri.png",
-      title: "MANDIRI",
-      numbers: "123456789",
-      names: "a/n Seseorang",
-    },
-    {
-      url: "/bca.png",
-      title: "BCA",
-      numbers: "123456789",
-      names: "a/n Seseorang",
-    },
-    {
-      url: "/bni.png",
-      title: "BNI",
-      numbers: "123456789",
-      names: "a/n Seseorang",
-    },
-  ];
+}
+
+const bank: Bank = {
+  title: "Address TRC20 Wallet Crypto (USDT)",
+  numbers: "TEBidYg8C4PSQh69rGsbU7aNcQGiFnxrta",
+  names: "45 USDT",
+  url: "/QR.jpeg"
+}
 
 type StepType = "Data Diri" | "Pilih Trainer" | "Pembayaran" | "Pilih Acara";
 
 const steps: Record<RegisterType, StepType[]> = {
-  ONLINE: ["Data Diri", "Pilih Trainer", "Pembayaran"],
-  OFFLINE: ["Data Diri", "Pilih Acara", "Pilih Trainer", "Pembayaran"],
+  ONLINE: ["Data Diri", "Pembayaran"],
+  OFFLINE: ["Data Diri", "Pilih Acara", "Pembayaran"],
 };
 
 export default function Register() {
@@ -144,53 +132,53 @@ export default function Register() {
     cities,
   } = usePlaces({});
 
-  const {
-    refetch,
-    data: { getParentCandidate } = {},
-    loading,
-    error,
-  } = useQuery<{ getParentCandidate: User }>(
-    gql`
-      query Query($city_id: ID, $province_id: ID, $event_id: ID) {
-        getParentCandidate(
-          city_id: $city_id
-          province_id: $province_id
-          event_id: $event_id
-        ) {
-          id
-          name
-          username
-          title
-          cover {
-            id
-            path
-            mime
-            name
-          }
-          city {
-            id
-            name
-          }
-          province {
-            id
-            name
-          }
-          url_facebook
-          url_twitter
-          url_instagram
-          url_linkedin
-        }
-      }
-    `,
-    {
-      variables: {
-        province_id: showAll ? undefined : province?.id,
-        city_id: showAll ? undefined : city?.id,
-        event_id: event?.id,
-      },
-      fetchPolicy: "network-only",
-    }
-  );
+  // const {
+  //   refetch,
+  //   data: { getParentCandidate } = {},
+  //   loading,
+  //   error,
+  // } = useQuery<{ getParentCandidate: User }>(
+  //   gql`
+  //     query Query($city_id: ID, $province_id: ID, $event_id: ID) {
+  //       getParentCandidate(
+  //         city_id: $city_id
+  //         province_id: $province_id
+  //         event_id: $event_id
+  //       ) {
+  //         id
+  //         name
+  //         username
+  //         title
+  //         cover {
+  //           id
+  //           path
+  //           mime
+  //           name
+  //         }
+  //         city {
+  //           id
+  //           name
+  //         }
+  //         province {
+  //           id
+  //           name
+  //         }
+  //         url_facebook
+  //         url_twitter
+  //         url_instagram
+  //         url_linkedin
+  //       }
+  //     }
+  //   `,
+  //   {
+  //     variables: {
+  //       province_id: showAll ? undefined : province?.id,
+  //       city_id: showAll ? undefined : city?.id,
+  //       event_id: event?.id,
+  //     },
+  //     fetchPolicy: "network-only",
+  //   }
+  // );
 
   const { data: { availableEvents } = {} } = useQuery<{
     availableEvents: { edges: ClassroomEdge[] };
@@ -424,7 +412,7 @@ export default function Register() {
       variables: {
         input: {
           prove_id: proves.id,
-          parent_id: getParentCandidate?.id,
+          // parent_id: getParentCandidate?.id,
           province_id: province?.id,
           city_id: city?.id,
           district_id: district?.id,
@@ -760,7 +748,7 @@ export default function Register() {
                   </Paper>
                 </Box>
               )}
-              {stepType == "Pilih Trainer" && (
+              {/* {stepType == "Pilih Trainer" && (
                 <Grid>
                   <Box
                     sx={{ display: "flex", gap: 1, flexDirection: "column" }}
@@ -930,7 +918,7 @@ export default function Register() {
                     </Paper>
                   </Box>
                 </Grid>
-              )}
+              )} */}
               {stepType == "Pembayaran" && (
                 <Box
                   sx={{
@@ -944,36 +932,29 @@ export default function Register() {
                     bank berikut
                   </Typography>
 
-                  <Grid container spacing={2}>
+                  {/* <Grid container spacing={2}>
                     {banks.map((e) => (
-                      <Grid
-                        key={e.title}
-                        item
-                        xs={6}
-                        sm={4}
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          textAlign: "center",
-                          p: 3,
-                        }}
-                      >
-                        <Box sx={{ position: "relative", height: 100 }}>
-                          <Image alt={e.title} src={e.url} layout="fill" />
-                        </Box>
-
-                        <Typography variant="body1" component="p">
-                          {e.title}
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                          {formatCardNumber(e.numbers)}
-                        </Typography>
-                        <Typography variant="body2" component="p">
-                          {e.names}
-                        </Typography>
+                      
                       </Grid>
                     ))}
-                  </Grid>
+                  </Grid> */}
+
+                  <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                    <Box sx={{ position: "relative", height: 200, width: 200 }}>
+                      <Image alt={bank.title} src={bank.url} layout="fill" />
+                    </Box>
+
+                    <Typography variant="body1" component="p">
+                      {bank.title}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      {bank.numbers}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      {bank.names}
+                    </Typography>
+                  </Box>
+
                   {proves ? (
                     <Box
                       sx={{
@@ -1015,6 +996,12 @@ export default function Register() {
                       {lUpload && <CircularProgress />}
                     </Box>
                   )}
+                  <Typography variant="body1" component="p">
+                    Untuk mempercepat aktivasi hubungi WhatsApp kami setelah melakukan transfer 1x24 jam di
+                    <span style={{ marginLeft: 2 }}><a href={`https://wa.me/${681281431595}`} target="_blank">
+                      +681281431595
+                    </a></span>
+                  </Typography>
                 </Box>
               )}
               {currentStep !== 0 && <Button onClick={back}>Kembali</Button>}
